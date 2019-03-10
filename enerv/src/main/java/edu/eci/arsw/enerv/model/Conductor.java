@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service("ConductorBean")
+//@Service("ConductorBean")
 public class Conductor implements Usuario{
 	
 	private String nombres;

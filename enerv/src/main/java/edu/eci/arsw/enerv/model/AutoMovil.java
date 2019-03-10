@@ -1,25 +1,25 @@
 package edu.eci.arsw.enerv.model;
 
 public class AutoMovil {
-	private int placa;
+	private String placa;
 	private String modelo;
 	private String color;
 	private String tipo;
 	
 	public AutoMovil(){}
 	
-	public AutoMovil(int placa, String modelo, String tipo, String color){
+	public AutoMovil(String placa, String modelo, String tipo, String color){
 		this.color=color;
 		this.modelo=modelo;
 		this.placa=placa;
 		this.tipo=tipo;
 	}
 
-	public int getPlaca() {
+	public String getPlaca() {
 		return placa;
 	}
 
-	public void setPlaca(int placa) {
+	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
 

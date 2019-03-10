@@ -15,7 +15,10 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<project.build.outputEncodig>UTF-8</project.build.outputEncodig>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		
 	</properties>
 
 	<dependencies>
@@ -23,6 +26,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+
 
 		<dependency>
 			<groupId>org.postgresql</groupId>

@@ -1,9 +1,22 @@
 package edu.eci.arsw.enerv.model;
 
-public class AutoMovil {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "AutoMoviles")
+public class AutoMovil{
+	
+	@Column(name = "placa")
 	private String placa;
+
+	@Column(name = "modelo")
 	private String modelo;
+
+	@Column(name = "color")
 	private String color;
+	
+
+	@Column(name = "tipo")
 	private String tipo;
 	
 	public AutoMovil(){}

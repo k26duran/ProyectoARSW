@@ -1,22 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2019-03-10 07:16:35.405
 
-/*
 
-spring.datasource.url=jdbc:postgresql://ec2-54-225-115-234.compute-1.amazonaws.com:5432/daeb8or97p747k?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory&
-spring.datasource.username=hturicolbmwdim
-spring.datasource.password=bc843b6debd46871c3845dbab53804393bd40dd113773f4a6239b715187ff6d5
-spring.jpa.generate-ddl=true
-
-
-<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-</dependency>
-		
-
-		
-*/
 
 
 -- tables
@@ -29,13 +14,14 @@ CREATE TABLE AutoMoviles (
     CONSTRAINT AutoMoviles_pk PRIMARY KEY (placa)
 );
 
+
 -- Table: Coductores
 CREATE TABLE Coductores (
     nombre varchar(20)  NOT NULL,
     apellido varchar(20)  NOT NULL,
     fechaDeNacimiento date  NOT NULL,
     Documento varchar(15)  NOT NULL,
-    CONSTRAINT Coductores_pk PRIMARY KEY (Documento)
+	CONSTRAINT Coductores_pk PRIMARY KEY (Documento)
 );
 
 -- Table: Comentarios

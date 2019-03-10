@@ -3,17 +3,34 @@ package edu.eci.arsw.enerv.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
 import org.springframework.stereotype.Service;
 
 //@Service("ConductorBean")
+@Entity
+@Table(name = "Coductores")
 public class Conductor implements Usuario{
 	
+	@Column(name  = "nombres")
 	private String nombres;
+	
+
+	@Column(name  = "apellidos")
 	private String apellidos;
+	
+
+	@Column(name  = "nombres")
 	private Date fechaDeNacimiento;
-	private List<TarjetaDeCredito> cuentasBancarias;
+	
+	
+	
 	private AutoMovil auto;
-	private List<Comentario> comentarios;
+	/*
+	 private List<Comentario> comentarios;
+	 private List<TarjetaDeCredito> cuentasBancarias;
+	
+	 */
 
 	public Conductor(){}
 	
@@ -23,9 +40,9 @@ public class Conductor implements Usuario{
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.fechaDeNacimiento = fechaDeNacimiento;
-		this.cuentasBancarias = cuentasBancarias;
 		this.auto = auto;
-		this.comentarios = comentarios;
+		//this.cuentasBancarias = cuentasBancarias;
+		//this.comentarios = comentarios;
 	}
 	
 
@@ -53,6 +70,7 @@ public class Conductor implements Usuario{
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
 
+	/*
 	public List<TarjetaDeCredito> getCuentasBancarias() {
 		return cuentasBancarias;
 	}
@@ -60,14 +78,7 @@ public class Conductor implements Usuario{
 	public void setCuentasBancarias(List<TarjetaDeCredito> cuentas) {
 		this.cuentasBancarias = cuentas;
 	}
-
-	public AutoMovil getAuto() {
-		return auto;
-	}
-
-	public void setAuto(AutoMovil auto) {
-		this.auto = auto;
-	}
+	
 	public List<Comentario> getComentarios() {
 		return comentarios;
 	}
@@ -76,11 +87,18 @@ public class Conductor implements Usuario{
 		this.comentarios = comentarios;
 	}
 	
-	@Override
-	public String toString() {
-		return "Conductor [nombres=" + nombres + ", apellidos=" + apellidos + ", fechaDeNacimiento=" + fechaDeNacimiento
-				+ ", cuentasBancarias=" + cuentasBancarias + ", auto=" + auto + ", comentarios=" + comentarios + "]";
+	
+	*/
+
+	public AutoMovil getAuto() {
+		return auto;
 	}
+
+	public void setAuto(AutoMovil auto) {
+		this.auto = auto;
+	}
+
+	
 
 	@Override
 	public void updateFoto() {

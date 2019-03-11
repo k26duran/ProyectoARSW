@@ -6,16 +6,16 @@ class Usuario{
   {field}-apellidos: String
   {field}-foto: Image
   {field}-calificacion: int
-  {field}-fechaNacimiento: Date
-
-  {method} registrarCuentaBancaria(CuentaBancaria cuenta)
-  {method} eliminarCuentaBancaria(CuentaBancaria cuenta)
-  {method} actualizarFoto(CuentaBancaria cuenta)
+  {field}-fechaNacimiento: String
+  {field}-celular: String
+  {field}-clave: String
 }
 
 class Automovil{
   {field}-placa: String
   {field}-modelo: String
+  {field}-tipo: String
+  {field}-color: String
 }
 
 class CuentaBancaria{
@@ -32,31 +32,31 @@ class Conductor{
 
 class Viaje{
   {field}-id: long
-  {field}-partida: Location
-  {field}-destino: Location
-  {field}-calificacion: Integer[0..5]
-  {field}-tiempo: long
+  {field}-lugarOrigen: String
+  {field}-lugarDestino: String
+  {field}-calificacion: int[0..5]
   {field}-costo: int
+  {field}-tiempo: long
+  {field}-correoPasajero: String
+  {field}-correoConductor: String
 }
 
 class Comentario{
   {field}-id: long
   {field}-contenido: String
   {field}-fecha: Date
+  {field}-correoAutor: String
 }
 
 Usuario <|--- Conductor
 Usuario <|--- Pasajero 
 
-Usuario -->"-tarjetas  *" CuentaBancaria
+Usuario -->"-cuentasBancarias *" CuentaBancaria
 Usuario -->"-viajes *" Viaje
-
-Viaje -->"-conductor " Conductor
-Viaje -->"-pasajero " Pasajero
-Viaje -->"-comentarios *" Comentario
-Comentario -->"-autor " Usuario
-Viaje --> "-pago " CuentaBancaria
 Conductor -->"-automovil " Automovil
+Viaje -->"-comentarios *" Comentario
+Viaje --> "-pago " CuentaBancaria
+
  
 
 @enduml

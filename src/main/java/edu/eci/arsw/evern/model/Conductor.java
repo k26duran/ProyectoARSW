@@ -32,9 +32,6 @@ public class Conductor extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Conductor [auto=" + auto + ", getCorreo()=" + getCorreo() + ", getNombres()=" + getNombres()
-				+ ", getApellidos()=" + getApellidos() + ", getFoto()=" + getFoto() + ", getCalificacion()="
-				+ getCalificacion() + ", getFechaNacimiento()=" + getFechaNacimiento() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "Conductor [auto=" + auto + super.toString() + "]";
 	}
 }

@@ -7,18 +7,16 @@ public class Comentario {
 	private long id;
 	private String contenido;
 	private String date; //dd-mm-yy
-	private Usuario autor;
+	private String correoAutor;
 	
 	public Comentario(){}
 	
-	public Comentario(long id, String contenido, String date, Usuario autor) {
+	public Comentario(long id, String contenido, String date, String correoAutor) {
 		this.id = id;
 		this.contenido = contenido;
 		this.date = date;
-		this.autor = autor;
+		this.correoAutor = correoAutor;
 	}
-
-
 
 	public long getId() {
 		return id;
@@ -44,19 +42,17 @@ public class Comentario {
 		this.date = date;
 	}
 
-	public Usuario getAutor() {
-		return autor;
+	public String getCorreoAutor() {
+		return correoAutor;
 	}
 
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
+	public void setCorreoAutor(String correoAutor) {
+		this.correoAutor = correoAutor;
 	}
 
 	@Override
 	public String toString() {
-		return "Comentario [id=" + id + ", contenido=" + contenido + ", date=" + date + ", autor=" + autor + "]";
+		return "Comentario [id=" + id + ", contenido=" + contenido + ", date=" + date + ", autor=" + correoAutor + "]";
 	}
-	
-	
 
 }

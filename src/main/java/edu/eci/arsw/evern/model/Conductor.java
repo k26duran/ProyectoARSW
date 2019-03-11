@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 import org.springframework.stereotype.Service;
 
-@Entity
-@Table(name = "Coductores")
 public class Conductor extends Usuario{
 	
 	Automovil auto;

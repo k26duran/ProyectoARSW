@@ -1,58 +1,70 @@
 package edu.eci.arsw.evern.model;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
+
+@Entity
+@Table(name = "comentario")
 public class Comentario {
 	
-	private long id;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
+  
 	private String contenido;
-	private String date; //dd-mm-yy
-	private String correoAutor;
 	
-	public Comentario(){}
 	
-	public Comentario(long id, String contenido, String date, String correoAutor) {
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+    private Date date; //dd-mm-yy
+	
+    
+    private String correoAutor;
+	
+
+	public Comentario(long id, String contenido, Date date, String correoAutor) {
 		this.id = id;
 		this.contenido = contenido;
 		this.date = date;
 		this.correoAutor = correoAutor;
 	}
-
-	public long getId() {
+    
+	
+	public Long getId() {
 		return id;
 	}
-
-	public void setId(long id) {
+	
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getContenido() {
 		return contenido;
 	}
-
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
-
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	public String getCorreoAutor() {
 		return correoAutor;
 	}
-
 	public void setCorreoAutor(String correoAutor) {
 		this.correoAutor = correoAutor;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "Comentario [id=" + id + ", contenido=" + contenido + ", date=" + date + ", autor=" + correoAutor + "]";
-	}
+	
 
 }

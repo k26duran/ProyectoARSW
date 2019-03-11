@@ -8,26 +8,20 @@ import javax.persistence.Column;
 
 public class Usuario {
 	
-	@Column(name = "celular")
-	private String celular;
-	
-	@Column(name  = "correo")
 	private String correo;
 	
-	@Column(name  = "nombres")
 	private String nombres;
 	
-	@Column(name  = "apellidos")
 	private String apellidos;
-
+	
 	private BufferedImage foto=null;
 	
-	@Column(name  = "calificacion")
-	private int calificacion=0; //[0..5]
+	private int calificacion=0;
 	
-	@Column(name  = "fechaNacimiento")
 	private String fechaNacimiento; // dd-mm-yy
-
+	
+	String celular;
+	
 	String clave;
 	
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();

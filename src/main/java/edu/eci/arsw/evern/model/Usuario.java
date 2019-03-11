@@ -8,21 +8,16 @@ import javax.persistence.Column;
 
 public class Usuario {
 	
-	@Column(name  = "correo")
 	private String correo;
 	
-	@Column(name  = "nombres")
 	private String nombres;
 	
-	@Column(name  = "apellidos")
 	private String apellidos;
 	
 	private BufferedImage foto=null;
 	
-	@Column(name  = "calificacion")
 	private int calificacion=0;
 	
-	@Column(name  = "fechaNacimiento")
 	private String fechaNacimiento; // dd-mm-yy
 	
 	String celular;

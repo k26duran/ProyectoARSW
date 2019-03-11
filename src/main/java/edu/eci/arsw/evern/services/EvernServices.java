@@ -25,4 +25,8 @@ public class EvernServices {
 		eps.registrarConductor(conductor);
 	}
 	
+	public boolean login(String correoUsuario, String clave) throws EvernPersistenceException{
+		return eps.login(correoUsuario, clave);
+	}
+	
 }

@@ -8,6 +8,9 @@ import javax.persistence.Column;
 
 public class Usuario {
 	
+	@Column(name = "celular")
+	private String celular;
+	
 	@Column(name  = "correo")
 	private String correo;
 	
@@ -16,17 +19,15 @@ public class Usuario {
 	
 	@Column(name  = "apellidos")
 	private String apellidos;
-	
+
 	private BufferedImage foto=null;
 	
 	@Column(name  = "calificacion")
-	private int calificacion=0;
+	private int calificacion=0; //[0..5]
 	
 	@Column(name  = "fechaNacimiento")
 	private String fechaNacimiento; // dd-mm-yy
-	
-	String celular;
-	
+
 	String clave;
 	
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
@@ -88,6 +89,60 @@ public class Usuario {
 
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
+	public List<CuentaBancaria> getCuentasBancarias() {
+		return cuentasBancarias;
+	}
+
+	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
+		this.cuentasBancarias = cuentasBancarias;
+	}
+
+	public List<Viaje> getViajes() {
+		return viajes;
+	}
+
+	public void setViajes(List<Viaje> viajes) {
+		this.viajes = viajes;
+	}
+	
+	
+	
+	public void addCuentaBancaria(CuentaBancaria cuentaBancaria) {
+		cuentasBancarias.add(cuentaBancaria);
+	}
+	
+	public void removeCuentaBancaria(long idCuentaBancaria) {
+		List<CuentaBancaria> cuentas = new ArrayList<CuentaBancaria>();
+		for (CuentaBancaria cuentaBancaria : cuentasBancarias) {
+			if(cuentaBancaria.getNumero() != idCuentaBancaria) cuentas.add(cuentaBancaria);
+		}
+		this.cuentasBancarias = cuentas;
+	}
+	
+	public void agregarViaje(Viaje viaje) {
+		this.viajes.add(viaje);
+	}
+	
+	public String getTipoUsuario() {
+		return "usuario";
 	}
 	
 }

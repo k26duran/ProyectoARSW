@@ -1,39 +1,35 @@
 package edu.eci.arsw.evern.model;
 
 public class CuentaBancaria {
-	private long id;
-	private String banco;
+	private long numero;
 	private boolean activa;
 	
 	public CuentaBancaria(){}
 	
-	public CuentaBancaria(long id, String banco, boolean activa) {
-		this.id = id;
-		this.banco = banco;
+	public CuentaBancaria(long numero, boolean activa) {
+		this.numero = numero;
 		this.activa = activa;
 	}
-	
-	public long getId() {
-		return id;
+
+	public long getNumero() {
+		return numero;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setNumero(long numero) {
+		this.numero = numero;
 	}
-	public String getBanco() {
-		return banco;
-	}
-	public void setBanco(String banco) {
-		this.banco = banco;
-	}
+
 	public boolean isActiva() {
 		return activa;
 	}
+
 	public void setActiva(boolean activa) {
 		this.activa = activa;
 	}
+
 	@Override
 	public String toString() {
-		return "CuentaBancaria [id=" + id + ", banco=" + banco + ", activa=" + activa + "]";
+		return "CuentaBancaria [numero=" + numero + ", activa=" + activa + "]";
 	}
-
+	
 }

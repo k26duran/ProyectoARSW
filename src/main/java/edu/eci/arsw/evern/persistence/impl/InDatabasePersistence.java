@@ -43,8 +43,7 @@ public class InDatabasePersistence implements EvernPersistence{
 	}
 
 	@Override
-	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria, String banco)
-			throws EvernPersistenceException {
+	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria) throws EvernPersistenceException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -56,13 +55,14 @@ public class InDatabasePersistence implements EvernPersistence{
 	}
 
 	@Override
-	public Conductor getConductorByCorreo(String correoConductor) throws EvernPersistenceException {
+	public Usuario getUsuarioByCorreo(String correoUsuario) throws EvernPersistenceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Pasajero getPasajeroByCorreo(String correoPasajero) throws EvernPersistenceException {
+	public List<Comentario> getComentariosByViajeAndUsuario(long idViaje, String correoUsuario)
+			throws EvernPersistenceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -89,6 +89,18 @@ public class InDatabasePersistence implements EvernPersistence{
 	public List<Viaje> getViajesDelUsuario(String correoUsuario) throws EvernPersistenceException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void pasajeroCalificaAlConductorByViaje(long idViaje, int calificacion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void conductorCalificaAlPasajeroByViaje(long idViaje, int calificacion) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -122,9 +134,10 @@ public class InDatabasePersistence implements EvernPersistence{
 	}
 
 	@Override
-	public void login(String correoUsuario, String clave) throws EvernPersistenceException {
+	public boolean login(String correoUsuario, String clave) throws EvernPersistenceException {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
+
 
 }

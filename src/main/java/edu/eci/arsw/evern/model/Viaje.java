@@ -10,11 +10,13 @@ public class Viaje {
 	private String lugarOrigen;
 	private String lugarDestino;
 	private String fecha;
-	private int calificacion;
+	private int calificacionAlPasajero; //[0..5]
+	private int calificacionAlConductor; //[0..5]
 	private int costo;
 	private int tiempo;
 	private String correoConductor;
 	private String correoPasajero;
+	private boolean aceptado;
 	
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 	
@@ -27,7 +29,7 @@ public class Viaje {
 		this.correoConductor = correoConductor;
 		this.correoConductor = correoPasajero;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -60,14 +62,22 @@ public class Viaje {
 		this.fecha = fecha;
 	}
 
-	public int getCalificacion() {
-		return calificacion;
+	public int getCalificacionAlPasajero() {
+		return calificacionAlPasajero;
 	}
 
-	public void setCalificacion(int calificacion) {
-		this.calificacion = calificacion;
+	public void setCalificacionAlPasajero(int calificacion) {
+		this.calificacionAlPasajero = calificacion;
 	}
-
+	
+	public int getCalificacionAlConductor() {
+		return calificacionAlConductor;
+	}
+	
+	public void setCalificacionAlConductor(int calificacion) {
+		this.calificacionAlConductor = calificacion;
+	}
+	
 	public int getCosto() {
 		return costo;
 	}
@@ -100,6 +110,42 @@ public class Viaje {
 		this.correoPasajero = correoPasajero;
 	}
 
+	public boolean isAceptado() {
+		return aceptado;
+	}
 
+	public void setAceptado(boolean aceptado) {
+		this.aceptado = aceptado;
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+	
+	public void addComentario(Comentario comentario) {
+		this.comentarios.add(comentario);
+	}
+	
+	public void removeComentario(long idComentario) {
+		List<Comentario> c = new ArrayList<Comentario>();
+		for (Comentario comentario : this.comentarios) {
+			if(comentario.getId() != idComentario) c.add(comentario);
+		}
+		comentarios = c;
+	}
+	
+	public List<Comentario> getComentariosByUsuario(String correoUsuario) {
+		List<Comentario> comentariosByUsuario = new ArrayList<Comentario>();
+		for (Comentario comentario : comentarios) {
+			if(comentario.getCorreoAutor().equals(correoUsuario)) {
+				comentariosByUsuario.add(comentario);
+			}
+		}
+		return comentariosByUsuario;
+	}
 
 }

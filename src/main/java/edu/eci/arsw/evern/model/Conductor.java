@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import org.springframework.stereotype.Service;
 
-//@Service("ConductorBean")
 @Entity
 @Table(name = "Coductores")
 public class Conductor extends Usuario{
@@ -29,9 +28,12 @@ public class Conductor extends Usuario{
 	public void setAuto(Automovil auto) {
 		this.auto = auto;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Conductor [auto=" + auto + super.toString() + "]";
 	}
+	
+	
+	
 }

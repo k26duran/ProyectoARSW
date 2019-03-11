@@ -1,5 +1,6 @@
 package edu.eci.arsw.evern.persistence.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,8 @@ import edu.eci.arsw.evern.persistence.EvernPersistenceException;
 @Component("inMemoryPersistence")
 public class InMemoryPersistence implements EvernPersistence{
 
-	Map<String,Usuario> usuarios = new HashMap<String, Usuario>();
+	Map<String,Usuario> usuarios = new HashMap<String, Usuario>();	
+	Map<Long, Viaje> viajes = new HashMap<Long, Viaje>();
 	
 	public InMemoryPersistence() {
 		
@@ -37,112 +39,181 @@ public class InMemoryPersistence implements EvernPersistence{
 
 	@Override
 	public void registrarConductor(Conductor conductor) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(conductor.getCorreo())) {
+			throw new EvernPersistenceException("El conductor no se puede registrar, ya existe una cuenta afiliada al correo" +conductor.getCorreo());
+		}else {
+			usuarios.put(conductor.getCorreo(), conductor);
+		}
 	}
 
 	@Override
 	public void registrarPasajero(Pasajero pasajero) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(pasajero.getCorreo())) {
+			throw new EvernPersistenceException("El pasajero no se puede registrar, ya existe una cuenta afiliada al correo" +pasajero.getCorreo());
+		}else {
+			usuarios.put(pasajero.getCorreo(), pasajero);
+		}
 	}
 
 	@Override
 	public void eliminarUsuario(Usuario usuario) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(usuario.getCorreo())) {
+			throw new EvernPersistenceException("El usuario con correo "+usuario.getCorreo()+"no existe");
+		}else {
+			usuarios.remove(usuario.getCorreo(), usuario);
+		}
 	}
 
 	@Override
 	public void agregarCuentaBancaria(String correoUsuario, CuentaBancaria cuentaBancaria)
 			throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		Usuario usuario = usuarios.get(correoUsuario);
+		usuario.addCuentaBancaria(cuentaBancaria);
 	}
 
 	@Override
-	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria, String banco)
+	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria) 
 			throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		Usuario usuario = usuarios.get(correoUsuario);
+		usuario.removeCuentaBancaria(idCuentaBancaria);
 	}
 
 	@Override
 	public void eliminarCuentas(String correoUsuario) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		Usuario usuario = usuarios.get(correoUsuario);
+		List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
+		usuario.setCuentasBancarias(cuentasBancarias);
 	}
 
 	@Override
-	public Conductor getConductorByCorreo(String correoConductor) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario getUsuarioByCorreo(String correoUsuario) throws EvernPersistenceException {
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else {
+			return usuarios.get(correoUsuario);
+		}
 	}
 
 	@Override
-	public Pasajero getPasajeroByCorreo(String correoPasajero) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void agregarComentarioAlViaje(long idViaje, Comentario comentario) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+	public void agregarComentarioAlViaje(long idViaje,Comentario comentario) throws EvernPersistenceException {
+		if(!viajes.containsKey(idViaje)) {
+			throw new EvernPersistenceException("El viaje "+idViaje+"no existe");
+		}else {
+			Viaje viaje = viajes.get(idViaje);
+			viaje.addComentario(comentario);
+		}		
 	}
 
 	@Override
 	public void eliminarComentarioAlViaje(long idViaje, long idComentario) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!viajes.containsKey(idViaje)) {
+			throw new EvernPersistenceException("El viaje "+idViaje+"no existe");
+		}else {
+			Viaje viaje = viajes.get(idViaje);
+			viaje.removeComentario(idComentario);
+		}
 	}
 
 	@Override
 	public void agregarViaje(Viaje viaje) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(viajes.containsKey(viaje.getId())) {
+			throw new EvernPersistenceException("El viaje con id "+viaje.getId() +"ya existe");
+		}else {
+			viajes.put(viaje.getId(), viaje);
+		}
 	}
 
 	@Override
 	public List<Viaje> getViajesDelUsuario(String correoUsuario) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		return null;
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else {
+			Usuario usuario = usuarios.get(correoUsuario);
+			return usuario.getViajes();
+		}
 	}
 
 	@Override
 	public void actualizarNombres(String correoUsuario, String nuevosNombres) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else {
+			Usuario usuario = usuarios.get(correoUsuario);
+			usuario.setNombres(nuevosNombres);
+		}
 	}
 
 	@Override
 	public void actualizarApellidos(String correoUsuario, String nuevosApellidos) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else {
+			Usuario usuario = usuarios.get(correoUsuario);
+			usuario.setNombres(nuevosApellidos);
+		}
 	}
 
 	@Override
 	public void actualizarCorreo(String correoUsuario, String nuevoCorreo) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else {
+			Usuario usuario = usuarios.get(correoUsuario);
+			usuario.setNombres(nuevoCorreo);
+		}
 	}
 
 	@Override
 	public void actualizarClave(String correoUsuario, String nuevaClave) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else {
+			Usuario usuario = usuarios.get(correoUsuario);
+			usuario.setNombres(nuevaClave);
+		}
 	}
 
 	@Override
 	public void actualizarAutomovil(String correoConductor, Automovil auto) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+		if(!usuarios.containsKey(correoConductor)) {
+			throw new EvernPersistenceException("El conductor con correo "+correoConductor+"no existe");
+		}else{
+			try {
+				Conductor conductor = (Conductor) usuarios.get(correoConductor);
+				conductor.setAuto(auto);
+			}catch(ClassCastException e) {
+				throw new EvernPersistenceException("El conductor con correo "+correoConductor+"no existe");
+			}
+		}
 	}
 
 	@Override
-	public void login(String correoUsuario, String clave) throws EvernPersistenceException {
-		// TODO Auto-generated method stub
-		
+	public boolean login(String correoUsuario, String clave) throws EvernPersistenceException {
+		if(!usuarios.containsKey(correoUsuario)) {
+			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
+		}else{
+			Usuario usuario = usuarios.get(correoUsuario);
+			return usuario.getClave().equals(clave);
+		}
+	}
+
+	@Override
+	public List<Comentario> getComentariosByViajeAndUsuario(long idViaje, String correoUsuario)
+			throws EvernPersistenceException {
+		Viaje viaje = viajes.get(idViaje);
+		return viaje.getComentariosByUsuario(correoUsuario);
+	}
+
+	@Override
+	public void pasajeroCalificaAlConductorByViaje(long idViaje, int calificacion) {
+		Viaje viaje = viajes.get(idViaje);
+		viaje.setCalificacionAlConductor(calificacion);
+	}
+
+	@Override
+	public void conductorCalificaAlPasajeroByViaje(long idViaje, int calificacion) {
+		Viaje viaje = viajes.get(idViaje);
+		viaje.setCalificacionAlPasajero(calificacion);
 	}
 
 }

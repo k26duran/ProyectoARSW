@@ -1,4 +1,4 @@
-package edu.eci.arsw.enerv.controller;
+package edu.eci.arsw.evern.controller;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;

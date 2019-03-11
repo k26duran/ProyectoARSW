@@ -1,10 +1,10 @@
-package edu.eci.arsw.enerv.model;
+package edu.eci.arsw.evern.model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "AutoMoviles")
-public class AutoMovil{
+public class Automovil{
 	
 	@Column(name = "placa")
 	private String placa;
@@ -14,14 +14,13 @@ public class AutoMovil{
 
 	@Column(name = "color")
 	private String color;
-	
 
 	@Column(name = "tipo")
 	private String tipo;
 	
-	public AutoMovil(){}
+	public Automovil(){}
 	
-	public AutoMovil(String placa, String modelo, String tipo, String color){
+	public Automovil(String placa, String modelo, String tipo, String color){
 		this.color=color;
 		this.modelo=modelo;
 		this.placa=placa;
@@ -62,7 +61,7 @@ public class AutoMovil{
 
 	@Override
 	public String toString() {
-		return "AutoMovil [placa=" + placa + ", modelo=" + modelo + ", color=" + color + ", tipo=" + tipo + "]";
+		return "Automovil [placa=" + placa + ", modelo=" + modelo + ", color=" + color + ", tipo=" + tipo + "]";
 	}
 	
 

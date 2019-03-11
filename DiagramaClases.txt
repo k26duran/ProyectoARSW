@@ -1,0 +1,63 @@
+@startuml
+
+class Usuario{
+  {field}-correo: String
+  {field}-nombres: String
+  {field}-apellidos: String
+  {field}-foto: Image
+  {field}-calificacion: int
+  {field}-fechaNacimiento: Date
+
+  {method} registrarCuentaBancaria(CuentaBancaria cuenta)
+  {method} eliminarCuentaBancaria(CuentaBancaria cuenta)
+  {method} actualizarFoto(CuentaBancaria cuenta)
+}
+
+class Automovil{
+  {field}-placa: String
+  {field}-modelo: String
+}
+
+class CuentaBancaria{
+  {field}-id: long
+  {field}-banco: String
+  {field}-activa: Boolean
+}
+
+class Pasajero{
+}
+
+class Conductor{
+}
+
+class Viaje{
+  {field}-id: long
+  {field}-partida: Location
+  {field}-destino: Location
+  {field}-calificacion: Integer[0..5]
+  {field}-tiempo: long
+  {field}-costo: int
+}
+
+class Comentario{
+  {field}-id: long
+  {field}-contenido: String
+  {field}-fecha: Date
+}
+
+Usuario <|--- Conductor
+Usuario <|--- Pasajero 
+
+Usuario -->"-tarjetas  *" CuentaBancaria
+Usuario -->"-viajes *" Viaje
+
+Viaje -->"-conductor " Conductor
+Viaje -->"-pasajero " Pasajero
+Viaje -->"-comentarios *" Comentario
+Comentario -->"-autor " Usuario
+Viaje --> "-pago " CuentaBancaria
+Conductor -->"-automovil " Automovil
+ 
+
+@enduml
+

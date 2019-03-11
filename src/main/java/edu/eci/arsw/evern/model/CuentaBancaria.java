@@ -1,19 +1,19 @@
-package edu.eci.arsw.enerv.model;
+package edu.eci.arsw.evern.model;
 
-public class TarjetaDeCredito {
-	private int id;
+public class CuentaBancaria {
+	private long id;
 	private String banco;
 	private boolean activa;
 	
-	public TarjetaDeCredito(){}
+	public CuentaBancaria(){}
 	
-	public TarjetaDeCredito(int id, String banco, boolean activa) {
+	public CuentaBancaria(long id, String banco, boolean activa) {
 		this.id = id;
 		this.banco = banco;
 		this.activa = activa;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -33,7 +33,7 @@ public class TarjetaDeCredito {
 	}
 	@Override
 	public String toString() {
-		return "TarjetaDeCredito [id=" + id + ", banco=" + banco + ", activa=" + activa + "]";
+		return "CuentaBancaria [id=" + id + ", banco=" + banco + ", activa=" + activa + "]";
 	}
 
 }

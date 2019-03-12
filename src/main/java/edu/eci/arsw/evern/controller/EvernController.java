@@ -17,17 +17,17 @@ import edu.eci.arsw.evern.repository.ComentarioRepository;
 public class EvernController {
 
 	  @Autowired
-	  ComentarioRepository conductorRepository;
+	  ComentarioRepository comentarioRepository;
 	  
 	  
 	  @GetMapping("/allComentarios")
 	  public List<Comentario> getAllComentario() {
-	      return conductorRepository.findAll();
+	      return comentarioRepository.findAll();
 	  }
 	  
-	  @PostMapping("/sabeComentarios")
+	  @PostMapping("/saveComentarios")
 	  public Comentario createNote(@RequestBody Comentario comentario) {
-	      return conductorRepository.save(comentario);
+	      return comentarioRepository.save(comentario);
 	  }
 	
 	

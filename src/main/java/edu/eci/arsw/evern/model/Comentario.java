@@ -29,6 +29,9 @@ public class Comentario {
     
     private String correoAutor;
 	
+    public Comentario() {
+    	
+    }
 
 	public Comentario(long id, String contenido, Date date, String correoAutor) {
 		this.id = id;

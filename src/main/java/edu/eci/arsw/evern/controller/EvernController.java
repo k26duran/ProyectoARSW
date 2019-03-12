@@ -20,10 +20,11 @@ public class EvernController {
 
 	  @Autowired
 	  ComentarioRepository comentarioRepository;
+
 	  
 	  @Autowired
 	  ConductorRepository conductorRepository;
-	  
+
 	  
 	  @GetMapping("/allComentarios")
 	  public List<Comentario> getAllComentario() {
@@ -43,7 +44,7 @@ public class EvernController {
 	  @PostMapping("/saveConductor")
 	  public Conductor addConductor(@RequestBody Conductor comentario) {
 	      return conductorRepository.save(comentario);
+
 	  }
-	
-	  
+
 }

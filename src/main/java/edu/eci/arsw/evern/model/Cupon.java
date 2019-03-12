@@ -1,10 +1,25 @@
 package edu.eci.arsw.evern.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cupon")
 public class Cupon {
 
+	
+	@Column(name = "cupon")
 	private String cupon;
-	private boolean activo;
+	
 
+	@Column(name = "cupon")
+	private boolean activo;
+	
+	public Cupon() {
+		
+	}
+	
 	public Cupon(String cupon, boolean activo) {
 		super();
 		this.cupon = cupon;

@@ -1,5 +1,7 @@
 package edu.eci.arsw.evern.persistence.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,15 +26,15 @@ public class InMemoryPersistence implements EvernPersistence{
 	Map<String,Usuario> usuarios = new HashMap<String, Usuario>();	
 	Map<Long, Viaje> viajes = new HashMap<Long, Viaje>();
 	
-	public InMemoryPersistence() {
+	public InMemoryPersistence() throws ParseException {
 		
 		// FULL DATABASE
-		Usuario john = new Pasajero("john@hotmail.com", "john", "arsw", "01/01/1997", "john");
+		Usuario john = new Pasajero("john@hotmail.com", "john", "arsw", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/1997"), "john");
 		
-		Usuario karen = new Pasajero("karen@hotmail.com", "karen", "arsw", "03/03/1999","karen");
+		Usuario karen = new Pasajero("karen@hotmail.com", "karen", "arsw", new SimpleDateFormat("dd/MM/yyyy").parse("03/03/1999") ,"karen");
 		
 		Automovil autoCamilo = new Automovil("BBC-123", "Vitara", "Camioneta", "negro");
-		Usuario camilo = new Conductor("camilo@hotmail.com","camilo", "arsw", "02/02/1998","camilo", autoCamilo);
+		Usuario camilo = new Conductor("camilo@hotmail.com","camilo", "arsw",  new SimpleDateFormat("dd/MM/yyyy").parse("02/02/1998"),"camilo", autoCamilo);
 		
 		// AGREGAR VIAJES		
 	}
@@ -180,7 +182,7 @@ public class InMemoryPersistence implements EvernPersistence{
 		}else{
 			try {
 				Conductor conductor = (Conductor) usuarios.get(correoConductor);
-				conductor.setAuto(auto);
+				//conductor.setAuto(auto);
 			}catch(ClassCastException e) {
 				throw new EvernPersistenceException("El conductor con correo "+correoConductor+"no existe");
 			}

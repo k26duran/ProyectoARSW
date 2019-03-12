@@ -10,7 +10,7 @@ public class Pasajero extends Usuario{
 
 	private List<Cupon> cupones = new ArrayList<Cupon>();
 	
-	public Pasajero(String correo, String nombres, String apellidos, String fechaNacimiento, String clave){
+	public Pasajero(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave){
 		super(correo, nombres, apellidos, fechaNacimiento, clave);
 	}
 

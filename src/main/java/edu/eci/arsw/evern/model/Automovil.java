@@ -2,17 +2,27 @@ package edu.eci.arsw.evern.model;
 
 import javax.persistence.*;
 
+
+@Entity
+@Table( name = "automovil")
 public class Automovil{
 	
 	private String placa;
 
+
 	private String modelo;
+
 
 	private String color;
 
+
 	private String tipo;
 	
-	public Automovil(){}
+	
+	
+	public Automovil(){
+		
+	}
 	
 	public Automovil(String placa, String modelo, String tipo, String color){
 		this.color=color;

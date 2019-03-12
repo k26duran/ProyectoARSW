@@ -5,24 +5,46 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
+
+@MappedSuperclass
 public class Usuario {
 	
+
+	@Id
+	@Column(name  = "correo")
 	private String correo;
 	
+
+	@Column(name  = "nombres")
 	private String nombres;
 	
+
+	@Column(name  = "apellidos")
 	private String apellidos;
 	
-	private BufferedImage foto=null;
+	//private BufferedImage foto=null;
 	
+	@Column(name  = "celular")
+	private String celular;
+	
+	
+
+	@Column(name  = "calificacion")
 	private int calificacion=0;
 	
-	private String fechaNacimiento; // dd-mm-yy
 	
-	String celular;
+
+	@Column(name  = "fechaNacimiento")
+	private Date fechaNacimiento;// dd-mm-yy
 	
-	String clave;
+
+	
+
+	@Column(name  = "clave")
+	private String clave;
 	
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 	
@@ -30,7 +52,7 @@ public class Usuario {
 	
 	public Usuario () {}
 
-	public Usuario(String correo, String nombres, String apellidos, String fechaNacimiento, String clave) {
+	public Usuario(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave) {
 		this.correo = correo;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -61,13 +83,13 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-	public BufferedImage getFoto() {
-		return foto;
-	}
-
-	public void setFoto(BufferedImage foto) {
-		this.foto = foto;
-	}
+//	public BufferedImage getFoto() {
+//		return foto;
+//	}
+//
+//	public void setFoto(BufferedImage foto) {
+//		this.foto = foto;
+//	}
 
 	public int getCalificacion() {
 		return calificacion;
@@ -77,11 +99,11 @@ public class Usuario {
 		this.calificacion = calificacion;
 	}
 
-	public String getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	

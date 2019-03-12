@@ -18,13 +18,13 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-  
+	@NotBlank
 	private String contenido;
 	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-    private Date date; //dd-mm-yy
+    private Date date = new Date(); //dd-mm-yy
 	
     
     private String correoAutor;

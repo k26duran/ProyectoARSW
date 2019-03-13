@@ -2,6 +2,7 @@ package edu.eci.arsw.evern.controller;
 
 import java.util.List;
 
+import edu.eci.arsw.evern.repository.ViajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,9 @@ public class EvernController {
 	  
 	  @Autowired
 	  ConductorRepository conductorRepository;
+
+	  @Autowired
+	  ViajeRepository viajeRepository;
 
 	  
 	  @GetMapping("/allComentarios")

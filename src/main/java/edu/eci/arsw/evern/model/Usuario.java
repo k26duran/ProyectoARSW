@@ -4,10 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,9 +39,8 @@ public class Usuario {
 
 	@Column(name  = "fechaNacimiento")
 	private Date fechaNacimiento;// dd-mm-yy
-	
 
-	
+
 
 	@Column(name  = "clave")
 	private String clave;

@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Entity
 @Table( name = "automovil")
 public class Automovil{
-	
-	
+
+
 	@Id
 	private String placa;
 
@@ -18,17 +18,30 @@ public class Automovil{
 
 
 	private String tipo;
-	
-	
+
+	@OneToOne(mappedBy = "auto" ,
+			 cascade = CascadeType.ALL,
+			 fetch = FetchType.LAZY,
+			 optional = false)
+	Conductor conductor;
+
 	public Automovil(){
-		
+
 	}
-	
+
 	public Automovil(String placa, String modelo, String tipo, String color){
 		this.color=color;
 		this.modelo=modelo;
 		this.placa=placa;
 		this.tipo=tipo;
+	}
+
+	public Conductor getConductor() {
+		return conductor;
+	}
+
+	public void setConductor(Conductor conductor) {
+		this.conductor = conductor;
 	}
 
 	public String getPlaca() {
@@ -67,6 +80,6 @@ public class Automovil{
 	public String toString() {
 		return "Automovil [placa=" + placa + ", modelo=" + modelo + ", color=" + color + ", tipo=" + tipo + "]";
 	}
-	
+
 
 }

@@ -11,6 +11,7 @@ public class Viaje {
 	
 	@Id
 	private Long id;
+
 	private String lugarOrigen;
 	private String lugarDestino;
 	private String fecha;
@@ -22,7 +23,7 @@ public class Viaje {
 	private String correoPasajero;
 	private boolean aceptado;
 	
-	@Transient
+	@OneToMany(mappedBy = "id" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 	
 	public Viaje(){}

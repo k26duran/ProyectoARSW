@@ -14,7 +14,11 @@ public class Pasajero extends Usuario{
 
 	@Transient
 	private List<Cupon> cupones = new ArrayList<Cupon>();
-	
+
+	public Pasajero(){
+
+	}
+
 	public Pasajero(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave){
 		super(correo, nombres, apellidos, fechaNacimiento, clave);
 	}

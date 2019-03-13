@@ -25,9 +25,11 @@ public class Comentario {
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
     private Date date = new Date(); //dd-mm-yy
-	
-    
+
     private String correoAutor;
+
+    @ManyToOne()
+	private Viaje viaje;
 	
     public Comentario() {
     	

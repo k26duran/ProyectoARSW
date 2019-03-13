@@ -7,8 +7,9 @@ import javax.persistence.*;
 @Table( name = "automovil")
 public class Automovil{
 	
+	
+//	@Id
 	private String placa;
-
 
 	private String modelo;
 
@@ -17,7 +18,6 @@ public class Automovil{
 
 
 	private String tipo;
-	
 	
 	
 	public Automovil(){

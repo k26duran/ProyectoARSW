@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class Conductor extends Usuario{
 	
 	
+//	@OneToOne
+//	@PrimaryKeyJoinColumn
 //	Automovil auto;
 
 	public Conductor() {
@@ -31,7 +33,7 @@ public class Conductor extends Usuario{
 //	public void setAuto(Automovil auto) {
 //		this.auto = auto;
 //	}
-//	
+	
 //	@Override
 //	public String toString() {
 //		return "Conductor [auto=" + auto + super.toString() + "]";

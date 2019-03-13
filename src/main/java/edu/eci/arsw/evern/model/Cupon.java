@@ -2,18 +2,19 @@ package edu.eci.arsw.evern.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "cupon")
 public class Cupon {
 
-	
+	@Id
 	@Column(name = "cupon")
 	private String cupon;
 	
 
-	@Column(name = "cupon")
+	@Column(name = "activo")
 	private boolean activo;
 	
 	public Cupon() {

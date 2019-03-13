@@ -3,10 +3,14 @@ package edu.eci.arsw.evern.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table( name = "viajes")
 public class Viaje {
 	
-	
-	private long id;
+	@Id
+	private Long id;
 	private String lugarOrigen;
 	private String lugarDestino;
 	private String fecha;
@@ -18,6 +22,7 @@ public class Viaje {
 	private String correoPasajero;
 	private boolean aceptado;
 	
+	@Transient
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 	
 	public Viaje(){}

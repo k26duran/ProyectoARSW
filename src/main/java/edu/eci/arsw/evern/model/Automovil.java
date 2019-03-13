@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Automovil{
 	
 	
-//	@Id
+	@Id
 	private String placa;
 
 	private String modelo;

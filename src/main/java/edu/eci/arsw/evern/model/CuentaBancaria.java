@@ -1,7 +1,14 @@
 package edu.eci.arsw.evern.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "CuentaBancaria")
 public class CuentaBancaria {
+	
+	@Id
 	private long numero;
+	
 	private boolean activa;
 	
 	public CuentaBancaria(){}

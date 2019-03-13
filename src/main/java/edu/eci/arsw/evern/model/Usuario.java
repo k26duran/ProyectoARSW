@@ -7,6 +7,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
+import org.springframework.transaction.annotation.Transactional;
 
 
 @MappedSuperclass
@@ -46,8 +49,11 @@ public class Usuario {
 	@Column(name  = "clave")
 	private String clave;
 	
+	
+	@Transient
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 	
+	@Transient
 	private List<Viaje> viajes = new ArrayList<Viaje>();
 	
 	public Usuario () {}

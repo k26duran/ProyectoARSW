@@ -1,22 +1,41 @@
 package edu.eci.arsw.evern.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cupon")
 public class Cupon {
 
 	@Id
+	private Long id;
+
 	@Column(name = "cupon")
 	private String cupon;
 	
 
 	@Column(name = "activo")
 	private boolean activo;
-	
+
+
+	@ManyToOne
+	private Pasajero pasajero;
+
+	public Pasajero getPasajero() {
+		return pasajero;
+	}
+
+	public void setPasajero(Pasajero pasajero) {
+		this.pasajero = pasajero;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Cupon() {
 		
 	}

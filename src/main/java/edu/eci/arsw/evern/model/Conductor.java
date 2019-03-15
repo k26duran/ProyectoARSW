@@ -7,20 +7,19 @@ import javax.persistence.*;
 
 import org.springframework.stereotype.Service;
 
-
 @Entity
-@Table(name = "conductor")
-public class Conductor extends Usuario{
-	
-	
-	@OneToOne
+public class Conductor extends Usuario {
+
+
+	@OneToOne(mappedBy = "conductor", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private Automovil auto;
 
 	public Conductor() {
 
 	}
 
-	public Conductor(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave, Automovil auto) {
+	public Conductor(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave,
+			Automovil auto) {
 		super(correo, nombres, apellidos, fechaNacimiento, clave);
 		this.auto = auto;
 	}
@@ -38,6 +37,5 @@ public class Conductor extends Usuario{
 //		return "Conductor [auto=" + auto + super.toString() + "]";
 //	}
 //
-
 
 }

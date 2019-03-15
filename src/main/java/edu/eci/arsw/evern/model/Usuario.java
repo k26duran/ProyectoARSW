@@ -9,11 +9,16 @@ import javax.persistence.*;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@MappedSuperclass
+//@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Usuario {
-	
+
 
 	@Id
+	private Long id;
+
+
 	@Column(name  = "correo")
 	private String correo;
 	
@@ -26,10 +31,10 @@ public class Usuario {
 	private String apellidos;
 	
 	//private BufferedImage foto=null;
-	
+
 	@Column(name  = "celular")
 	private String celular;
-	
+
 	
 
 	@Column(name  = "calificacion")
@@ -44,11 +49,12 @@ public class Usuario {
 
 	@Column(name  = "clave")
 	private String clave;
-	
-	
+
 	@Transient
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 	
+	
+	//@OneToMany(mappedBy = "numero" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
 	@Transient
 	private List<Viaje> viajes = new ArrayList<Viaje>();
 	

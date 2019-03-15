@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Comentario;
 import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.repository.ComentarioRepository;
-import edu.eci.arsw.evern.repository.ConductorRepository;
 
 @RestController
 @RequestMapping(value = "v1/evern")
@@ -23,8 +22,6 @@ public class EvernController {
 	  ComentarioRepository comentarioRepository;
 
 	  
-	  @Autowired
-	  ConductorRepository conductorRepository;
 
 	  @Autowired
 	  ViajeRepository viajeRepository;
@@ -40,16 +37,5 @@ public class EvernController {
 	      return comentarioRepository.save(comentario);
 	  }
 
-
-	  @GetMapping("/allConductor")
-	  public List<Conductor> getAllConductor() {
-	      return conductorRepository.findAll();
-	  }
-	  
-	  @PostMapping("/saveConductor")
-	  public Conductor addConductor(@RequestBody Conductor comentario) {
-	      return conductorRepository.save(comentario);
-
-	  }
 
 }

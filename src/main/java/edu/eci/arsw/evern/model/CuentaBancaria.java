@@ -7,23 +7,22 @@ import javax.persistence.*;
 public class CuentaBancaria {
 	
 	@Id
-	private long numero;
+	private Long numero;
 	
 	private boolean activa;
 	
+
+	public Long getNumero() {
+		return numero;
+	}
+
+
+
 	public CuentaBancaria(){}
 	
 	public CuentaBancaria(long numero, boolean activa) {
 		this.numero = numero;
 		this.activa = activa;
-	}
-
-	public long getNumero() {
-		return numero;
-	}
-
-	public void setNumero(long numero) {
-		this.numero = numero;
 	}
 
 	public boolean isActiva() {

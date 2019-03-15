@@ -9,10 +9,9 @@ import javax.persistence.*;
 import org.springframework.stereotype.Service;
 
 @Entity
-@Table( name = "pasajeros")
 public class Pasajero extends Usuario{
 
-	@Transient
+	@OneToMany(mappedBy = "id" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
 	private List<Cupon> cupones = new ArrayList<Cupon>();
 
 	public Pasajero(){

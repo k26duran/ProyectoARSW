@@ -2,38 +2,41 @@ package edu.eci.arsw.evern.model;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table( name = "automovil")
-public class Automovil{
-
+@Table(name = "automovil")
+public class Automovil {
 
 	@Id
+	private Long id;
+
 	private String placa;
 
 	private String modelo;
 
-
 	private String color;
-
 
 	private String tipo;
 
-	@OneToOne(mappedBy = "auto" ,
-			 cascade = CascadeType.ALL,
-			 fetch = FetchType.LAZY,
-			 optional = false)
+	@OneToOne
 	Conductor conductor;
 
-	public Automovil(){
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Automovil() {
 
 	}
 
-	public Automovil(String placa, String modelo, String tipo, String color){
-		this.color=color;
-		this.modelo=modelo;
-		this.placa=placa;
-		this.tipo=tipo;
+	public Automovil(String placa, String modelo, String tipo, String color) {
+		this.color = color;
+		this.modelo = modelo;
+		this.placa = placa;
+		this.tipo = tipo;
 	}
 
 	public Conductor getConductor() {
@@ -80,6 +83,5 @@ public class Automovil{
 	public String toString() {
 		return "Automovil [placa=" + placa + ", modelo=" + modelo + ", color=" + color + ", tipo=" + tipo + "]";
 	}
-
 
 }

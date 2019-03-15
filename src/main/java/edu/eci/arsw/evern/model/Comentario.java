@@ -28,7 +28,7 @@ public class Comentario {
 
     private String correoAutor;
 
-    @ManyToOne()
+    @ManyToOne
 	private Viaje viaje;
 	
     public Comentario() {

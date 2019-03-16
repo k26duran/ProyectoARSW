@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 @Entity
 public class Conductor extends Usuario {
 
+	@Id
+	private  Long  idComput;
 
 	@OneToOne(mappedBy = "conductor", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private Automovil auto;

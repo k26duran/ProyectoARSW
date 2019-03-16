@@ -10,7 +10,21 @@ public class CuentaBancaria {
 	private Long numero;
 	
 	private boolean activa;
-	
+
+	@ManyToOne
+	private Usuario usr;
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
+	}
+
+	public Usuario getUsr() {
+		return usr;
+	}
+
+	public void setUsr(Usuario usr) {
+		this.usr = usr;
+	}
 
 	public Long getNumero() {
 		return numero;

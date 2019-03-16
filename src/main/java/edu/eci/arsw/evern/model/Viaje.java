@@ -25,6 +25,9 @@ public class Viaje {
 	
 	@OneToMany(mappedBy = "id" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
+
+	@ManyToOne
+	Usuario usr;
 	
 	public Viaje(){}
 	

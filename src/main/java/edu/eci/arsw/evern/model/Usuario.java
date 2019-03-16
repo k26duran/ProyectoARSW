@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,8 @@ public class Usuario {
 	private Long id;
 
 
-	@Column(name  = "correo")
+	@Column(name  = "correo" , unique=true)
+	@NotNull( message ="El  correo no puede ser nulo")
 	private String correo;
 	
 
@@ -32,7 +34,7 @@ public class Usuario {
 	
 	//private BufferedImage foto=null;
 
-	@Column(name  = "celular")
+	@Column(name  = "celular" , unique=true )
 	private String celular;
 
 	
@@ -47,15 +49,15 @@ public class Usuario {
 
 
 
-	@Column(name  = "clave")
+	@Column(name  = "clave" )
 	private String clave;
 
-	@Transient
+	@OneToMany(mappedBy = "usr" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
-	
-	
-	//@OneToMany(mappedBy = "numero" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
-	@Transient
+
+
+	@OneToMany(mappedBy = "usr" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
+	//@Transient
 	private List<Viaje> viajes = new ArrayList<Viaje>();
 	
 	public Usuario () {}

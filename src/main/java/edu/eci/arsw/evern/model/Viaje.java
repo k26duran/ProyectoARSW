@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Viaje {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String lugarOrigen;
@@ -22,13 +23,18 @@ public class Viaje {
 	private String correoConductor;
 	private String correoPasajero;
 	private boolean aceptado;
-	
-	@OneToMany(mappedBy = "id" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
+
+	@ManyToOne(targetEntity = edu.eci.arsw.evern.model.Conductor.class)
+	Conductor conductor;
+
+
+	@ManyToOne(targetEntity = edu.eci.arsw.evern.model.Pasajero.class)
+	Pasajero pasajero;
+
+
+	@OneToMany(mappedBy = "viaje"  , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 
-	@ManyToOne
-	Usuario usr;
-	
 	public Viaje(){}
 	
 	public Viaje(String lugarOrigen, String lugarDestino, int costo, String correoConductor, String correoPasajero) {
@@ -146,15 +152,6 @@ public class Viaje {
 		}
 		comentarios = c;
 	}
-	
-	public List<Comentario> getComentariosByUsuario(String correoUsuario) {
-		List<Comentario> comentariosByUsuario = new ArrayList<Comentario>();
-		for (Comentario comentario : comentarios) {
-			if(comentario.getCorreoAutor().equals(correoUsuario)) {
-				comentariosByUsuario.add(comentario);
-			}
-		}
-		return comentariosByUsuario;
-	}
+
 
 }

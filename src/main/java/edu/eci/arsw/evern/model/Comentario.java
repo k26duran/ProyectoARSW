@@ -26,9 +26,7 @@ public class Comentario {
 	@CreatedDate
     private Date date = new Date(); //dd-mm-yy
 
-    private String correoAutor;
-
-    @ManyToOne
+    @ManyToOne(targetEntity = edu.eci.arsw.evern.model.Viaje.class)
 	private Viaje viaje;
 	
     public Comentario() {
@@ -39,7 +37,6 @@ public class Comentario {
 		this.id = id;
 		this.contenido = contenido;
 		this.date = date;
-		this.correoAutor = correoAutor;
 	}
     
 	
@@ -62,13 +59,7 @@ public class Comentario {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getCorreoAutor() {
-		return correoAutor;
-	}
-	public void setCorreoAutor(String correoAutor) {
-		this.correoAutor = correoAutor;
-	}
-	
+
 
 	
 

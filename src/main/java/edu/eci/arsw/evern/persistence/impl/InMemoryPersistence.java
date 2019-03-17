@@ -59,32 +59,35 @@ public class InMemoryPersistence implements EvernPersistence{
 
 	@Override
 	public void eliminarUsuario(Usuario usuario) throws EvernPersistenceException {
+		/*
 		if(!usuarios.containsKey(usuario.getCorreo())) {
+
 			throw new EvernPersistenceException("El usuario con correo "+usuario.getCorreo()+"no existe");
 		}else {
 			usuarios.remove(usuario.getCorreo(), usuario);
 		}
+		*/
 	}
 
 	@Override
 	public void agregarCuentaBancaria(String correoUsuario, CuentaBancaria cuentaBancaria)
 			throws EvernPersistenceException {
-		Usuario usuario = usuarios.get(correoUsuario);
-		usuario.addCuentaBancaria(cuentaBancaria);
+//		usuario.addCuentaBancaria(cuentaBancaria);
+//		Usuario usuario = usuarios.get(correoUsuario);
 	}
 
 	@Override
-	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria) 
+	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria)
 			throws EvernPersistenceException {
-		Usuario usuario = usuarios.get(correoUsuario);
-		usuario.removeCuentaBancaria(idCuentaBancaria);
+//		Usuario usuario = usuarios.get(correoUsuario);
+//		usuario.removeCuentaBancaria(idCuentaBancaria);
 	}
 
 	@Override
 	public void eliminarCuentas(String correoUsuario) throws EvernPersistenceException {
 		Usuario usuario = usuarios.get(correoUsuario);
 		List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
-		usuario.setCuentasBancarias(cuentasBancarias);
+//		usuario.setCuentasBancarias(cuentasBancarias);
 	}
 
 	@Override
@@ -131,7 +134,7 @@ public class InMemoryPersistence implements EvernPersistence{
 			throw new EvernPersistenceException("El usuario con correo "+correoUsuario+"no existe");
 		}else {
 			Usuario usuario = usuarios.get(correoUsuario);
-			return usuario.getViajes();
+			return null;
 		}
 	}
 
@@ -203,7 +206,7 @@ public class InMemoryPersistence implements EvernPersistence{
 	public List<Comentario> getComentariosByViajeAndUsuario(long idViaje, String correoUsuario)
 			throws EvernPersistenceException {
 		Viaje viaje = viajes.get(idViaje);
-		return viaje.getComentariosByUsuario(correoUsuario);
+		return null;
 	}
 
 	@Override

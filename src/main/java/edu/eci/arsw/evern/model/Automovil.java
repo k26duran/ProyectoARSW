@@ -1,12 +1,16 @@
 package edu.eci.arsw.evern.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "automovil")
+
 public class Automovil {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String placa;
@@ -17,16 +21,12 @@ public class Automovil {
 
 	private String tipo;
 
-	@OneToOne
+
+	@OneToOne(targetEntity = Conductor.class, mappedBy = "automovil",
+			  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "conductor")
+	@JsonIgnore
 	Conductor conductor;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Automovil() {
 
@@ -38,6 +38,15 @@ public class Automovil {
 		this.placa = placa;
 		this.tipo = tipo;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	public Conductor getConductor() {
 		return conductor;

@@ -1,4 +1,8 @@
 package edu.eci.arsw.evern.repository;
 
-public interface PasajeroRepository {
+import edu.eci.arsw.evern.model.Automovil;
+import edu.eci.arsw.evern.model.Pasajero;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PasajeroRepository  extends JpaRepository<Pasajero, Long> {
 }

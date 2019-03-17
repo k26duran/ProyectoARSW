@@ -10,20 +10,17 @@ import javax.validation.constraints.*;
 import org.springframework.transaction.annotation.Transactional;
 
 
-//@MappedSuperclass
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
+@MappedSuperclass
 public class Usuario {
 
 
-	@Id
+   	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-
-	@Column(name  = "correo" , unique=true)
-	@NotNull( message ="El  correo no puede ser nulo")
-	private String correo;
-	
+    @Column(name  = "correo" , unique=true)
+    private String correo;
 
 	@Column(name  = "nombres")
 	private String nombres;
@@ -52,13 +49,11 @@ public class Usuario {
 	@Column(name  = "clave" )
 	private String clave;
 
-	@OneToMany(mappedBy = "usr" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
-	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 
 
-	@OneToMany(mappedBy = "usr" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
-	//@Transient
-	private List<Viaje> viajes = new ArrayList<Viaje>();
+
+
+
 	
 	public Usuario () {}
 
@@ -133,40 +128,6 @@ public class Usuario {
 		this.clave = clave;
 	}
 
-	public List<CuentaBancaria> getCuentasBancarias() {
-		return cuentasBancarias;
-	}
-
-	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
-		this.cuentasBancarias = cuentasBancarias;
-	}
-
-	public List<Viaje> getViajes() {
-		return viajes;
-	}
-
-	public void setViajes(List<Viaje> viajes) {
-		this.viajes = viajes;
-	}
-	
-	
-	
-	public void addCuentaBancaria(CuentaBancaria cuentaBancaria) {
-		cuentasBancarias.add(cuentaBancaria);
-	}
-	
-	public void removeCuentaBancaria(long idCuentaBancaria) {
-		List<CuentaBancaria> cuentas = new ArrayList<CuentaBancaria>();
-		for (CuentaBancaria cuentaBancaria : cuentasBancarias) {
-			if(cuentaBancaria.getNumero() != idCuentaBancaria) cuentas.add(cuentaBancaria);
-		}
-		this.cuentasBancarias = cuentas;
-	}
-	
-	public void agregarViaje(Viaje viaje) {
-		this.viajes.add(viaje);
-	}
-	
 	public String getTipoUsuario() {
 		return "usuario";
 	}

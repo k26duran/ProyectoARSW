@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Cupon {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "cupon")

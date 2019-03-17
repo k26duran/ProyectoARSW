@@ -11,8 +11,15 @@ import org.springframework.stereotype.Service;
 @Entity
 public class Pasajero extends Usuario{
 
-	@OneToMany(mappedBy = "id" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
+	@OneToMany(mappedBy = "pasajero" , fetch = FetchType.EAGER , cascade =  CascadeType.ALL)
 	private List<Cupon> cupones = new ArrayList<Cupon>();
+
+	@OneToMany(mappedBy = "pasajero" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
+	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
+
+	@OneToMany(mappedBy = "pasajero" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
+	private List<Viaje> viajes = new ArrayList<Viaje>();
+
 
 	public Pasajero(){
 
@@ -33,5 +40,20 @@ public class Pasajero extends Usuario{
 	public String userType() {
 		return "pasajero";
 	}
-	
+
+
+	public void setViajes(List<Viaje> viajes) {
+		this.viajes = viajes;
+	}
+
+	public void agregarViaje(Viaje viaje) {
+		this.viajes.add(viaje);
+	}
+
+
+	public List<Viaje> getViajes() {
+		return viajes;
+	}
+
+
 }

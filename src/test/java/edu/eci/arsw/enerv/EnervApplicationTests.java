@@ -11,7 +11,6 @@ public class EnervApplicationTests {
 
 	@Test
 	public void contextLoads(){
-
 	}
 
 }

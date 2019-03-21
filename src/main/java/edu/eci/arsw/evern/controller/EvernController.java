@@ -68,11 +68,6 @@ public class EvernController {
 	public Conductor getCondutor(@PathVariable String correo) {
 		return conductorRepository.getConductor(correo);
 	}
-	
-	
-	
-	
-	
 
 	@PostMapping("/saveComentarios")
 	public Comentario createComentarios(@RequestBody Comentario comentario) {
@@ -83,11 +78,5 @@ public class EvernController {
 	public Automovil createAutomovil(@RequestBody Automovil automovil) {
 		return automovilRepository.save(automovil);
 	}
-	
-
-	
-	
-	
-
 
 }

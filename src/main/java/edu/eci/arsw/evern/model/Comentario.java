@@ -1,4 +1,4 @@
-package edu.eci.arsw.evern.model;
+	package edu.eci.arsw.evern.model;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

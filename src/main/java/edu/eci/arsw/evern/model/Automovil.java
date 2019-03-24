@@ -1,16 +1,12 @@
 package edu.eci.arsw.evern.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "automovil")
+public class Automovil implements Serializable{
 
-public class Automovil {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String placa;
@@ -22,11 +18,11 @@ public class Automovil {
 	private String tipo;
 
 
-	@OneToOne(targetEntity = Conductor.class, mappedBy = "automovil",
-			  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "conductor")
-	@JsonIgnore
-	Conductor conductor;
+//	@OneToOne(targetEntity = Conductor.class, mappedBy = "automovil",
+//			  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "conductor")
+//	@JsonIgnore
+//	Conductor conductor;
 
 	public Automovil() {
 
@@ -48,13 +44,13 @@ public class Automovil {
 	}
 
 
-	public Conductor getConductor() {
-		return conductor;
-	}
-
-	public void setConductor(Conductor conductor) {
-		this.conductor = conductor;
-	}
+//	public Conductor getConductor() {
+//		return conductor;
+//	}
+//
+//	public void setConductor(Conductor conductor) {
+//		this.conductor = conductor;
+//	}
 
 	public String getPlaca() {
 		return placa;

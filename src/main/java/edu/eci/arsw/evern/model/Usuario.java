@@ -4,58 +4,31 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.transaction.annotation.Transactional;
 
-
-
-@MappedSuperclass
 public class Usuario {
 
-
-   	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    @Column(name  = "correo" , unique=true)
-    private String correo;
+	private String correo;
 
-	@Column(name  = "nombres")
 	private String nombres;
-	
 
-	@Column(name  = "apellidos")
 	private String apellidos;
-	
-	//private BufferedImage foto=null;
 
-	@Column(name  = "celular" , unique=true )
+	// private BufferedImage foto=null;
+
 	private String celular;
 
-	
+	private int calificacion = 0;
 
-	@Column(name  = "calificacion")
-	private int calificacion=0;
-	
-	
-
-	@Column(name  = "fechaNacimiento")
 	private Date fechaNacimiento;// dd-mm-yy
 
-
-
-	@Column(name  = "clave" )
 	private String clave;
 
-
-
-
-
-
-	
-	public Usuario () {}
+	public Usuario() {
+	}
 
 	public Usuario(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave) {
 		this.correo = correo;
@@ -111,7 +84,7 @@ public class Usuario {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	
+
 	public String getCelular() {
 		return celular;
 	}
@@ -131,5 +104,5 @@ public class Usuario {
 	public String getTipoUsuario() {
 		return "usuario";
 	}
-	
+
 }

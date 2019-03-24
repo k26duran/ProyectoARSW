@@ -1,26 +1,20 @@
 package edu.eci.arsw.evern.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.*;
-
 import org.springframework.stereotype.Service;
 
-@Entity
-public class Conductor extends Usuario {
 
 
-    @OneToOne(targetEntity = Automovil.class ,
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+public class Conductor extends Usuario implements Serializable {
+
+
     private Automovil automovil;
 
-    @OneToMany(mappedBy = "conductor" , fetch = FetchType.LAZY ,
-            cascade =  CascadeType.ALL)
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 
-    @OneToMany(mappedBy = "conductor" , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
     private List<Viaje> viajes = new ArrayList<Viaje>();
 
 

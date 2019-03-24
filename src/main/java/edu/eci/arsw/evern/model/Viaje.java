@@ -1,16 +1,12 @@
 package edu.eci.arsw.evern.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
 
-@Entity
-@Table( name = "viajes")
-public class Viaje {
+public class Viaje implements Serializable {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String lugarOrigen;
@@ -24,15 +20,11 @@ public class Viaje {
 	private String correoPasajero;
 	private boolean aceptado;
 
-	@ManyToOne(targetEntity = edu.eci.arsw.evern.model.Conductor.class)
 	Conductor conductor;
 
-
-	@ManyToOne(targetEntity = edu.eci.arsw.evern.model.Pasajero.class)
 	Pasajero pasajero;
 
 
-	@OneToMany(mappedBy = "viaje"  , fetch = FetchType.LAZY , cascade =  CascadeType.ALL)
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 
 	public Viaje(){}

@@ -1,33 +1,22 @@
 	package edu.eci.arsw.evern.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 
-@Entity
-@Table(name = "comentario")
-public class Comentario {
+public class Comentario implements Serializable {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	private Long id;
 	
-	@NotBlank
 	private String contenido;
 	
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
-    private Date date = new Date(); //dd-mm-yy
+	private Date date = new Date(); //dd-mm-yy
 
-    @ManyToOne(targetEntity = edu.eci.arsw.evern.model.Viaje.class)
-	private Viaje viaje;
+    private Viaje viaje;
 	
     public Comentario() {
     	

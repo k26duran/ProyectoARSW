@@ -1,22 +1,12 @@
 package edu.eci.arsw.evern.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "CuentaBancaria")
-public class CuentaBancaria {
+public class CuentaBancaria implements Serializable{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
-	
 	private boolean activa;
-
-	@ManyToOne(targetEntity = edu.eci.arsw.evern.model.Conductor.class )
 	private Conductor conductor;
-
-
-	@ManyToOne(targetEntity = edu.eci.arsw.evern.model.Pasajero.class)
 	private Pasajero pasajero;
 
 	public Conductor getConductor() {

@@ -1,24 +1,12 @@
 package edu.eci.arsw.evern.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "cupon")
-public class Cupon {
+public class Cupon implements Serializable{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "cupon")
 	private String cupon;
-	
-
-	@Column(name = "activo")
 	private boolean activo;
-
-
-	@ManyToOne
 	private Pasajero pasajero;
 
 	public Pasajero getPasajero() {

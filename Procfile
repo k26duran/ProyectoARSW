@@ -1,0 +1,1 @@
+web: java -jar target/enerv-0.0.1-SNAPSHOT.jar

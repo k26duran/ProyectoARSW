@@ -29,9 +29,53 @@ public class  ConductorRepository implements IConductorRepository {
 	
 	@Override
 	public List<Conductor> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM conductores;";
+		List<Conductor> conductors = new ArrayList<>();
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				Conductor conductor = new Conductor();
+				conductor.setApellidos(rs.getString("apellidos"));
+				conductor.setNombres(rs.getString("nombres"));
+				conductor.setCelular(rs.getString("celular"));
+				conductor.setCorreo(rs.getString("correo"));		
+				conductors.add(conductor);
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return conductors;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
 	}
+	
+	@Override
+	public Conductor getCondutor(String correo) {
+		String query = "SELECT * FROM conductores c where c.correo = '"+correo+"';";
+		try {
+			Conductor conductor = new Conductor();
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				conductor.setApellidos(rs.getString("apellidos"));
+				conductor.setNombres(rs.getString("nombres"));
+				conductor.setCelular(rs.getString("celular"));
+				conductor.setCorreo(rs.getString("correo"));		
+				conductor.setClave(rs.getString("clave"));
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return conductor;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
+	}
+
+
+	
 
 	
 	@Override
@@ -42,9 +86,23 @@ public class  ConductorRepository implements IConductorRepository {
 
 	@Override
 	public Long save(Conductor entity) {
-		// TODO Auto-generated method stub
-		return null;
+		 	String FK_CONDUCTOR_AUTO  = (entity.getAutomovil()!= null) ? "'"+entity.getAutomovil().getPlaca()+"'" : "null" ; 
+			String query = "INSERT INTO conductores(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento , automovil_id)"
+			 +"values ('"+entity.getNombres()+"','"+entity.getApellidos()+"',0,'"+entity.getCelular()+"','"+entity.getClave()+"','"
+					+entity.getCorreo()+"',null,"+FK_CONDUCTOR_AUTO+");";
+			System.out.println(query);
+			try {
+				Connection connection = RepositoryDataBases.dataSource().getConnection();
+				Statement stmt = connection.createStatement();
+				stmt.execute(query);
+				RepositoryDataBases.dataSource().close();
+				connection.close();
+				return (long) 200;
+			} catch (Exception e) {	
+				throw new RuntimeException(e);
+			}
 	}
+	
 
 	@Override
 	public void update(Conductor entity) {
@@ -62,12 +120,6 @@ public class  ConductorRepository implements IConductorRepository {
 	public void remove(Long id) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Conductor getCondutor(String correo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	

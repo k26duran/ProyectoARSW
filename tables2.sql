@@ -3,12 +3,11 @@
 
 
 CREATE TABLE automoviles (
-	id bigserial NOT NULL,
 	color varchar(255) NULL,
 	modelo varchar(255) NULL,
-	placa varchar(255) NULL,
+	placa varchar(255) NOT NULL,
 	tipo varchar(255) NULL,
-	CONSTRAINT automovil_pkey PRIMARY KEY (id)
+	CONSTRAINT automovil_pkey PRIMARY KEY (placa)
 );
 
 CREATE TABLE conductores (
@@ -20,11 +19,11 @@ CREATE TABLE conductores (
 	correo varchar(255) NULL,
 	fecha_nacimiento timestamp NULL,
 	nombres varchar(255) NULL,
-	automovil_id int8 NULL,
+	automovil_id varchar(255) NULL,
 	CONSTRAINT conductor_pkey PRIMARY KEY (id),
 	CONSTRAINT UK_CORREO UNIQUE (correo),
 	CONSTRAINT UK_CELULAR UNIQUE (celular),
-	CONSTRAINT FK_CONDUCTOR_AUTOMOVIL FOREIGN KEY (automovil_id) REFERENCES automoviles(id)
+	CONSTRAINT FK_CONDUCTOR_AUTOMOVIL FOREIGN KEY (automovil_id) REFERENCES automoviles(placa)
 );
 
 
@@ -103,25 +102,40 @@ CREATE TABLE  cupones (
 );
 
 
+insert into automoviles(tipo,color,placa,modelo) values ('camioneta','negra','ARS219','Mercedes-2017');
 
 insert into conductores(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento , automovil_id) 
-			values ('Camilo' ,'Velandia' , 0 , '320989471' , 'NoEsUnaClave' , 'corre1o@arsw',now(),1)
+			values ('Camilo' ,'Velandia' , 0 , '320989471' , 'NoEsUnaClave' , 'corre1o@arsw',now(),'ARS219');
 
-insert into automoviles(tipo,color,placa,modelo) values ('camioneta','negra','ARS219','Mercedes-2017')
 		
 insert into pasajeros(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento) 
-	values ('John David' ,'Ibanez Rodrigue' , 0 , '3209894071' , 'NoEsUnaClave' , 'correo@arsw',now()) 
+	values ('John David' ,'Ibanez Rodrigue' , 0 , '3209894071' , 'NoEsUnaClave' , 'correo@arsw',now());
 
 
 insert into  viajes(aceptado,calificacion_al_conductor,calificacion_al_pasajero,conductor_id,correo_conductor,correo_pasajero,costo,fecha,lugar_destino,
 					lugar_origen,pasajero_id,tiempo)
-					values(true,5,5,1,'correoUsr','correoUsr',10000,now(),'san Joaquin','Tunal',1,50000)		
+					values(true,5,5,1,'correoUsr','correoUsr',10000,now(),'san Joaquin','Tunal',1,50000);	
 
 insert into pasajeros(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento) 
-	values ('Kare paola' ,'Duran ' , 0 , '320989071' , 'SiEsUnaClave' , 'paola@arsw',now()) 
+	values ('Kare paola' ,'Duran ' , 0 , '320989071' , 'SiEsUnaClave' , 'paola@arsw',now());
 
 insert into  viajes(aceptado,calificacion_al_conductor,calificacion_al_pasajero,conductor_id,correo_conductor,correo_pasajero,costo,fecha,lugar_destino,
 					lugar_origen,pasajero_id,tiempo)
-					values(true,5,5,1,'correoUsr','correoUsr',10000,now(),'san Joaquin','Tunal',1,50000)		
+					values(true,5,5,1,'correoUsr','correoUsr',10000,now(),'san Joaquin','Tunal',1,50000);
 
 
+/*
+	{
+        "correo": "correo@arsw",
+        "nombres": "John David",
+        "apellidos": "Ibanez Rodrigue",
+        "celular": "3209894071",
+        "calificacion": 0,
+        "fechaNacimiento": null,
+        "clave": null,
+        "cupones": [],
+        "viajes": [],
+        "tipoUsuario": "usuario"
+    }
+
+*/

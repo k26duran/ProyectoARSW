@@ -28,7 +28,7 @@ public class PasajeroController{
 	IPasajerosServices iPasajerosServices;
 
 
-	@GetMapping("/all")
+	@GetMapping("/allPasajero")
 	public ResponseEntity<?> getAllPasajeros() {
 		try {
 			return new ResponseEntity<>(iPasajerosServices.list(), HttpStatus.OK);

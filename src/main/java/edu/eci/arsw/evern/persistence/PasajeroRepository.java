@@ -25,8 +25,6 @@ import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
 @Qualifier("PasajeroRepository")
 public class PasajeroRepository implements  IPasajeroRepository {
 	
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
-	
 	
 	@Override
 	public List<Pasajero> findAll() {

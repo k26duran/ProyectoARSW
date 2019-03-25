@@ -51,8 +51,14 @@ public class Pasajero extends Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Pasajero [cupones=" + cupones + ", cuentasBancarias=" + cuentasBancarias + ", viajes=" + viajes + "]";
+		return "Pasajero [cupones=" + cupones + ", cuentasBancarias=" + cuentasBancarias + ", viajes=" + viajes
+				+ ", getCorreo()=" + getCorreo() + ", getNombres()=" + getNombres() + ", getApellidos()="
+				+ getApellidos() + ", getCalificacion()=" + getCalificacion() + ", getFechaNacimiento()="
+				+ getFechaNacimiento() + ", getCelular()=" + getCelular() + ", getClave()=" + getClave()
+				+ ", getTipoUsuario()=" + getTipoUsuario() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
+	
 	
 }

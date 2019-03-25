@@ -14,10 +14,7 @@ import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 @RequestMapping(value = "v1/conductor")
 public class ConductorController {
 
-	
-
 	@Autowired
 	IConductorRepository conductorRepository;
-
 
 }

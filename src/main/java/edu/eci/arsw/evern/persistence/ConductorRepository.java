@@ -33,6 +33,7 @@ public class  ConductorRepository implements IConductorRepository {
 		return null;
 	}
 
+	
 	@Override
 	public Conductor find(Long id) {
 		// TODO Auto-generated method stub
@@ -62,6 +63,14 @@ public class  ConductorRepository implements IConductorRepository {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Conductor getCondutor(String correo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	
 
 }

@@ -14,8 +14,10 @@ public interface IPasajerosServices {
 
 	
 	List<Pasajero> list();
+	
+	Pasajero getPasajeroCorreo(String correo);
 
-	Pasajero createPasajero(Pasajero pasajero);
+	Long createPasajero(Pasajero pasajero);
 	
 	void delete(Pasajero pasajero);
 

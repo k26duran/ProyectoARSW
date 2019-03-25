@@ -47,11 +47,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 			return pasajeros;
-		} catch (Exception e) {
-			System.out.println();
-			
+		} catch (Exception e) {	
 			throw new RuntimeException(e);
-
 		}
 	}
 
@@ -61,11 +58,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		return null;
 	}
 
-	@Override
-	public Long save(Pasajero entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void update(Pasajero entity) {
@@ -85,17 +77,45 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		
 	}
 
-	@Bean("pasajeroDataSource")
-	public DataSource pasajeroDataSource() throws SQLException {
-		System.out.println("Host : " +  System.getenv().get("JDBC_DATABASE_URL"));
-		if (dbUrl == null || dbUrl.isEmpty()) {
+	@Override
+	public Pasajero getPasajero(String correo) {
 		
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
+		String query = "SELECT * FROM pasajeros p where p.correo = '"+correo+"';";
+		try {
+			Pasajero pasajero = new Pasajero();
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				pasajero.setApellidos(rs.getString("apellidos"));
+				pasajero.setNombres(rs.getString("nombres"));
+				pasajero.setCelular(rs.getString("celular"));
+				pasajero.setCorreo(rs.getString("correo"));		
+				pasajero.setClave(rs.getString("clave"));
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return pasajero;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
 		}
 	}
 
+	@Override
+	public Long save(Pasajero entity) {
+		String query = "INSERT INTO pasajeros(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento)"
+		 +"values ('"+entity.getNombres()+"','"+entity.getApellidos()+"',0,'"+entity.getCelular()+"','"+entity.getClave()+"','"
+				+entity.getCorreo()+"',null);";
+		System.out.println(query);
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(query);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return (long) 200;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
+	}
 }

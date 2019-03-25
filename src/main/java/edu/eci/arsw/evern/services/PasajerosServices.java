@@ -24,9 +24,8 @@ public class PasajerosServices  implements  IPasajerosServices {
 
 
 	@Override
-	public Pasajero createPasajero(Pasajero pasajero) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long createPasajero(Pasajero pasajero) {
+		return pasajeroRepository.save(pasajero);
 	}
 
 	@Override
@@ -56,6 +55,11 @@ public class PasajerosServices  implements  IPasajerosServices {
 	@Override
 	public List<Pasajero> list() {
 		return  pasajeroRepository.findAll();
+	}
+
+	@Override
+	public Pasajero getPasajeroCorreo(String correo) {
+		return pasajeroRepository.getPasajero(correo);
 	}
 
 

@@ -27,14 +27,12 @@ public class RepositoryDataBases {
 	        String username = dbUri.getUserInfo().split(":")[0];
 	        String password = dbUri.getUserInfo().split(":")[1];
 	        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-	        if(basicDataSource == null ) {
-	        	basicDataSource = new BasicDataSource();
-	 	        basicDataSource.setUrl(dbUrl);
-	 	        basicDataSource.setUsername(username);
-	 	        basicDataSource.setPassword(password);
-	 	        basicDataSource.setMaxIdle(5);
-	 	        basicDataSource.setMinIdle(3);
-	        }
+	        basicDataSource = new BasicDataSource();
+	        basicDataSource.setUrl(dbUrl);
+ 	        basicDataSource.setUsername(username);
+ 	        basicDataSource.setPassword(password);
+ 	        basicDataSource.setMaxIdle(5);
+ 	        basicDataSource.setMinIdle(3);
 	        return basicDataSource;
 	}
 		

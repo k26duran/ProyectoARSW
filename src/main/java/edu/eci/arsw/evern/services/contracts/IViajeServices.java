@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.model.Viaje;
 
 @Service
@@ -11,9 +12,7 @@ public interface IViajeServices {
 
 	List<Viaje> list();
 
-	Viaje create(Viaje car);
-
-	Viaje get(String licencePlate);
+	Long create(Viaje car);
 
 	void updateViaje(Viaje car);
 

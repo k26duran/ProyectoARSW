@@ -23,6 +23,8 @@ public interface IConductorServices {
 	void actualizarNombres(String correoUsuario, String nuevosNombres);
 
 	void actualizarApellidos(String correoUsuario, String nuevosApellidos);
+	
+	void apartarViajeConductor(Conductor conductor , int id);
 
 
 }

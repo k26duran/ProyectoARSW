@@ -9,14 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import edu.eci.arsw.evern.model.Conductor;
-import edu.eci.arsw.evern.model.Pasajero;
-import edu.eci.arsw.evern.persistence.repositories.IAutomovilRepository;
-import edu.eci.arsw.evern.persistence.repositories.IComentarioRepository;
-import edu.eci.arsw.evern.persistence.repositories.IConductorRepository;
-import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
-import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
 
 @RestController
@@ -52,6 +45,17 @@ public class ConductorController {
 		try {
 			conductorServices.createConductor(conductor);
 			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PostMapping("/apartarViaje/{id}")
+	public ResponseEntity<?> apartarViajeConductor(@RequestBody Conductor conductor ,@PathVariable int id) {
+		try {
+			System.out.println(id+" "+conductor.toString());
+			conductorServices.apartarViajeConductor(conductor,id);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

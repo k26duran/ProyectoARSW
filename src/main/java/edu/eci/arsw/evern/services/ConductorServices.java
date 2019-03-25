@@ -36,6 +36,13 @@ public class ConductorServices implements IConductorServices {
 		return conductorRepository.save(conductor);
 	}
 
+
+	@Override
+	public void apartarViajeConductor(Conductor conductor , int id) {
+		 conductorRepository.apartarViajeConductor(conductor,id);
+	}
+
+	
 	@Override
 	public void delete(Conductor pasajero) {
 		// TODO Auto-generated method stub

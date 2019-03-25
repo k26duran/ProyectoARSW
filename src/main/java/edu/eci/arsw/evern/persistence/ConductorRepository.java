@@ -103,6 +103,23 @@ public class  ConductorRepository implements IConductorRepository {
 			}
 	}
 	
+	
+	@Override
+	public void apartarViajeConductor(Conductor conductor, int id) {
+			System.out.println("Repo "+ conductor.toString() + " " + id);
+			String query = String.format("UPDATE viajes SET correo_conductor = '%s' , aceptado = true WHERE id = %d;",conductor.getCorreo() , id); 
+			System.out.println(query);
+			try {
+				Connection connection = RepositoryDataBases.dataSource().getConnection();
+				Statement stmt = connection.createStatement();
+				stmt.execute(query);
+				RepositoryDataBases.dataSource().close();
+				connection.close();
+			} catch (Exception e) {	
+				throw new RuntimeException(e);
+			}
+	
+	}
 
 	@Override
 	public void update(Conductor entity) {
@@ -121,6 +138,8 @@ public class  ConductorRepository implements IConductorRepository {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 	
 	

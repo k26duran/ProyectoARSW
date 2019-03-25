@@ -9,6 +9,8 @@ import edu.eci.arsw.evern.model.*;
 public interface IConductorRepository  extends DAO<Conductor, Long> {
 	
 	public Conductor getCondutor(String correo);
+	
+	void apartarViajeConductor(Conductor conductor , int id);
 
 	
 }

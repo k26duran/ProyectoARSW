@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Viaje implements Serializable {
 	
-	private Long id;
+	private int id;
 
 	private String lugarOrigen;
 	private String lugarDestino;
@@ -20,9 +20,6 @@ public class Viaje implements Serializable {
 	private String correoPasajero;
 	private boolean aceptado;
 
-	Conductor conductor;
-
-	Pasajero pasajero;
 
 
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
@@ -36,15 +33,16 @@ public class Viaje implements Serializable {
 		this.correoConductor = correoConductor;
 		this.correoConductor = correoPasajero;
 	}
-
-	public long getId() {
+	
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
+	
 	public String getLugarOrigen() {
 		return lugarOrigen;
 	}

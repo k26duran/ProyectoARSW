@@ -21,8 +21,8 @@ CREATE TABLE conductores (
 	nombres varchar(255) NULL,
 	automovil_id varchar(255) NULL,
 	CONSTRAINT conductor_pkey PRIMARY KEY (id),
-	CONSTRAINT UK_CORREO UNIQUE (correo),
-	CONSTRAINT UK_CELULAR UNIQUE (celular),
+	CONSTRAINT UK_CORREO_CONDUCTOR UNIQUE (correo),
+	CONSTRAINT UK_CELULAR__CONDUCTOR UNIQUE (celular),
 	CONSTRAINT FK_CONDUCTOR_AUTOMOVIL FOREIGN KEY (automovil_id) REFERENCES automoviles(placa)
 );
 
@@ -48,18 +48,16 @@ CREATE TABLE viajes (
 	aceptado bool NOT NULL,
 	calificacion_al_conductor int4 NOT NULL,
 	calificacion_al_pasajero int4 NOT NULL,
-	correo_conductor varchar(255) NULL,
-	correo_pasajero varchar(255) NULL,
+	correo_conductor varchar(255)  NULL,
+	correo_pasajero varchar(255) NOT NULL,
 	costo int4 NOT NULL,
 	fecha varchar(255) NULL,
 	lugar_destino varchar(255) NULL,
 	lugar_origen varchar(255) NULL,
 	tiempo int4 NOT NULL,
-	conductor_id int8 NULL,
-	pasajero_id int8 NULL,
 	CONSTRAINT viajes_pkey PRIMARY KEY (id),
-	CONSTRAINT FK_VIAJES_CODUCTOR FOREIGN KEY (conductor_id) REFERENCES conductores(id),
-	CONSTRAINT FK_VIAJES_PASAJERO FOREIGN KEY (pasajero_id) REFERENCES pasajeros(id)
+	CONSTRAINT FK_VIAJES_CODUCTOR FOREIGN KEY (correo_conductor) REFERENCES conductores(correo),
+	CONSTRAINT FK_VIAJES_PASAJERO FOREIGN KEY (correo_pasajero) REFERENCES pasajeros(correo)
 );
 
 

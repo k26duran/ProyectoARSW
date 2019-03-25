@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.persistence.ViajeRepository;
 import edu.eci.arsw.evern.persistence.repositories.*;
@@ -21,24 +22,17 @@ public class ViajeServices implements  IViajeServices {
 
 	@Override
 	public List<Viaje> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return viajeRepository.findAll();
 	}
 
 	@Override
-	public Viaje create(Viaje car) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long create(Viaje viaje) {
+		return viajeRepository.save(viaje);
 	}
 
-	@Override
-	public Viaje get(String licencePlate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public void updateViaje(Viaje car) {
+	public void updateViaje(Viaje viaje) {
 		// TODO Auto-generated method stub
 		
 	}

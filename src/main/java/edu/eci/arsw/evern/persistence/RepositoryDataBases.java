@@ -19,9 +19,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @Component
 public class RepositoryDataBases {
 	
-	public RepositoryDataBases() {
-		
-	}
 	
 
 	@Bean
@@ -34,6 +31,7 @@ public class RepositoryDataBases {
 	        basicDataSource.setUrl(dbUrl);
 	        basicDataSource.setUsername(username);
 	        basicDataSource.setPassword(password);
+	        basicDataSource.setMaxIdle(5);
 	        return basicDataSource;
 	}
 		

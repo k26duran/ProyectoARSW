@@ -46,6 +46,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCorreo(rs.getString("correo"));		
 				pasajeros.add(pasajero);
 			}
+			repositoryDataBases.dataSource().close();
 			connection.close();
 			return pasajeros;
 		} catch (Exception e) {

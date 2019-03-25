@@ -32,6 +32,7 @@ public class RepositoryDataBases {
 	        basicDataSource.setUsername(username);
 	        basicDataSource.setPassword(password);
 	        basicDataSource.setMaxIdle(5);
+	        basicDataSource.setMinIdle(3);
 	        return basicDataSource;
 	}
 		

@@ -66,12 +66,12 @@ public class Conductor extends Usuario implements Serializable {
         return viajes;
     }
 
+	@Override
+	public String toString() {
+		return "Conductor [automovil=" + automovil + ", cuentasBancarias=" + cuentasBancarias + ", viajes=" + viajes
+				+ "]";
+	}
 
-
-//	@Override
-//	public String toString() {
-//		return "Conductor [auto=" + auto + super.toString() + "]";
-//	}
-//
+    
 
 }

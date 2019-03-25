@@ -26,14 +26,34 @@ import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
 public class PasajeroRepository implements  IPasajeroRepository {
 	
 	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
+	
 	@Autowired
-	@Qualifier("pasajeroDataSource")
-	private DataSource pasajeroDataSource;
+	private RepositoryDataBases repositoryDataBases;
 
 	@Override
 	public List<Pasajero> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM pasajeros;";
+		List<Pasajero> pasajeros = new ArrayList<>();
+		try {
+			Connection connection = repositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				Pasajero pasajero = new Pasajero();
+				pasajero.setApellidos(rs.getString("apellidos"));
+				pasajero.setNombres(rs.getString("nombres"));
+				pasajero.setCelular(rs.getString("celular"));
+				pasajero.setCorreo(rs.getString("correo"));		
+				pasajeros.add(pasajero);
+			}
+			connection.close();
+			return pasajeros;
+		} catch (Exception e) {
+			System.out.println();
+			
+			throw new RuntimeException(e);
+
+		}
 	}
 
 	@Override
@@ -68,7 +88,9 @@ public class PasajeroRepository implements  IPasajeroRepository {
 
 	@Bean("pasajeroDataSource")
 	public DataSource pasajeroDataSource() throws SQLException {
+		System.out.println("Host : " +  System.getenv().get("JDBC_DATABASE_URL"));
 		if (dbUrl == null || dbUrl.isEmpty()) {
+		
 			return new HikariDataSource();
 		} else {
 			HikariConfig config = new HikariConfig();

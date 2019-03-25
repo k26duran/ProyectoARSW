@@ -23,9 +23,6 @@ import edu.eci.arsw.evern.persistence.repositories.ICuentaBancariaRepository;
 public class CuentaBancariaRepository implements ICuentaBancariaRepository   {
 
 	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
-	@Autowired
-	@Qualifier("cuentaDataSource")
-	private DataSource cuentaDataSource;
 	
 	@Override
 	public List<CuentaBancaria> findAll() {
@@ -62,17 +59,7 @@ public class CuentaBancariaRepository implements ICuentaBancariaRepository   {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	@Bean("cuentaDataSource")
-	public DataSource cuentaDataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
+
 
 
 }

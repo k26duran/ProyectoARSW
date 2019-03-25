@@ -8,5 +8,6 @@ import edu.eci.arsw.evern.model.*;
 @Repository
 public interface IPasajeroRepository  extends DAO<Pasajero, Long> {
 	
+	
 
 }

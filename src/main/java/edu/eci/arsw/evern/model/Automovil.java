@@ -18,12 +18,6 @@ public class Automovil implements Serializable{
 	private String tipo;
 
 
-//	@OneToOne(targetEntity = Conductor.class, mappedBy = "automovil",
-//			  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "conductor")
-//	@JsonIgnore
-//	Conductor conductor;
-
 	public Automovil() {
 
 	}

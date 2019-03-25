@@ -22,11 +22,7 @@ import edu.eci.arsw.evern.persistence.repositories.ICuponRepository;
 @Qualifier("CuponRepository")
 public class CuponRepository implements ICuponRepository {
 	
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
-	@Autowired
-	@Qualifier("cuponDataSource")
-	private DataSource cuponDataSource;
-
+	
 
 
 	@Override
@@ -65,14 +61,5 @@ public class CuponRepository implements ICuponRepository {
 		
 	}
 	
-	@Bean("cuponDataSource")
-	public DataSource carDataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
+	
 }

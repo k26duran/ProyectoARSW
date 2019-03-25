@@ -1,6 +1,8 @@
 package edu.eci.arsw.evern.services;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -49,6 +51,11 @@ public class PasajerosServices  implements  IPasajerosServices {
 	public void actualizarApellidos(String correoUsuario, String nuevosApellidos) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Pasajero> list() {
+		return  pasajeroRepository.findAll();
 	}
 
 

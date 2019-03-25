@@ -25,11 +25,7 @@ import javax.sql.DataSource;
 @Qualifier("ConductorRepository")
 public class  ConductorRepository implements IConductorRepository {
 	
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
-	@Autowired
-	@Qualifier("conductorDataSource")
-	private DataSource conductorDataSource;
-
+	
 	
 	@Override
 	public List<Conductor> findAll() {
@@ -67,15 +63,5 @@ public class  ConductorRepository implements IConductorRepository {
 		
 	}
 	
-	@Bean("conductorDataSource")
-	public DataSource conductorDataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
 
 }

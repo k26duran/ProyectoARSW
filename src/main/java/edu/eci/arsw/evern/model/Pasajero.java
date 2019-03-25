@@ -49,5 +49,10 @@ public class Pasajero extends Usuario implements Serializable{
 		return viajes;
 	}
 
+	@Override
+	public String toString() {
+		return "Pasajero [cupones=" + cupones + ", cuentasBancarias=" + cuentasBancarias + ", viajes=" + viajes + "]";
+	}
 
+	
 }

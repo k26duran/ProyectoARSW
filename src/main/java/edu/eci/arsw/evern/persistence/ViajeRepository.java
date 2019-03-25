@@ -24,10 +24,7 @@ import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 @Qualifier("ViajeRepository")
 public class  ViajeRepository implements  IViajeRepository {
 	
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
-	@Autowired
-	@Qualifier("viajeDataSource")
-	private DataSource viajeDataSource;
+	
 	
 	@Override
 	public List<Viaje> findAll() {
@@ -65,15 +62,5 @@ public class  ViajeRepository implements  IViajeRepository {
 		
 	}
 	
-	@Bean("viajeDataSource")
-	public DataSource viajeDataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
 
 }

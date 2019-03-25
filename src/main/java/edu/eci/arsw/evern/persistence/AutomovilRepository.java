@@ -20,12 +20,8 @@ import edu.eci.arsw.evern.persistence.repositories.IAutomovilRepository;
 @Qualifier("AutomovilRepository")
 public class AutomovilRepository implements IAutomovilRepository {
 	
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
 	
-	@Autowired
-	@Qualifier("autoDataSource")
-	private DataSource auoDataSource;
-
+	
 	@Override
 	public List<Automovil> findAll() {
 		// TODO Auto-generated method stub
@@ -63,15 +59,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 	}
 
 	
-	@Bean("autoDataSource")
-	public DataSource autoDataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
+	
 }
 

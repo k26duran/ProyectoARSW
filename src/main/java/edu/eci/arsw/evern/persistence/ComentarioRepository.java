@@ -24,10 +24,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @Qualifier("ComentarioRepository")
 public class ComentarioRepository implements IComentarioRepository {
 
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
-	@Autowired
-	@Qualifier("comentarioDataSource")
-	private DataSource comentarioDataSource;
 
 	@Override
 	public List<Comentario> findAll() {
@@ -65,15 +61,6 @@ public class ComentarioRepository implements IComentarioRepository {
 
 	}
 
-	@Bean("comentarioDataSource")
-	public DataSource comentarioDataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			return new HikariDataSource(config);
-		}
-	}
+	
 
 }

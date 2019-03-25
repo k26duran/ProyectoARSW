@@ -27,15 +27,13 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	
 	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
 	
-	@Autowired
-	private RepositoryDataBases repositoryDataBases;
-
+	
 	@Override
 	public List<Pasajero> findAll() {
 		String query = "SELECT * FROM pasajeros;";
 		List<Pasajero> pasajeros = new ArrayList<>();
 		try {
-			Connection connection = repositoryDataBases.dataSource().getConnection();
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -46,7 +44,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCorreo(rs.getString("correo"));		
 				pasajeros.add(pasajero);
 			}
-			repositoryDataBases.dataSource().close();
+			RepositoryDataBases.dataSource().close();
 			connection.close();
 			return pasajeros;
 		} catch (Exception e) {

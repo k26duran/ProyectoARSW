@@ -30,9 +30,9 @@ public class Conductor extends Usuario implements Serializable {
         this.automovil = automovil;
     }
 
-    public Conductor(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave,
+    public Conductor(String correo, String nombres, String apellidos, String celular, String fechaNacimiento, String clave,
                      Automovil auto) {
-        super(correo, nombres, apellidos, fechaNacimiento, clave);
+        super(correo, nombres, apellidos, celular, fechaNacimiento, clave);
         this.automovil = auto;
     }
 
@@ -65,13 +65,16 @@ public class Conductor extends Usuario implements Serializable {
     public List<Viaje> getViajes() {
         return viajes;
     }
+    
+    @Override
+    public String getTipoUsuario() {
+    	return "conductor";
+    }
 
 	@Override
 	public String toString() {
 		return "Conductor [automovil=" + automovil + ", cuentasBancarias=" + cuentasBancarias + ", viajes=" + viajes
 				+ "]";
 	}
-
-    
 
 }

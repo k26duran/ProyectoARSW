@@ -2,6 +2,7 @@ package edu.eci.arsw.evern.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,24 +22,23 @@ import edu.eci.arsw.evern.services.contracts.IPasajerosServices;
 
 @RestController
 @RequestMapping(value = "v1/pasajero")
+@CrossOrigin()
 public class PasajeroController{
 	
 	
 	@Autowired
 	IPasajerosServices iPasajerosServices;
 
-
-	@GetMapping("/allPasajero")
+	@GetMapping("/allPasajeros")
 	public ResponseEntity<?> getAllPasajeros() {
 		try {
 			return new ResponseEntity<>(iPasajerosServices.list(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
-
 		}
 	}
 	
-	@GetMapping("/pas/{correo}")
+	@GetMapping("/pasajero/{correo}")
 	public ResponseEntity<?> getAllPasajeros(@PathVariable String correo) {
 		try {
 			return new ResponseEntity<>(iPasajerosServices.getPasajeroCorreo(correo), HttpStatus.OK);
@@ -53,13 +53,12 @@ public class PasajeroController{
 	public ResponseEntity<?> postSavePasajero(@RequestBody Pasajero pasajero) {
 		try {
 			System.out.println(pasajero.toString());
+			System.out.println("FECHA: "+pasajero.getFechaNacimiento());
 			iPasajerosServices.createPasajero(pasajero);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	
 	
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class Pasajero extends Usuario implements Serializable{
 
 	private List<Cupon> cupones = new ArrayList<Cupon>();
-
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 	private List<Viaje> viajes = new ArrayList<Viaje>();
 
@@ -19,11 +18,11 @@ public class Pasajero extends Usuario implements Serializable{
 
 	}
 
-	public Pasajero(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave){
-		super(correo, nombres, apellidos, fechaNacimiento, clave);
+	public Pasajero(String correo, String nombres, String apellidos, String celular, String fechaNacimiento, String clave){
+		super(correo, nombres, apellidos, celular, fechaNacimiento, clave);
 	}
 
-	public List<Cupon> getCupones() {
+	public List<Cupon> getCupones(){
 		return cupones;
 	}
 
@@ -31,7 +30,8 @@ public class Pasajero extends Usuario implements Serializable{
 		this.cupones = cupones;
 	}
 	
-	public String userType() {
+	@Override
+	public String getTipoUsuario() {
 		return "pasajero";
 	}
 

@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class Usuario {
 
@@ -23,17 +25,19 @@ public class Usuario {
 
 	private int calificacion = 0;
 
-	private Date fechaNacimiento;// dd-mm-yy
-
+	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private String fechaNacimiento;// dd-mm-yy
+	
 	private String clave;
 
 	public Usuario() {
 	}
 
-	public Usuario(String correo, String nombres, String apellidos, Date fechaNacimiento, String clave) {
+	public Usuario(String correo, String nombres, String apellidos, String celular, String fechaNacimiento, String clave) {
 		this.correo = correo;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
+		this.celular=celular;
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -77,11 +81,11 @@ public class Usuario {
 		this.calificacion = calificacion;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

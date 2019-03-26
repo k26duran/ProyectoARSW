@@ -36,6 +36,7 @@ public class PasajeroController{
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
 	}
 	
 	@GetMapping("/pasajero/{correo}")

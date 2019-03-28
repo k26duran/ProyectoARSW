@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.evern.model.CuentaBancaria;
 import edu.eci.arsw.evern.model.Pasajero;
+import edu.eci.arsw.evern.model.Viaje;
 
 
 @Service
@@ -15,7 +16,7 @@ public interface IPasajerosServices {
 	
 	List<Pasajero> list();
 	
-	Pasajero getPasajeroCorreo(String correo);
+	Pasajero getPasajeroByCorreo(String correo);
 
 	Long createPasajero(Pasajero pasajero);
 	
@@ -27,4 +28,6 @@ public interface IPasajerosServices {
 
 	void actualizarApellidos(String correoUsuario, String nuevosApellidos);
 
+	List<Viaje> getViajesPasajeroByCorreo(String correoPasajero);
+	
 }

@@ -38,8 +38,8 @@ public class ConductorServices implements IConductorServices {
 
 
 	@Override
-	public void apartarViajeConductor(Conductor conductor , int id) {
-		 conductorRepository.apartarViajeConductor(conductor,id);
+	public void aceptarViajeConductor(Conductor conductor , int idViaje) {
+		 conductorRepository.aceptarViajeConductor(conductor,idViaje);
 	}
 
 	

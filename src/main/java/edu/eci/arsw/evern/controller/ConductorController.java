@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
 
 @RestController
-@RequestMapping(value = "v1/conductor")
+@RequestMapping(value = "v1/conductores")
 public class ConductorController {
 
 	@Autowired
 	IConductorServices conductorServices;
 	
-	@GetMapping("/allConductor")
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllPasajeros() {
 		try {
 			return new ResponseEntity<>(conductorServices.list(), HttpStatus.OK);
@@ -29,7 +30,7 @@ public class ConductorController {
 		}
 	}
 	
-	@GetMapping("/conductor/{correo}")
+	@GetMapping("/{correo}")
 	public ResponseEntity<?> getAllPasajeros(@PathVariable String correo) {
 		try {
 			return new ResponseEntity<>(conductorServices.getConductorCorreo(correo), HttpStatus.OK);
@@ -50,11 +51,11 @@ public class ConductorController {
 		}
 	}
 	
-	@PostMapping("/apartarViaje/{id}")
-	public ResponseEntity<?> apartarViajeConductor(@RequestBody Conductor conductor ,@PathVariable int id) {
+	@PostMapping("/aceptarViaje/{idViaje}")
+	public ResponseEntity<?> apartarViajeConductor(@RequestBody Conductor conductor ,@PathVariable int idViaje) {
 		try {
-			System.out.println(id+" "+conductor.toString());
-			conductorServices.apartarViajeConductor(conductor,id);
+			System.out.println(idViaje+" "+conductor.toString());
+			conductorServices.aceptarViajeConductor(conductor,idViaje);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);

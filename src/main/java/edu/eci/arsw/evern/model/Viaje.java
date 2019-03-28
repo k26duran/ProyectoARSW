@@ -2,6 +2,7 @@ package edu.eci.arsw.evern.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -11,16 +12,14 @@ public class Viaje implements Serializable {
 
 	private String lugarOrigen;
 	private String lugarDestino;
-	private String fecha;
+	private String fecha = (new Date()).toString();
 	private int calificacionAlPasajero; //[0..5]
 	private int calificacionAlConductor; //[0..5]
 	private int costo;
 	private int tiempo;
 	private String correoConductor;
 	private String correoPasajero;
-	private boolean aceptado;
-
-
+	private boolean aceptado=false;
 
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 

@@ -105,8 +105,8 @@ public class  ConductorRepository implements IConductorRepository {
 	
 	
 	@Override
-	public void apartarViajeConductor(Conductor conductor, int id) {
-			String query = String.format("UPDATE viajes SET correo_conductor = '%s' , aceptado = true WHERE id = %d;",conductor.getCorreo() , id); 
+	public void aceptarViajeConductor(Conductor conductor , int idViaje) {
+			String query = String.format("UPDATE viajes SET correo_conductor = '%s' , aceptado = true WHERE id = %d;",conductor.getCorreo() , idViaje); 
 			try {
 				Connection connection = RepositoryDataBases.dataSource().getConnection();
 				Statement stmt = connection.createStatement();

@@ -25,6 +25,9 @@ public class ViajeServices implements  IViajeServices {
 		return viajeRepository.findAll();
 	}
 
+	/**
+	 * Crea un viaje y al mismo tiempo le añade el viaje al pasajero y al conductor
+	 */
 	@Override
 	public Long create(Viaje viaje) {
 		return viajeRepository.save(viaje);
@@ -54,6 +57,5 @@ public class ViajeServices implements  IViajeServices {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

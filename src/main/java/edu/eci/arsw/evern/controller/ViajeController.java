@@ -17,6 +17,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping(value = "v1/viajes")
+@CrossOrigin()
 public class ViajeController {
 
 	@Autowired

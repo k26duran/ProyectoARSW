@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.*;
 import edu.eci.arsw.evern.services.contracts.*;
 import java.util.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RestController

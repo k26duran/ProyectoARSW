@@ -1,5 +1,6 @@
 package edu.eci.arsw.evern.controller;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,29 @@ public class UsuarioController {
 		try {
 			String resultConductor = httpUsuario("conductores",correo);
 			String resultPasajero = httpUsuario("pasajeros",correo);
+			JSONObject jsonObjConductor = new JSONObject(resultConductor);
+			//System.out.println(jsonObjConductor);
+			if(!jsonObjConductor.isNull("correo")) {
+				String claveJSON = jsonObjConductor.getString("clave");
+				//System.out.println(claveJSON +" - "+clave);
+				if(claveJSON.equals(clave)) {
+					return new ResponseEntity<>("conductor", HttpStatus.OK);
+				}
+				return new ResponseEntity<>("none", HttpStatus.NOT_FOUND);
+			}
+			JSONObject jsonObjPasajero = new JSONObject(resultPasajero);
+			//System.out.println(jsonObjPasajero);
+			if(!jsonObjPasajero.isNull("correo")) {
+				String claveJSON = jsonObjPasajero.getString("clave");
+				//System.out.println(claveJSON +" - "+clave);
+				if(claveJSON.equals(clave)) {
+					return new ResponseEntity<>("pasajero", HttpStatus.OK);
+				}
+				return new ResponseEntity<>("none", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>("none", HttpStatus.NOT_FOUND);
 			
-			return new ResponseEntity<>(HttpStatus.OK);
+			
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

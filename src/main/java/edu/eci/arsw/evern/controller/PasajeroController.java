@@ -62,6 +62,8 @@ public class PasajeroController{
 	@PostMapping("/savePasajero")
 	public ResponseEntity<?> postSavePasajero(@RequestBody Pasajero pasajero) {
 		try {
+			//System.out.println("SE CONECTO");
+			//System.out.println(pasajero);
 			pasajerosServices.createPasajero(pasajero);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (Exception ex) {

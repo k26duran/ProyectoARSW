@@ -1,4 +1,4 @@
-package edu.eci.arsw.evern.sockets.config;
+package edu.eci.arsw.evern.sockets;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -19,7 +19,7 @@ public class EvernSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/stompendpoint").withSockJS();
+        registry.addEndpoint("/stompendpoint2").withSockJS();
     }
 
 }

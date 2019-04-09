@@ -32,7 +32,6 @@ public class PasajerosServices  implements  IPasajerosServices {
 	@Override
 	public void delete(Pasajero pasajero) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

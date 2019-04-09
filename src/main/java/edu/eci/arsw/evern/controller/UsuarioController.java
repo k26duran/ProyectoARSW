@@ -25,11 +25,12 @@ public class UsuarioController {
 
 	@GetMapping("/{correo}/{clave}")
 	public ResponseEntity<?> getUsuarioByCorreoAndClave(@PathVariable String correo, @PathVariable String clave) {
+		System.out.println("ENTRO A USUARIO CONTROLLER");
 		try {
 			String resultConductor = httpUsuario("conductores",correo);
 			String resultPasajero = httpUsuario("pasajeros",correo);
 			JSONObject jsonObjConductor = new JSONObject(resultConductor);
-			//System.out.println(jsonObjConductor);
+			System.out.println(jsonObjConductor);
 			if(!jsonObjConductor.isNull("correo")) {
 				String claveJSON = jsonObjConductor.getString("clave");
 				//System.out.println(claveJSON +" - "+clave);
@@ -39,7 +40,7 @@ public class UsuarioController {
 				return new ResponseEntity<>("none", HttpStatus.NOT_FOUND);
 			}
 			JSONObject jsonObjPasajero = new JSONObject(resultPasajero);
-			//System.out.println(jsonObjPasajero);
+			System.out.println(jsonObjPasajero);
 			if(!jsonObjPasajero.isNull("correo")) {
 				String claveJSON = jsonObjPasajero.getString("clave");
 				//System.out.println(claveJSON +" - "+clave);

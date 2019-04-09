@@ -98,6 +98,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		} catch (Exception e) {	
 			throw new RuntimeException(e);
 		}
+		
 	}
 
 	@Override

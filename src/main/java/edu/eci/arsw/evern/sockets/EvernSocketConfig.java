@@ -23,9 +23,8 @@ public class EvernSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 	
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/stompendpoint").setAllowedOrigins("http://localhost:5000").withSockJS();
-
-        //registry.addEndpoint("/stompendpoint").withSockJS();
+        //registry.addEndpoint("/stompendpoint").setAllowedOrigins("http://localhost:5000").withSockJS();
+        registry.addEndpoint("/stompendpoint").withSockJS();
     }
     
    

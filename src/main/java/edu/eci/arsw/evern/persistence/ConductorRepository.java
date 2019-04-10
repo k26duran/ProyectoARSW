@@ -41,7 +41,7 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setNombres(rs.getString("nombres"));
 				conductor.setCelular(rs.getString("celular"));
 				conductor.setCorreo(rs.getString("correo"));
-				conductor.setCorreo(rs.getString("clave"));
+				conductor.setClave(rs.getString("clave"));
 				conductors.add(conductor);
 			}
 			RepositoryDataBases.dataSource().close();

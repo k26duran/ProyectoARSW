@@ -62,14 +62,9 @@ public class PasajeroController{
 	@PostMapping("/savePasajero")
 	public ResponseEntity<?> postSavePasajero(@RequestBody Pasajero pasajero) {
 		try {
-			System.out.println("SE CONECTO");
-			System.out.println(pasajero);
-			System.out.println("------------- VAMOS A REGISTRAR ->");
-			pasajerosServices.createPasajero(pasajero);
-			System.out.println("-----------PUDIMOS REGISTRAR EL USUARIO--------------------------");
-			return new ResponseEntity<>("Acepted",HttpStatus.OK);
+			return new ResponseEntity<>(pasajerosServices.createPasajero(pasajero),HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 	

@@ -32,7 +32,7 @@ public class ConductorController {
 	
 	@GetMapping("/{correo}")
 	public ResponseEntity<?> getAllPasajeros(@PathVariable String correo) {
-		try {
+		try {		
 			return new ResponseEntity<>(conductorServices.getConductorCorreo(correo), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -42,10 +42,11 @@ public class ConductorController {
 	
 	
 	@PostMapping("/saveConductor")
-	public ResponseEntity<?> postSavePasajero(@RequestBody Conductor conductor) {
+	public ResponseEntity<?> postSaveConductor(@RequestBody Conductor conductor) {
 		try {
-			conductorServices.createConductor(conductor);
-			return new ResponseEntity<>(HttpStatus.CREATED);
+			System.out.println("------ VAMOS A REGISTRAR UN CONDUCTOR ---------");
+			System.out.println(conductor);
+			return new ResponseEntity<>(conductorServices.createConductor(conductor),HttpStatus.CREATED);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

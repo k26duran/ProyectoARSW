@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.evern.model.Pasajero;
+import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
 import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IPasajerosServices;
@@ -31,7 +32,6 @@ public class PasajerosServices  implements  IPasajerosServices {
 	@Override
 	public void delete(Pasajero pasajero) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -58,8 +58,13 @@ public class PasajerosServices  implements  IPasajerosServices {
 	}
 
 	@Override
-	public Pasajero getPasajeroCorreo(String correo) {
+	public Pasajero getPasajeroByCorreo(String correo) {
 		return pasajeroRepository.getPasajero(correo);
+	}
+	
+	@Override
+	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero){
+		return pasajeroRepository.getViajesPasajeroByCorreo(correoPasajero);
 	}
 
 

@@ -24,7 +24,7 @@ public interface IConductorServices {
 
 	void actualizarApellidos(String correoUsuario, String nuevosApellidos);
 	
-	void apartarViajeConductor(Conductor conductor , int id);
+	void aceptarViajeConductor(Conductor conductor , int idViaje);
 
 
 }

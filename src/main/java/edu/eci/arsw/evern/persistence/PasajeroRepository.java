@@ -39,7 +39,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setApellidos(rs.getString("apellidos"));
 				pasajero.setNombres(rs.getString("nombres"));
 				pasajero.setCelular(rs.getString("celular"));
-				pasajero.setCorreo(rs.getString("correo"));		
+				pasajero.setCorreo(rs.getString("correo"));
+				pasajero.setClave(rs.getString("clave"));
 				pasajeros.add(pasajero);
 			}
 			RepositoryDataBases.dataSource().close();
@@ -97,6 +98,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		} catch (Exception e) {	
 			throw new RuntimeException(e);
 		}
+		
 	}
 
 	@Override
@@ -116,4 +118,40 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero){
+		String query = "SELECT * FROM viajes WHERE correo_pasajero ='"+correoPasajero+"';" ;
+		System.out.println("Consultar los viajes del pasajero: "+correoPasajero);
+		try {
+			List<Viaje> viajesPasajero = new ArrayList<>();
+			
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				Viaje viaje=new Viaje();
+				viaje.setId(rs.getInt("id"));
+				viaje.setAceptado(rs.getBoolean("aceptado"));
+				viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
+				viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
+				viaje.setCorreoConductor(rs.getString("correo_conductor"));
+				viaje.setCorreoPasajero(rs.getString("correo_pasajero"));
+				viaje.setCosto(rs.getInt("costo"));
+				viaje.setFecha(rs.getString("fecha"));
+				viaje.setLugarDestino(rs.getString("lugar_destino"));
+				viaje.setLugarOrigen(rs.getString("lugar_origen"));
+				viaje.setTiempo(rs.getInt("tiempo"));
+				
+				viajesPasajero.add(viaje);
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			
+			return viajesPasajero;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
+	}
+	
 }

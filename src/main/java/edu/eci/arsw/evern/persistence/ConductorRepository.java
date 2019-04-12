@@ -40,7 +40,8 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setApellidos(rs.getString("apellidos"));
 				conductor.setNombres(rs.getString("nombres"));
 				conductor.setCelular(rs.getString("celular"));
-				conductor.setCorreo(rs.getString("correo"));		
+				conductor.setCorreo(rs.getString("correo"));
+				conductor.setClave(rs.getString("clave"));
 				conductors.add(conductor);
 			}
 			RepositoryDataBases.dataSource().close();
@@ -105,8 +106,8 @@ public class  ConductorRepository implements IConductorRepository {
 	
 	
 	@Override
-	public void apartarViajeConductor(Conductor conductor, int id) {
-			String query = String.format("UPDATE viajes SET correo_conductor = '%s' , aceptado = true WHERE id = %d;",conductor.getCorreo() , id); 
+	public void aceptarViajeConductor(Conductor conductor , int idViaje) {
+			String query = String.format("UPDATE viajes SET correo_conductor = '%s' , aceptado = true WHERE id = %d;",conductor.getCorreo() , idViaje); 
 			try {
 				Connection connection = RepositoryDataBases.dataSource().getConnection();
 				Statement stmt = connection.createStatement();

@@ -8,40 +8,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.*;
 import edu.eci.arsw.evern.services.contracts.*;
 import java.util.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RestController
-@RequestMapping(value = "v1/viaje")
+@RequestMapping(value = "v1/viajes")
+@CrossOrigin()
 public class ViajeController {
 
 	@Autowired
-	IViajeServices iViajeServices;
+	IViajeServices viajeServices;
 	
 	
-	@GetMapping("/allViajes")
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> list() {
 		try {
-			return new ResponseEntity<>(iViajeServices.list(),HttpStatus.OK);
+			return new ResponseEntity<>(viajeServices.list(),HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	
+	/**
+	 * El viaje es creado por un pasajero, el pasajero pide el viaje
+	 * @param viaje
+	 * @return
+	 */
 	@PostMapping("/saveViaje")
 	public ResponseEntity<?>  create(@RequestBody Viaje viaje) {
 		try {
-			return new ResponseEntity<>(iViajeServices.create(viaje),HttpStatus.CREATED);
+			return new ResponseEntity<>(viajeServices.create(viaje), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
-
+	
 	public ResponseEntity<?>  updateViaje(Viaje car) {
 		try {
 			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -59,7 +65,7 @@ public class ViajeController {
 		}		
 	}
 
-	public ResponseEntity<?>  agregarViaje(Viaje viaje) {
+	public ResponseEntity<?> agregarViaje(Viaje viaje) {
 		try {
 			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 		} catch (Exception e) {

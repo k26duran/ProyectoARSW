@@ -131,7 +131,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			
 			while (rs.next()) {
 				Viaje viaje=new Viaje();
-				viaje.setId(rs.getInt("id"));
+				viaje.setId(rs.getLong("id"));
 				viaje.setAceptado(rs.getBoolean("aceptado"));
 				viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
 				viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));

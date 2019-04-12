@@ -6,39 +6,18 @@ public class CuentaBancaria implements Serializable{
 	
 	private Long numero;
 	private boolean activa;
-	private Conductor conductor;
-	private Pasajero pasajero;
-
-	public Conductor getConductor() {
-		return conductor;
-	}
-
-	public void setConductor(Conductor conductor) {
-		this.conductor = conductor;
-	}
-
-	public Pasajero getPasajero() {
-		return pasajero;
-	}
-
-	public void setPasajero(Pasajero pasajero) {
-		this.pasajero = pasajero;
-	}
 
 	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 
-
-	public Long getNumero() {
+	public long getNumero() {
 		return numero;
 	}
 
-
-
 	public CuentaBancaria(){}
 	
-	public CuentaBancaria(long numero, boolean activa) {
+	public CuentaBancaria(Long numero, boolean activa) {
 		this.numero = numero;
 		this.activa = activa;
 	}

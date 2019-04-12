@@ -27,7 +27,7 @@ public class  ViajeRepository implements  IViajeRepository {
 
 	@Override
 	public List<Viaje> findAll() {
-		String query = "SELECT * FROM viajes;";
+		String query = "SELECT * FROM viaje;";
 		List<Viaje> viajes = new ArrayList<>();
 		try {
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
@@ -35,13 +35,15 @@ public class  ViajeRepository implements  IViajeRepository {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				Viaje viaje = new Viaje();
-				viaje.setId(rs.getInt("id"));
+				viaje.setId(rs.getLong("id"));
 				viaje.setAceptado(rs.getBoolean("aceptado"));
 				viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
 				viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
 				viaje.setCorreoConductor(rs.getString("correo_conductor"));
 				viaje.setCorreoPasajero(rs.getString("correo_pasajero"));
 				viaje.setCosto(rs.getInt("costo"));
+				viaje.setTiempo(rs.getInt("tiempo"));
+				viaje.setFecha(rs.getString("fecha"));
 				viaje.setLugarDestino(rs.getString("lugar_destino"));
 				viaje.setLugarOrigen(rs.getString("lugar_origen"));
 				viajes.add(viaje);
@@ -62,7 +64,7 @@ public class  ViajeRepository implements  IViajeRepository {
 
 	@Override
 	public Long save(Viaje entity) {
-		String query =String.format("insert into  viajes(aceptado,calificacion_al_conductor,calificacion_al_pasajero,"
+		String query =String.format("insert into  viaje(aceptado,calificacion_al_conductor,calificacion_al_pasajero,"
 											+ "correo_conductor,correo_pasajero,costo,fecha,lugar_destino,lugar_origen,tiempo)"+
 				"values(false,0,0,null,'%s',%d,now(),'%s','%s',0);",entity.getCorreoPasajero(),
 						entity.getCosto(),entity.getLugarDestino(),entity.getLugarOrigen());

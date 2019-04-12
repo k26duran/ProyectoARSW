@@ -11,34 +11,39 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Usuario {
 
-	private Long id;
-
 	private String correo;
-
-	private String nombres;
-
-	private String apellidos;
-
-	// private BufferedImage foto=null;
-
-	private String celular;
-
-	private int calificacion = 0;
-
-	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	private String fechaNacimiento;// dd-mm-yy
-	
 	private String clave;
-
+	private String nombres;
+	private String apellidos;
+	private String celular;
+	private int calificacion = 0;
+	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
+	private List<Viaje> viajes = new ArrayList<Viaje>();
+	
 	public Usuario() {
 	}
 
-	public Usuario(String correo, String nombres, String apellidos, String celular, String fechaNacimiento, String clave) {
+	public Usuario(String correo, String nombres, String apellidos, String celular, String clave) {
 		this.correo = correo;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.celular=celular;
-		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public List<CuentaBancaria> getCuentasBancarias() {
+		return cuentasBancarias;
+	}
+
+	public List<Viaje> getViajes() {
+		return viajes;
+	}
+
+	public void setViajes(List<Viaje> viajes) {
+		this.viajes = viajes;
+	}
+	
+	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
+		this.cuentasBancarias = cuentasBancarias;
 	}
 
 	public String getCorreo() {
@@ -65,28 +70,12 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-//	public BufferedImage getFoto() {
-//		return foto;
-//	}
-//
-//	public void setFoto(BufferedImage foto) {
-//		this.foto = foto;
-//	}
-
 	public int getCalificacion() {
 		return calificacion;
 	}
 
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
-	}
-
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getCelular() {

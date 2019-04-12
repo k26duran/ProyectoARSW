@@ -7,19 +7,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Automovil implements Serializable{
 
-	private Long id;
-
 	private String placa;
-
 	private String modelo;
-
 	private String color;
-
 	private String tipo;
 
-
 	public Automovil() {
-
 	}
 
 	public Automovil(String placa, String modelo, String tipo, String color) {
@@ -28,23 +21,6 @@ public class Automovil implements Serializable{
 		this.placa = placa;
 		this.tipo = tipo;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-//	public Conductor getConductor() {
-//		return conductor;
-//	}
-//
-//	public void setConductor(Conductor conductor) {
-//		this.conductor = conductor;
-//	}
 
 	public String getPlaca() {
 		return placa;

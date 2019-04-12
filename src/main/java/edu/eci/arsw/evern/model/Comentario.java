@@ -9,53 +9,58 @@ import java.util.Date;
 
 public class Comentario implements Serializable {
 	
-	private Long id;
-	
+	private long id;
 	private String contenido;
-	
-	
-	private Date date = new Date(); //dd-mm-yy
-
-    private Viaje viaje;
+	private String fecha = (new Date()).toString(); //dd-mm-yy
+    private String correoAutor;
 	
     public Comentario() {
-    	
     }
 
-	public Comentario(long id, String contenido, Date date, String correoAutor) {
+	public Comentario(long id, String contenido, String fecha, String correoAutor) {
 		this.id = id;
 		this.contenido = contenido;
-		this.date = date;
+		this.fecha = fecha;
 	}
-    
-	
-	public Long getId() {
+
+	public long getId() {
 		return id;
 	}
-	
-	public void setId(Long id) {
+
+	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getContenido() {
 		return contenido;
 	}
+
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
+
+	public String getFecha() {
+		return fecha;
 	}
 
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getCorreoAutor() {
+		return correoAutor;
+	}
+
+	public void setCorreoAutor(String correoAutor) {
+		this.correoAutor = correoAutor;
+	}
+	
 	@Override
 	public String toString() {
-		return "Comentario [id=" + id + ", contenido=" + contenido + ", date=" + date + ", viaje=" + viaje + "]";
+		return "Comentario [id=" + id + ", contenido=" + contenido + ", fecha=" + fecha + ", correoAutor=" + correoAutor
+				+ "]";
 	}
-	
-	
 
-	
+    
 
 }

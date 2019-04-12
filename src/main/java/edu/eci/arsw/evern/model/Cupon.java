@@ -7,14 +7,13 @@ public class Cupon implements Serializable{
 	private Long id;
 	private String cupon;
 	private boolean activo;
-	private Pasajero pasajero;
 
-	public Pasajero getPasajero() {
-		return pasajero;
-	}
-
-	public void setPasajero(Pasajero pasajero) {
-		this.pasajero = pasajero;
+	public Cupon() {}
+	
+	public Cupon(String cupon, boolean activo) {
+		super();
+		this.cupon = cupon;
+		this.activo = activo;
 	}
 
 	public Long getId() {
@@ -24,17 +23,7 @@ public class Cupon implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Cupon() {
-		
-	}
 	
-	public Cupon(String cupon, boolean activo) {
-		super();
-		this.cupon = cupon;
-		this.activo = activo;
-	}
-
 	public String getCupon() {
 		return cupon;
 	}

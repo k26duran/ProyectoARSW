@@ -8,8 +8,7 @@ import java.util.List;
 
 public class Viaje implements Serializable {
 	
-	private int id;
-
+	private Long id;
 	private String lugarOrigen;
 	private String lugarDestino;
 	private String fecha = (new Date()).toString();
@@ -19,8 +18,18 @@ public class Viaje implements Serializable {
 	private int tiempo;
 	private String correoConductor;
 	private String correoPasajero;
-	private boolean aceptado=false;
 
+	public Automovil getAutomovil() {
+		return automovil;
+	}
+
+	public void setAutomovil(Automovil automovil) {
+		this.automovil = automovil;
+	}
+
+	private boolean aceptado=false;
+	private Automovil automovil;
+	
 	private List<Comentario> comentarios = new ArrayList<Comentario>();
 
 	public Viaje(){}
@@ -30,17 +39,16 @@ public class Viaje implements Serializable {
 		this.lugarDestino = lugarDestino;
 		this.costo = costo;
 		this.correoConductor = correoConductor;
-		this.correoConductor = correoPasajero;
+		this.correoPasajero = correoPasajero;
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 	
 	public String getLugarOrigen() {
 		return lugarOrigen;
@@ -98,22 +106,6 @@ public class Viaje implements Serializable {
 		this.tiempo = tiempo;
 	}
 
-	public String getCorreoConductor() {
-		return correoConductor;
-	}
-
-	public void setCorreoConductor(String correoConductor) {
-		this.correoConductor = correoConductor;
-	}
-
-	public String getCorreoPasajero() {
-		return correoPasajero;
-	}
-
-	public void setCorreoPasajero(String correoPasajero) {
-		this.correoPasajero = correoPasajero;
-	}
-
 	public boolean isAceptado() {
 		return aceptado;
 	}
@@ -130,17 +122,20 @@ public class Viaje implements Serializable {
 		this.comentarios = comentarios;
 	}
 	
-	public void addComentario(Comentario comentario) {
-		this.comentarios.add(comentario);
-	}
-	
-	public void removeComentario(long idComentario) {
-		List<Comentario> c = new ArrayList<Comentario>();
-		for (Comentario comentario : this.comentarios) {
-			if(comentario.getId() != idComentario) c.add(comentario);
-		}
-		comentarios = c;
+	public String getCorreoConductor() {
+		return correoConductor;
 	}
 
+	public void setCorreoConductor(String correoConductor) {
+		this.correoConductor = correoConductor;
+	}
+
+	public String getCorreoPasajero() {
+		return correoPasajero;
+	}
+
+	public void setCorreoPasajero(String correoPasajero) {
+		this.correoPasajero = correoPasajero;
+	}
 
 }

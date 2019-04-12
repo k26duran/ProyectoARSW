@@ -10,16 +10,12 @@ import org.springframework.stereotype.Service;
 public class Pasajero extends Usuario implements Serializable{
 
 	private List<Cupon> cupones = new ArrayList<Cupon>();
-	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
-	private List<Viaje> viajes = new ArrayList<Viaje>();
-
 
 	public Pasajero(){
-
 	}
 
-	public Pasajero(String correo, String nombres, String apellidos, String celular, String fechaNacimiento, String clave){
-		super(correo, nombres, apellidos, celular, fechaNacimiento, clave);
+	public Pasajero(String correo, String nombres, String apellidos, String celular, String clave){
+		super(correo, nombres, apellidos, celular, clave);
 	}
 
 	public List<Cupon> getCupones(){
@@ -35,30 +31,13 @@ public class Pasajero extends Usuario implements Serializable{
 		return "pasajero";
 	}
 
-
-	public void setViajes(List<Viaje> viajes) {
-		this.viajes = viajes;
-	}
-
-	public void agregarViaje(Viaje viaje) {
-		this.viajes.add(viaje);
-	}
-
-
-	public List<Viaje> getViajes() {
-		return viajes;
-	}
-
 	@Override
 	public String toString() {
-		return "Pasajero [cupones=" + cupones + ", cuentasBancarias=" + cuentasBancarias + ", viajes=" + viajes
-				+ ", getCorreo()=" + getCorreo() + ", getNombres()=" + getNombres() + ", getApellidos()="
-				+ getApellidos() + ", getCalificacion()=" + getCalificacion() + ", getFechaNacimiento()="
-				+ getFechaNacimiento() + ", getCelular()=" + getCelular() + ", getClave()=" + getClave()
-				+ ", getTipoUsuario()=" + getTipoUsuario() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Pasajero [cupones=" + cupones + ", cuentasBancarias=" + super.getCuentasBancarias() + ", getCupones()="
+				+ getCupones() + ", getTipoUsuario()=" + getTipoUsuario() + ", getCorreo()=" + getCorreo()
+				+ ", getNombres()=" + getNombres() + ", getApellidos()=" + getApellidos() + ", getCalificacion()="
+				+ getCalificacion() + ", getCelular()=" + getCelular() + ", getClave()=" + getClave() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-
-	
 	
 }

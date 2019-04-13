@@ -20,24 +20,22 @@ public  class ComentarioServices  implements  IComentarioServices{
 	@Qualifier("ComentarioRepository")
 	private IComentarioRepository comentarioRepository;
 
-
 	@Override
-	public List<Comentario> getComentariosByViajeAndUsuario(long idViaje, String correoUsuario) {
+	public List<Comentario> getComentariosByViajeAndUsuario(Long idViaje, String correoUsuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void agregarComentarioAlViaje(long idViaje, Comentario comentario) {
+	public void agregarComentarioAlViaje(Long idViaje, Comentario comentario) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void eliminarComentarioAlViaje(long idViaje, long idComentario) {
+	public void eliminarComentarioAlViaje(Long idViaje, Long idComentario) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

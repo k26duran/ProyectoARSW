@@ -29,13 +29,13 @@ public class AutomovilRepository implements IAutomovilRepository {
 	}
 
 	@Override
-	public Automovil find(Long id) {
+	public Automovil find(String placa) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Long save(Automovil entity) {
+	public String save(Automovil automovil) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -51,14 +51,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void remove(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 	
 }
 

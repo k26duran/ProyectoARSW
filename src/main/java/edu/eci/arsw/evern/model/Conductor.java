@@ -38,10 +38,11 @@ public class Conductor extends Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Conductor [automovil=" + automovil + ", getAutomovil()=" + getAutomovil() + ", getTipoUsuario()="
-				+ getTipoUsuario() + ", getCuentasBancarias()=" + getCuentasBancarias() + ", getCorreo()=" + getCorreo()
-				+ ", getNombres()=" + getNombres() + ", getApellidos()=" + getApellidos() + ", getCalificacion()="
-				+ getCalificacion() + ", getCelular()=" + getCelular() + ", getClave()=" + getClave() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ getTipoUsuario() + ", getCuentasBancarias()=" + getCuentasBancarias() + ", getViajes()=" + getViajes()
+				+ ", getCorreo()=" + getCorreo() + ", getNombres()=" + getNombres() + ", getApellidos()="
+				+ getApellidos() + ", getCalificacion()=" + getCalificacion() + ", getCelular()=" + getCelular()
+				+ ", toString()=" + super.toString() + ", getClave()=" + getClave() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 

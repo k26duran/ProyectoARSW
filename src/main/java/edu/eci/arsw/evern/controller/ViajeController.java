@@ -28,7 +28,7 @@ public class ViajeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> list() {
 		try {
-			return new ResponseEntity<>(viajeServices.list(),HttpStatus.OK);
+			return new ResponseEntity<>(viajeServices.getViajes(),HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -42,7 +42,16 @@ public class ViajeController {
 	@PostMapping("/saveViaje")
 	public ResponseEntity<?>  create(@RequestBody Viaje viaje) {
 		try {
-			return new ResponseEntity<>(viajeServices.create(viaje), HttpStatus.CREATED);
+			return new ResponseEntity<>(viajeServices.createViaje(viaje), HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/{idviaje}")
+	public ResponseEntity<?> getViajeById(@PathVariable String idviaje) {
+		try {
+			return new ResponseEntity<>(viajeServices, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -54,7 +63,6 @@ public class ViajeController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 	public ResponseEntity<?>  deleteViaje(Viaje car) {
@@ -65,7 +73,7 @@ public class ViajeController {
 		}		
 	}
 
-	public ResponseEntity<?> agregarViaje(Viaje viaje) {
+	public ResponseEntity<?> addViaje(Viaje viaje) {
 		try {
 			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 		} catch (Exception e) {

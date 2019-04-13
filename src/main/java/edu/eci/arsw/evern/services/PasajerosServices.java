@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.evern.model.Pasajero;
 import edu.eci.arsw.evern.model.Viaje;
+import edu.eci.arsw.evern.persistence.PasajeroRepository;
 import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
 import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IPasajerosServices;
@@ -23,49 +24,59 @@ public class PasajerosServices  implements  IPasajerosServices {
 	@Qualifier("PasajeroRepository")
 	private IPasajeroRepository pasajeroRepository;
 
+	@Override
+	public List<Pasajero> getPasajeros() {
+		return pasajeroRepository.findAll();
+	}
+	
+	@Override
+	public Pasajero getPasajeroByCorreo(String correo) {
+		return pasajeroRepository.find(correo);
+	}
 
 	@Override
-	public Long createPasajero(Pasajero pasajero) {
+	public String createPasajero(Pasajero pasajero) {
 		return pasajeroRepository.save(pasajero);
 	}
 
 	@Override
-	public void delete(Pasajero pasajero) {
-		// TODO Auto-generated method stub
+	public void updatePasajero(Pasajero pasajero) {
+		pasajeroRepository.update(pasajero);
 	}
 
 	@Override
-	public void pasajeroCalificaAlConductorByViaje(long idViaje, int calificacion) {
-		// TODO Auto-generated method stub
-		
+	public void deletePasajero(Pasajero pasajero) {
+		pasajeroRepository.delete(pasajero);
 	}
 
 	@Override
-	public void actualizarNombres(String correoUsuario, String nuevosNombres) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actualizarApellidos(String correoUsuario, String nuevosApellidos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Pasajero> list() {
-		return  pasajeroRepository.findAll();
-	}
-
-	@Override
-	public Pasajero getPasajeroByCorreo(String correo) {
-		return pasajeroRepository.getPasajero(correo);
-	}
-	
-	@Override
-	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero){
+	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero) {
 		return pasajeroRepository.getViajesPasajeroByCorreo(correoPasajero);
 	}
 
+	@Override
+	public void pasajeroCalificaAlConductorByViaje(Long idViaje, int calificacion) {
+		pasajeroRepository.pasajeroCalificaAlConductorByViaje(idViaje, calificacion);
+	}
 
+	@Override
+	public void updateNombres(String correoUsuario, String nuevosNombres) {
+		pasajeroRepository.updateNombres(correoUsuario, nuevosNombres);
+	}
+
+	@Override
+	public void updateApellidos(String correoUsuario, String nuevosApellidos) {
+		pasajeroRepository.updateApellidos(correoUsuario, nuevosApellidos);
+	}
+
+	@Override
+	public void updateCelular(String correoUsuario, String celular) {
+		pasajeroRepository.updateCelular(correoUsuario, celular);
+	}
+
+	@Override
+	public void updateClave(String correoUsuario, String nuevaClave) {
+		pasajeroRepository.updateClave(correoUsuario, nuevaClave);
+	}
+	
 }

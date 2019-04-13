@@ -54,12 +54,5 @@ public class CuponRepository implements ICuponRepository {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void remove(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	
 }

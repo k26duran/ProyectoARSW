@@ -8,9 +8,14 @@ import edu.eci.arsw.evern.model.*;
 
 
 @Repository
-public interface IPasajeroRepository  extends DAO<Pasajero, Long> {
+public interface IPasajeroRepository  extends DAO<Pasajero, String> {
+		
+	List<Viaje> getViajesPasajeroByCorreo(String correoPasajero);
 	
-	public Pasajero getPasajero(String correo);
-	public Long save(Pasajero entity);
-	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero);
+	void pasajeroCalificaAlConductorByViaje(Long idViaje, int calificacion);
+	void updateNombres(String correoUsuario, String nuevosNombres);
+	void updateApellidos(String correoUsuario, String nuevosApellidos);
+	void updateCelular(String correoUsuario,String celular);
+	void updateClave(String correoUsuario, String nuevaClave);
+	
 }

@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import edu.eci.arsw.evern.model.Comentario;
+import edu.eci.arsw.evern.model.Viaje;
 
 @Service
 public interface IComentarioServices {
 
-	List<Comentario> getComentariosByViajeAndUsuario(long idViaje, String correoUsuario);
-	
-	void agregarComentarioAlViaje(long idViaje, Comentario comentario);
-	
-	void eliminarComentarioAlViaje(long idViaje, long idComentario);
+	List<Comentario> getComentariosByViajeAndUsuario(Long idViaje, String correoUsuario);
+	void agregarComentarioAlViaje(Long idViaje, Comentario comentario);
+	void eliminarComentarioAlViaje(Long idViaje, Long idComentario);
 
+	/*Long createComentario(Comentario comentario);
+	void updateComentario(Comentario comentario);
+	void deleteComentario(Comentario comentario);
+	*/
 }

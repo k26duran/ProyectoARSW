@@ -14,20 +14,18 @@ import edu.eci.arsw.evern.model.Viaje;
 public interface IPasajerosServices {
 
 	
-	List<Pasajero> list();
+	String createPasajero(Pasajero pasajero);
+	void updatePasajero(Pasajero pasajero);
+	void deletePasajero(Pasajero pasajero);
 	
+	List<Pasajero> getPasajeros();
 	Pasajero getPasajeroByCorreo(String correo);
-
-	Long createPasajero(Pasajero pasajero);
-	
-	void delete(Pasajero pasajero);
-
-	void pasajeroCalificaAlConductorByViaje(long idViaje, int calificacion);
-
-	void actualizarNombres(String correoUsuario, String nuevosNombres);
-
-	void actualizarApellidos(String correoUsuario, String nuevosApellidos);
-
 	List<Viaje> getViajesPasajeroByCorreo(String correoPasajero);
+	
+	void pasajeroCalificaAlConductorByViaje(Long idViaje, int calificacion);
+	void updateNombres(String correoUsuario, String nuevosNombres);
+	void updateApellidos(String correoUsuario, String nuevosApellidos);
+	void updateCelular(String correoUsuario,String celular);
+	void updateClave(String correoUsuario, String nuevaClave);
 	
 }

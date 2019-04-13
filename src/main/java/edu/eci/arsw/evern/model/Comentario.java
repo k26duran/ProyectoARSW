@@ -54,12 +54,13 @@ public class Comentario implements Serializable {
 	public void setCorreoAutor(String correoAutor) {
 		this.correoAutor = correoAutor;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Comentario [id=" + id + ", contenido=" + contenido + ", fecha=" + fecha + ", correoAutor=" + correoAutor
 				+ "]";
 	}
+	
 
     
 

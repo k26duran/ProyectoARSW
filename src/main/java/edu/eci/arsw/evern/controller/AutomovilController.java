@@ -28,13 +28,10 @@ public class AutomovilController {
 	@Autowired
 	IAutomovilServices automovilesServices;
 
-	
-	@PostMapping("/saveAutomovil")
-	public ResponseEntity<?> postSaveAutomovil(@RequestBody Automovil automovil) {
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> getAutomoviles(){
 		try {
-			System.out.println("------ VAMOS A REGISTRAR UN AUTOMOVIL ---------");
-			System.out.println(automovil);
-			return new ResponseEntity<>(automovilesServices.createAutomovil(automovil),HttpStatus.OK);
+			return new ResponseEntity<>(automovilesServices,HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

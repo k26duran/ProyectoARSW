@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Conductor;
+import edu.eci.arsw.evern.services.contracts.IAutomovilServices;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
 
 @RestController
@@ -19,28 +20,43 @@ public class ConductorController {
 
 	@Autowired
 	IConductorServices conductorServices;
+	@Autowired
+	IAutomovilServices automovilesServices;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getAllPasajeros() {
+	public ResponseEntity<?> getConductores() {
 		try {
-			return new ResponseEntity<>(conductorServices.list(), HttpStatus.OK);
+			return new ResponseEntity<>(conductorServices.getConductores(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
-
 		}
 	}
+
 	
 	@GetMapping("/{correo}")
-	public ResponseEntity<?> getAllPasajeros(@PathVariable String correo) {
+	public ResponseEntity<?> getConductorByCorreo(@PathVariable String correo) {
 		try {		
-			return new ResponseEntity<>(conductorServices.getConductorCorreo(correo), HttpStatus.OK);
+			return new ResponseEntity<>(conductorServices.getConductorByCorreo(correo), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.NOT_FOUND);
 
 		}
 	}
 	
-	
+	/**
+	 * Obtiene la lista de viajes que tiene un pasajero
+	 * @param correo
+	 * @return lista de viajes
+	 */
+	@GetMapping("/{correo}/viajes")
+	public ResponseEntity<?> getViajesConductorByCorreo(@PathVariable String correo){
+		try {
+			return new ResponseEntity<>(conductorServices.getConductorByCorreo(correo),HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@PostMapping("/saveConductor")
 	public ResponseEntity<?> postSaveConductor(@RequestBody Conductor conductor) {
 		try {
@@ -53,7 +69,7 @@ public class ConductorController {
 	}
 	
 	@PostMapping("/aceptarViaje/{idViaje}")
-	public ResponseEntity<?> apartarViajeConductor(@RequestBody Conductor conductor ,@PathVariable int idViaje) {
+	public ResponseEntity<?> apartarViajeConductor(@RequestBody Conductor conductor ,@PathVariable Long idViaje) {
 		try {
 			System.out.println(idViaje+" "+conductor.toString());
 			conductorServices.aceptarViajeConductor(conductor,idViaje);

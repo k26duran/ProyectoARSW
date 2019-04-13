@@ -10,21 +10,20 @@ import edu.eci.arsw.evern.model.*;
 public interface IConductorServices {
 	
 
-	List<Conductor> list();
+	String createConductor(Conductor conductor);
+	void updateConductor(Conductor conductor);
+	void deleteConductor(Conductor conductor);
 	
-	Conductor getConductorCorreo(String correo);
-
-	Long createConductor(Conductor conductor);
+	List<Conductor> getConductores();
+	Conductor getConductorByCorreo(String correo);
+	List<Viaje> getViajesConductorByCorreo(String correoConductor);
 	
-	void delete(Conductor pasajero);
-
-	void conductorCalificaAlPasajeroByViaje(long idViaje, int calificacion);
-
-	void actualizarNombres(String correoUsuario, String nuevosNombres);
-
-	void actualizarApellidos(String correoUsuario, String nuevosApellidos);
+	void conductorCalificaAlPasajeroByViaje(Long idViaje, int calificacion);
+	void updateNombres(String correoUsuario, String nuevosNombres);
+	void updateApellidos(String correoUsuario, String nuevosApellidos);
+	void updateCelular(String correoUsuario,String celular);
+	void updateClave(String correoUsuario, String nuevaClave);
 	
-	void aceptarViajeConductor(Conductor conductor , int idViaje);
-
+	void aceptarViajeConductor(Conductor conductor, Long idViaje);	
 
 }

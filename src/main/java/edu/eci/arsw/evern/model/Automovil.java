@@ -59,4 +59,5 @@ public class Automovil implements Serializable{
 		return "Automovil [placa=" + placa + ", modelo=" + modelo + ", color=" + color + ", tipo=" + tipo + "]";
 	}
 
+
 }

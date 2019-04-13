@@ -19,55 +19,17 @@ public class CuentaBancariaServices  implements ICuentaBancariaServices {
 	
 	@Autowired
 	@Qualifier("CuentaBancariaRepository")
-	private ICuentaBancariaRepository bancariaRepository;
-
+	private ICuentaBancariaRepository cuentaBancRepository;
 
 	@Override
-	public List<CuentaBancaria> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long createCuentaBancaria(CuentaBancaria cuentaBancaria) {
+		return cuentaBancRepository.save(cuentaBancaria);
 	}
 
 	@Override
-	public CuentaBancaria create(CuentaBancaria car) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteCuentaBancaria(CuentaBancaria cuentaBancaria) {
+		cuentaBancRepository.update(cuentaBancaria);
 	}
 
-	@Override
-	public CuentaBancaria get(String licencePlate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(CuentaBancaria cuentaBancaria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(CuentaBancaria cuentaBancaria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void agregarCuentaBancaria(String correoUsuario, CuentaBancaria cuentaBancaria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eliminarCuentas(String correoUsuario) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -97,5 +97,12 @@ public class Usuario {
 	public String getTipoUsuario() {
 		return "usuario";
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [correo=" + correo + ", clave=" + clave + ", nombres=" + nombres + ", apellidos=" + apellidos
+				+ ", celular=" + celular + ", calificacion=" + calificacion + ", cuentasBancarias=" + cuentasBancarias
+				+ ", viajes=" + viajes + "]";
+	}
 
 }

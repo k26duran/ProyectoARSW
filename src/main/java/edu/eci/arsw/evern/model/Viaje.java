@@ -137,5 +137,14 @@ public class Viaje implements Serializable {
 	public void setCorreoPasajero(String correoPasajero) {
 		this.correoPasajero = correoPasajero;
 	}
+	
+	@Override
+	public String toString() {
+		return "Viaje [id=" + id + ", lugarOrigen=" + lugarOrigen + ", lugarDestino=" + lugarDestino + ", fecha="
+				+ fecha + ", calificacionAlPasajero=" + calificacionAlPasajero + ", calificacionAlConductor="
+				+ calificacionAlConductor + ", costo=" + costo + ", tiempo=" + tiempo + ", correoConductor="
+				+ correoConductor + ", correoPasajero=" + correoPasajero + ", aceptado=" + aceptado + ", automovil="
+				+ automovil + ", comentarios=" + comentarios + "]";
+	}
 
 }

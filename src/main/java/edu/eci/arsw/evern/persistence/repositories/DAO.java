@@ -6,10 +6,9 @@ import java.util.List;
 public interface DAO<T extends Serializable, PK>{
 	
 	public List<T> findAll();
-	public T find(PK id);
+	public T find(PK findByPK);
 	public PK save(T entity);
 	public void update(T entity);
-	public void delete(T o);
-	public void remove(Long id);
+	public void delete(T entity);
 
 }

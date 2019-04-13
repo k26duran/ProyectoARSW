@@ -58,8 +58,32 @@ public class  ViajeRepository implements  IViajeRepository {
 
 	@Override
 	public Viaje find(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM viaje WHERE id="+id.toString()+";";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			Viaje viaje = new Viaje();
+			viaje.setId(rs.getLong("id"));
+			viaje.setAceptado(rs.getBoolean("aceptado"));
+			viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
+			viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
+			viaje.setCorreoConductor(rs.getString("correo_conductor"));
+			viaje.setCorreoPasajero(rs.getString("correo_pasajero"));
+			viaje.setCosto(rs.getInt("costo"));
+			viaje.setTiempo(rs.getInt("tiempo"));
+			viaje.setFecha(rs.getString("fecha"));
+			viaje.setLugarDestino(rs.getString("lugar_destino"));
+			viaje.setLugarOrigen(rs.getString("lugar_origen"));
+			
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			
+			return viaje;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}	
 	}
 
 	@Override
@@ -82,21 +106,36 @@ public class  ViajeRepository implements  IViajeRepository {
 	}
 
 	@Override
-	public void update(Viaje entity) {
+	public void update(Viaje viaje) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Viaje o) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Viaje viaje) {
+		String query = "DELETE FROM viaje WHERE id="+viaje.getId().toString()+";";
+		System.out.println("QUERY ELIMINAR VIAJE -> "+query);
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(query);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
-	public void remove(Long id) {
+	public List<Comentario> getComentariosByViaje(Long idViaje) {
 		// TODO Auto-generated method stub
-		
+		return null;
+	}
+
+	@Override
+	public Automovil getAutomovilByViaje(Long idViaje) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import edu.eci.arsw.evern.model.Cupon;
 import edu.eci.arsw.evern.persistence.repositories.ICuponRepository;
 import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.ICuponServices;
@@ -17,5 +18,19 @@ public  class  CuponServices  implements ICuponServices {
 	@Qualifier("CuponRepository")
 	private ICuponRepository cuponRepository;
 
+	@Override
+	public Long createCupon(Cupon cupon) {
+		return cuponRepository.save(cupon);
+	}
+
+	@Override
+	public void updateCupon(Cupon cupon) {
+		cuponRepository.delete(cupon);
+	}
+
+	@Override
+	public void deleteCupon(Cupon cupon) {
+		cuponRepository.delete(cupon);
+	}
 
 }

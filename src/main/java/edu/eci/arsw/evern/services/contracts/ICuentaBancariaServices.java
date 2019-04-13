@@ -5,23 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.evern.model.CuentaBancaria;
+import edu.eci.arsw.evern.model.Pasajero;
 
 @Service
 public interface ICuentaBancariaServices {
 
-	List<CuentaBancaria> list();
-
-	CuentaBancaria create(CuentaBancaria car);
-
-	CuentaBancaria get(String licencePlate);
-
-	void update(CuentaBancaria cuentaBancaria);
-
-	void delete(CuentaBancaria cuentaBancaria);
-
-	void agregarCuentaBancaria(String correoUsuario, CuentaBancaria cuentaBancaria);
-
-	void eliminarCuentaBancaria(String correoUsuario, long idCuentaBancaria);
-
-	void eliminarCuentas(String correoUsuario);
+	Long createCuentaBancaria(CuentaBancaria cuentaBancaria);
+	void deleteCuentaBancaria(CuentaBancaria cuentaBancaria);
+	
 }

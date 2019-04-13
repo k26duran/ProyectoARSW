@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import edu.eci.arsw.evern.model.Automovil;
+import edu.eci.arsw.evern.model.Comentario;
 import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.persistence.ViajeRepository;
@@ -21,41 +23,40 @@ public class ViajeServices implements  IViajeServices {
 	private IViajeRepository viajeRepository;
 
 	@Override
-	public List<Viaje> list() {
-		return viajeRepository.findAll();
-	}
-
-	/**
-	 * Crea un viaje y al mismo tiempo le añade el viaje al pasajero y al conductor
-	 */
-	@Override
-	public Long create(Viaje viaje) {
+	public Long createViaje(Viaje viaje) {
 		return viajeRepository.save(viaje);
 	}
 
-
 	@Override
 	public void updateViaje(Viaje viaje) {
-		// TODO Auto-generated method stub
-		
+		viajeRepository.update(viaje);
 	}
 
 	@Override
-	public void deleteViaje(Viaje car) {
-		// TODO Auto-generated method stub
-		
+	public void deleteViaje(Viaje viaje) {
+		viajeRepository.delete(viaje);
 	}
 
 	@Override
-	public void agregarViaje(Viaje viaje) {
-		// TODO Auto-generated method stub
-		
+	public List<Viaje> getViajes() {
+		return viajeRepository.findAll();
 	}
 
 	@Override
-	public List<Viaje> getViajesDelUsuario(String correoUsuario) {
-		// TODO Auto-generated method stub
-		return null;
+	public Viaje getViajeById(Long idViaje) {
+		return viajeRepository.find(idViaje);
 	}
 
+	@Override
+	public List<Comentario> getComentariosByViaje(Long idViaje) {
+		return viajeRepository.getComentariosByViaje(idViaje);
+	}
+
+	@Override
+	public Automovil getAutomovilByViaje(Long idViaje) {
+		return viajeRepository.getAutomovilByViaje(idViaje);
+	}
+
+	
+	
 }

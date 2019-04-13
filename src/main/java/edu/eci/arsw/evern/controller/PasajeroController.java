@@ -1,5 +1,7 @@
 package edu.eci.arsw.evern.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,19 +32,28 @@ public class PasajeroController{
 	
 	@Autowired
 	IPasajerosServices pasajerosServices;
-
+	
+	/**
+	 * @return Lista de pasajeros de EVERN DRIVER
+	 */
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<?> getAllPasajeros() {
+	public ResponseEntity<?> getPasajeros() {
 		try {
-			return new ResponseEntity<>(pasajerosServices.list(), HttpStatus.OK);
+			List<Pasajero> pasajeros = pasajerosServices.getPasajeros();
+			System.out.println(pasajeros);
+			return new ResponseEntity<>(pasajeros, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
 	}
 	
+	/**
+	 * Obtiene la informacion de un pasajero dado su correo
+	 * @param correo
+	 * @return Un Pasajero
+	 */
 	@GetMapping("/{correo}")
-	public ResponseEntity<?> getAllPasajeros(@PathVariable String correo) {
+	public ResponseEntity<?> getPasajeroByCorreo(@PathVariable String correo) {
 		try {
 			return new ResponseEntity<>(pasajerosServices.getPasajeroByCorreo(correo), HttpStatus.OK);
 		} catch (Exception e) {
@@ -51,6 +62,11 @@ public class PasajeroController{
 		}
 	}
 	
+	/**
+	 * Obtiene la lista de viajes que tiene un pasajero
+	 * @param correo
+	 * @return lista de viajes
+	 */
 	@GetMapping("/{correo}/viajes")
 	public ResponseEntity<?> getViajesPasajeroByCorreo(@PathVariable String correo){
 		try {
@@ -60,6 +76,11 @@ public class PasajeroController{
 		}
 	}
 	
+	/**
+	 * Guarda un pasajero a la base de datos
+	 * @param pasajero
+	 * @return
+	 */
 	@PostMapping("/savePasajero")
 	public ResponseEntity<?> postSavePasajero(@RequestBody Pasajero pasajero) {
 		try {
@@ -68,28 +89,5 @@ public class PasajeroController{
 			return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@GetMapping("/login/{correo}/{clave}")
-	public ResponseEntity<?> login(@PathVariable String correo, @PathVariable String clave){
-		try {
-			System.out.println("LOGIN!!!!!!! "+correo+ " -> "+clave);
-			if(pasajerosServices.getPasajeroByCorreo(correo).getClave().equals(clave)) {
-				return new ResponseEntity<>("Acepted",HttpStatus.OK);
-				//System.out.println("ACEPTADO");
-			}else {
-				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-				//System.out.println("ERROR");
-			}
-		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-			//System.out.println("ERROR");
-		}
-		
-	}
-	
-	
-	
-	
-	
-	
+
 }

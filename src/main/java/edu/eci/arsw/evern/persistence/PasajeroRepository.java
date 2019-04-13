@@ -28,7 +28,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	
 	@Override
 	public List<Pasajero> findAll() {
-		String query = "SELECT * FROM pasajeros;";
+		String query = "SELECT * FROM pasajero;";
 		List<Pasajero> pasajeros = new ArrayList<>();
 		try {
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
@@ -46,40 +46,15 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 			return pasajeros;
-		} catch (Exception e) {	
+		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
 
 	@Override
-	public Pasajero find(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void update(Pasajero entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Pasajero o) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void remove(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Pasajero getPasajero(String correo) {
-		
-		String query = "SELECT * FROM pasajeros p where p.correo = '"+correo+"';";
+	public Pasajero find(String correo) {
+		String query = "SELECT * FROM pasajero p where p.correo = '"+correo+"';";
 		try {
 			Pasajero pasajero = new Pasajero();
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
@@ -98,14 +73,26 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		} catch (Exception e) {	
 			throw new RuntimeException(e);
 		}
+	}
+
+
+	@Override
+	public void update(Pasajero entity) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Long save(Pasajero entity) {
-		String query = "INSERT INTO pasajeros(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento)"
-		 +"values ('"+entity.getNombres()+"','"+entity.getApellidos()+"',0,'"+entity.getCelular()+"','"+entity.getClave()+"','"
-				+entity.getCorreo()+"',null);";
+	public void delete(Pasajero o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String save(Pasajero pasajero) {
+		String query = "INSERT INTO pasajero(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento)"
+		 +"values ('"+pasajero.getNombres()+"','"+pasajero.getApellidos()+"',0,'"+pasajero.getCelular()+"','"+pasajero.getClave()+"','"
+				+pasajero.getCorreo()+"',null);";
 		System.out.println(query);
 		try {
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
@@ -113,14 +100,14 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			stmt.execute(query);
 			RepositoryDataBases.dataSource().close();
 			connection.close();
-			return (long) 200;
-		} catch (Exception e) {	
+			return pasajero.getCorreo();
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero){
-		String query = "SELECT * FROM viajes WHERE correo_pasajero ='"+correoPasajero+"';" ;
+		String query = "SELECT * FROM viaje WHERE correo_pasajero ='"+correoPasajero+"';" ;
 		System.out.println("Consultar los viajes del pasajero: "+correoPasajero);
 		try {
 			List<Viaje> viajesPasajero = new ArrayList<>();
@@ -152,6 +139,36 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		} catch (Exception e) {	
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public void pasajeroCalificaAlConductorByViaje(Long idViaje, int calificacion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNombres(String correoUsuario, String nuevosNombres) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateApellidos(String correoUsuario, String nuevosApellidos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCelular(String correoUsuario, String celular) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateClave(String correoUsuario, String nuevaClave) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

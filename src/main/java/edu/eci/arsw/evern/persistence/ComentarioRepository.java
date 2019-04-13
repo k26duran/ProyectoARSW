@@ -55,12 +55,4 @@ public class ComentarioRepository implements IComentarioRepository {
 
 	}
 
-	@Override
-	public void remove(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	
-
 }

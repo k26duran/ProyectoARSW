@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.evern.model.Conductor;
+import edu.eci.arsw.evern.model.Pasajero;
+import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.persistence.repositories.IConductorRepository;
 import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
@@ -22,47 +24,68 @@ public class ConductorServices implements IConductorServices {
 	private IConductorRepository conductorRepository;
 
 	@Override
-	public List<Conductor> list() {
+	public String createConductor(Conductor conductor) {
+		return conductorRepository.save(conductor);
+	}
+
+	@Override
+	public void updateConductor(Conductor conductor) {
+		conductorRepository.update(conductor);
+	}
+
+	@Override
+	public void deleteConductor(Conductor conductor) {
+		conductorRepository.delete(conductor);		
+	}
+
+	@Override
+	public List<Conductor> getConductores() {
 		return conductorRepository.findAll();
 	}
 
 	@Override
-	public Conductor getConductorCorreo(String correo) {
-		return conductorRepository.getCondutor(correo);
+	public Conductor getConductorByCorreo(String correo) {
+		return conductorRepository.find(correo);
 	}
 
 	@Override
-	public Long createConductor(Conductor conductor) {
-		return conductorRepository.save(conductor);
+	public List<Viaje> getViajesConductorByCorreo(String correoConductor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-
 	@Override
-	public void aceptarViajeConductor(Conductor conductor , int idViaje) {
-		 conductorRepository.aceptarViajeConductor(conductor,idViaje);
-	}
-
-	
-	@Override
-	public void delete(Conductor pasajero) {
+	public void conductorCalificaAlPasajeroByViaje(Long idViaje, int calificacion) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void conductorCalificaAlPasajeroByViaje(long idViaje, int calificacion) {
+	public void updateNombres(String correoUsuario, String nuevosNombres) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void actualizarNombres(String correoUsuario, String nuevosNombres) {
+	public void updateApellidos(String correoUsuario, String nuevosApellidos) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void actualizarApellidos(String correoUsuario, String nuevosApellidos) {
+	public void updateCelular(String correoUsuario, String celular) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateClave(String correoUsuario, String nuevaClave) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aceptarViajeConductor(Conductor conductor, Long idViaje) {
 		// TODO Auto-generated method stub
 		
 	}

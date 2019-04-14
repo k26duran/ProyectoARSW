@@ -11,6 +11,5 @@ public interface IViajeRepository extends DAO<Viaje,Long>{
 
 	
 	List<Comentario> getComentariosByViaje(Long idViaje);
-	Automovil getAutomovilByViaje(Long idViaje);
 	
 }

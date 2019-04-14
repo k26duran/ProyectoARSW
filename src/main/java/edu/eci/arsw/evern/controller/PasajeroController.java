@@ -47,6 +47,8 @@ public class PasajeroController{
 		}
 	}
 	
+	
+	
 	/**
 	 * Obtiene la informacion de un pasajero dado su correo
 	 * @param correo
@@ -58,21 +60,6 @@ public class PasajeroController{
 			return new ResponseEntity<>(pasajerosServices.getPasajeroByCorreo(correo), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
-
-		}
-	}
-	
-	/**
-	 * Obtiene la lista de viajes que tiene un pasajero
-	 * @param correo
-	 * @return lista de viajes
-	 */
-	@GetMapping("/{correo}/viajes")
-	public ResponseEntity<?> getViajesPasajeroByCorreo(@PathVariable String correo){
-		try {
-			return new ResponseEntity<>(pasajerosServices.getViajesPasajeroByCorreo(correo),HttpStatus.OK);
-		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -87,6 +74,20 @@ public class PasajeroController{
 			return new ResponseEntity<>(pasajerosServices.createPasajero(pasajero),HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	/**
+	 * Obtiene la lista de viajes que tiene un pasajero
+	 * @param correo
+	 * @return lista de viajes
+	 */
+	@GetMapping("/{correo}/viajes")
+	public ResponseEntity<?> getViajesPasajeroByCorreo(@PathVariable String correo){
+		try {
+			return new ResponseEntity<>(pasajerosServices.getViajesPasajeroByCorreo(correo),HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
 

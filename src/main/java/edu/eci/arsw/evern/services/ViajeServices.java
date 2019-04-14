@@ -44,19 +44,13 @@ public class ViajeServices implements  IViajeServices {
 
 	@Override
 	public Viaje getViajeById(Long idViaje) {
+		System.out.println("SERVICES VIAJE BY ID "+idViaje.toString());
 		return viajeRepository.find(idViaje);
 	}
 
 	@Override
 	public List<Comentario> getComentariosByViaje(Long idViaje) {
 		return viajeRepository.getComentariosByViaje(idViaje);
-	}
-
-	@Override
-	public Automovil getAutomovilByViaje(Long idViaje) {
-		return viajeRepository.getAutomovilByViaje(idViaje);
-	}
-
-	
+	}	
 	
 }

@@ -28,6 +28,7 @@ public class  ViajeRepository implements  IViajeRepository {
 	@Override
 	public List<Viaje> findAll() {
 		String query = "SELECT * FROM viaje;";
+		System.out.println("CONSULTAR TODOS LOS VIAJES -> "+query);
 		List<Viaje> viajes = new ArrayList<>();
 		try {
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
@@ -58,30 +59,32 @@ public class  ViajeRepository implements  IViajeRepository {
 
 	@Override
 	public Viaje find(Long id) {
-		String query = "SELECT * FROM viaje WHERE id="+id.toString()+";";
+		String query = "SELECT * FROM viaje,automovil WHERE id="+id.toString()+";";
+		System.out.println("CONSULTAR VIAJE -> "+query);
+		Viaje viaje = new Viaje();
 		try {
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-
-			Viaje viaje = new Viaje();
-			viaje.setId(rs.getLong("id"));
-			viaje.setAceptado(rs.getBoolean("aceptado"));
-			viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
-			viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
-			viaje.setCorreoConductor(rs.getString("correo_conductor"));
-			viaje.setCorreoPasajero(rs.getString("correo_pasajero"));
-			viaje.setCosto(rs.getInt("costo"));
-			viaje.setTiempo(rs.getInt("tiempo"));
-			viaje.setFecha(rs.getString("fecha"));
-			viaje.setLugarDestino(rs.getString("lugar_destino"));
-			viaje.setLugarOrigen(rs.getString("lugar_origen"));
-			
+			while (rs.next()) {
+				viaje.setId(rs.getLong("id"));
+				viaje.setAceptado(rs.getBoolean("aceptado"));
+				viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
+				viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
+				viaje.setCorreoConductor(rs.getString("correo_conductor"));
+				viaje.setCorreoPasajero(rs.getString("correo_pasajero"));
+				viaje.setCosto(rs.getInt("costo"));
+				viaje.setTiempo(rs.getInt("tiempo"));
+				viaje.setFecha(rs.getString("fecha"));
+				viaje.setLugarDestino(rs.getString("lugar_destino"));
+				viaje.setLugarOrigen(rs.getString("lugar_origen"));
+				return viaje;
+			}
 			RepositoryDataBases.dataSource().close();
 			connection.close();
-			
 			return viaje;
-		} catch (Exception e) {	
+		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}	
 	}
@@ -128,15 +131,27 @@ public class  ViajeRepository implements  IViajeRepository {
 
 	@Override
 	public List<Comentario> getComentariosByViaje(Long idViaje) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		String query = "SELECT c.* FROM viaje as v, comentario as c WHERE v.id="+
+				idViaje.toString()+" AND c.viaje_id=v.id;";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
 
-	@Override
-	public Automovil getAutomovilByViaje(Long idViaje) {
-		// TODO Auto-generated method stub
-		return null;
+			List<Comentario> comentarios = new ArrayList<Comentario>();
+			while(rs.next()) {
+				Comentario comentario = new Comentario();
+				comentario.setId(rs.getLong("id"));
+				comentario.setFecha(rs.getString("fecha"));
+				comentario.setContenido(rs.getString("contenido"));
+				comentarios.add(comentario);
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return comentarios;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
 	}
-	
 
 }

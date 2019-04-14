@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import edu.eci.arsw.evern.model.*;
-import edu.eci.arsw.evern.services.contracts.*;
+import edu.eci.arsw.evern.model.Viaje;
+import edu.eci.arsw.evern.services.contracts.IViajeServices;
 import java.util.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -24,9 +24,8 @@ public class ViajeController {
 	@Autowired
 	IViajeServices viajeServices;
 	
-	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> list() {
+	public ResponseEntity<?> getViajes() {
 		try {
 			return new ResponseEntity<>(viajeServices.getViajes(),HttpStatus.OK);
 		} catch (Exception e) {
@@ -34,24 +33,24 @@ public class ViajeController {
 		}
 	}
 
+	@GetMapping("/{idviaje}")
+	public ResponseEntity<?> getViajeById(@PathVariable Long idviaje) {
+		try {
+			return new ResponseEntity<>(viajeServices.getViajeById(idviaje), HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}	
+	
 	/**
 	 * El viaje es creado por un pasajero, el pasajero pide el viaje
 	 * @param viaje
 	 * @return
 	 */
 	@PostMapping("/saveViaje")
-	public ResponseEntity<?>  create(@RequestBody Viaje viaje) {
+	public ResponseEntity<?> create(@RequestBody Viaje viaje) {
 		try {
 			return new ResponseEntity<>(viajeServices.createViaje(viaje), HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	@PostMapping("/{idviaje}")
-	public ResponseEntity<?> getViajeById(@PathVariable String idviaje) {
-		try {
-			return new ResponseEntity<>(viajeServices, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

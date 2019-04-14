@@ -122,32 +122,97 @@ public class  ConductorRepository implements IConductorRepository {
 
 	@Override
 	public void conductorCalificaAlPasajeroByViaje(Long idViaje, int calificacion) {
-		// TODO Auto-generated method stub
-		
+		String sql = "UPDATE viaje"+
+				"SET calificacion_al_pasajero="+String.valueOf(calificacion)+
+				"WHERE id="+idViaje.toString()+";";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
-
 	@Override
 	public void updateNombres(String correoUsuario, String nuevosNombres) {
-		// TODO Auto-generated method stub
-		
+		String sql = "UPDATE conductor"+
+				"SET nombres='"+nuevosNombres+"'"+
+				"WHERE correo='"+correoUsuario+"';";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void updateApellidos(String correoUsuario, String nuevosApellidos) {
-		// TODO Auto-generated method stub
-		
+		String sql = "UPDATE conductor"+
+				"SET apellidos='"+nuevosApellidos+"'"+
+				"WHERE correo='"+correoUsuario+"';";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
-	public void updateCelular(String correoUsuario, String celular) {
-		// TODO Auto-generated method stub
-		
+	public void updateCelular(String correoUsuario, String nuevoCelular) {
+		String sql = "UPDATE conductor"+
+				"SET celular='"+nuevoCelular+"'"+
+				"WHERE correo='"+correoUsuario+"';";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void updateClave(String correoUsuario, String nuevaClave) {
-		// TODO Auto-generated method stub
-		
+		String sql = "UPDATE conductor"+
+				"SET clave='"+nuevaClave+"'"+
+				"WHERE correo='"+correoUsuario+"';";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	@Override
+	public void updateCalificacion(String correoUsuario, int nuevaCalificacion) {
+		String sql = "UPDATE conductor"+
+				"SET calificacion='"+String.valueOf(nuevaCalificacion)+"'"+
+				"WHERE correo='"+correoUsuario+"';";
+		try {
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

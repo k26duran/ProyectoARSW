@@ -19,6 +19,5 @@ public interface IViajeServices {
 	List<Viaje> getViajes();
 	Viaje getViajeById(Long idViaje);
 	List<Comentario> getComentariosByViaje(Long idViaje);
-	Automovil getAutomovilByViaje(Long idViaje);
 	
 }

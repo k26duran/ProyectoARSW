@@ -24,6 +24,7 @@ public interface IConductorServices {
 	void updateCelular(String correoUsuario,String celular);
 	void updateClave(String correoUsuario, String nuevaClave);
 	
-	void aceptarViajeConductor(Conductor conductor, Long idViaje);	
+	void aceptarViajeConductor(Conductor conductor, Long idViaje);
+	Conductor getConductorByCorreoYClave(String correoConductor, String clave);
 
 }

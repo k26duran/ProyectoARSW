@@ -19,4 +19,5 @@ public interface IPasajeroRepository  extends DAO<Pasajero, String> {
 	void updateClave(String correoUsuario, String nuevaClave);
 	void updateCalificacion(String correoUsuario, int nuevaCalificacion);
 	
+	Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave);
 }

@@ -18,4 +18,6 @@ public interface IConductorRepository  extends DAO<Conductor, String> {
 	void updateClave(String correoUsuario, String nuevaClave);
 	void updateCalificacion(String correoUsuario, int nuevaCalificacion);
 	
+	
+	Conductor getConductorByCorreoYClave(String correoConductor, String clave);
 }

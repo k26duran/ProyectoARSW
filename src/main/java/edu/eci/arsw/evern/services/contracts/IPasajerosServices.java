@@ -28,4 +28,6 @@ public interface IPasajerosServices {
 	void updateCelular(String correoUsuario,String celular);
 	void updateClave(String correoUsuario, String nuevaClave);
 	
+	Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave);
+	
 }

@@ -92,7 +92,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		String query = "INSERT INTO pasajero(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento)"
 		 +"values ('"+pasajero.getNombres()+"','"+pasajero.getApellidos()+"',0,'"+pasajero.getCelular()+"','"+pasajero.getClave()+"','"
 				+pasajero.getCorreo()+"',null);";
-		System.out.println(query);
 		try {
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
@@ -107,7 +106,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	
 	public List<Viaje> getViajesPasajeroByCorreo(String correoPasajero){
 		String query = "SELECT * FROM viaje WHERE correo_pasajero ='"+correoPasajero+"';" ;
-		System.out.println("Consultar los viajes del pasajero: "+correoPasajero);
 		try {
 			List<Viaje> viajesPasajero = new ArrayList<>();
 			
@@ -232,6 +230,29 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave) {
+		String query = "SELECT * FROM pasajero p WHERE p.correo = '"+correoPasajero+"' AND p.clave='"+clave+"';";
+		try {
+			Pasajero pasajero = new Pasajero();
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				pasajero.setApellidos(rs.getString("apellidos"));
+				pasajero.setNombres(rs.getString("nombres"));
+				pasajero.setCelular(rs.getString("celular"));
+				pasajero.setCorreo(rs.getString("correo"));		
+				pasajero.setClave(rs.getString("clave"));
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return pasajero;
+		} catch (Exception e) {	
 			throw new RuntimeException(e);
 		}
 	}

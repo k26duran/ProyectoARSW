@@ -79,7 +79,6 @@ public class  ConductorRepository implements IConductorRepository {
 			String query = "INSERT INTO conductor(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento , automovil_id)"
 			 +"values ('"+entity.getNombres()+"','"+entity.getApellidos()+"',0,'"+entity.getCelular()+"','"+entity.getClave()+"','"
 					+entity.getCorreo()+"',null,"+FK_CONDUCTOR_AUTO+");";
-			System.out.println(query);
 			try {
 				Connection connection = RepositoryDataBases.dataSource().getConnection();
 				Statement stmt = connection.createStatement();
@@ -211,6 +210,29 @@ public class  ConductorRepository implements IConductorRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public Conductor getConductorByCorreoYClave(String correoConductor, String clave) {
+		String query = "SELECT * FROM conductor c WHERE c.correo = '"+correoConductor+"' AND c.clave='"+clave+"';";
+		try {
+			Conductor conductor = new Conductor();
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				conductor.setApellidos(rs.getString("apellidos"));
+				conductor.setNombres(rs.getString("nombres"));
+				conductor.setCelular(rs.getString("celular"));
+				conductor.setCorreo(rs.getString("correo"));		
+				conductor.setClave(rs.getString("clave"));
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return conductor;
+		} catch (Exception e) {	
 			throw new RuntimeException(e);
 		}
 	}

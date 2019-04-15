@@ -90,5 +90,19 @@ public class PasajeroController{
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
+	@GetMapping("/{correo}/{clave}")
+	public ResponseEntity<?> loginPasajero(@PathVariable String correo, @PathVariable String clave){
+		try {
+			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
+			if(pasajero.getCorreo()==null) {
+				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(pasajero,HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

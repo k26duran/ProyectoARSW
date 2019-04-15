@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Conductor;
+import edu.eci.arsw.evern.model.Pasajero;
 import edu.eci.arsw.evern.services.contracts.IAutomovilServices;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
 
@@ -74,6 +75,19 @@ public class ConductorController {
 			System.out.println(idViaje+" "+conductor.toString());
 			conductorServices.aceptarViajeConductor(conductor,idViaje);
 			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/{correo}/{clave}")
+	public ResponseEntity<?> loginConductor(@PathVariable String correo, @PathVariable String clave){
+		try {
+			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
+			if(conductor.getCorreo()==null) {
+				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(conductor,HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

@@ -78,5 +78,10 @@ public class PasajerosServices  implements  IPasajerosServices {
 	public void updateClave(String correoUsuario, String nuevaClave) {
 		pasajeroRepository.updateClave(correoUsuario, nuevaClave);
 	}
+
+	@Override
+	public Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave) {
+		return pasajeroRepository.getPasajeroByCorreoYClave(correoPasajero, clave);
+	}
 	
 }

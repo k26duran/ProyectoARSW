@@ -90,4 +90,9 @@ public class ConductorServices implements IConductorServices {
 		
 	}
 
+	@Override
+	public Conductor getConductorByCorreoYClave(String correoConductor, String clave) {
+		return conductorRepository.getConductorByCorreoYClave(correoConductor, clave);		
+	}
+
 }

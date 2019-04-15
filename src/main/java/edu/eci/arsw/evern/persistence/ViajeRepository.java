@@ -59,7 +59,8 @@ public class  ViajeRepository implements  IViajeRepository {
 
 	@Override
 	public Viaje find(Long id) {
-		String query = "SELECT * FROM viaje,automovil WHERE id="+id.toString()+";";
+		String query = "SELECT * FROM viaje WHERE id="+id.toString()+";";
+		//String query = "SELECT * FROM viaje, automovil WHERE id="+id.toString()+" AND placa_automovil=";";
 		System.out.println("CONSULTAR VIAJE -> "+query);
 		Viaje viaje = new Viaje();
 		try {

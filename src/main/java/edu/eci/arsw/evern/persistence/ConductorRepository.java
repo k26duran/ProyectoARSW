@@ -52,9 +52,10 @@ public class  ConductorRepository implements IConductorRepository {
 	
 	@Override
 	public Conductor find(String correo) {
-		String query = "SELECT * FROM conductor c where c.correo = '"+correo+"';";
+		String query = "SELECT * FROM conductor c, automovil a where c.correo = '"+correo+"' AND c.automovil_id=a.placa;";
 		try {
 			Conductor conductor = new Conductor();
+			Automovil automovil = new Automovil();
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -64,6 +65,10 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setCelular(rs.getString("celular"));
 				conductor.setCorreo(rs.getString("correo"));		
 				conductor.setClave(rs.getString("clave"));
+				automovil.setModelo(rs.getString("modelo"));
+				automovil.setPlaca(rs.getString("placa"));
+				automovil.setTipo(rs.getString("tipo"));
+				conductor.setAutomovil(automovil);
 			}
 			RepositoryDataBases.dataSource().close();
 			connection.close();

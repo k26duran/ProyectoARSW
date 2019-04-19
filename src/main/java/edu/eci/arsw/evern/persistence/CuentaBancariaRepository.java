@@ -54,4 +54,10 @@ public class CuentaBancariaRepository implements ICuentaBancariaRepository   {
 		
 	}
 
+	@Override
+	public void remove(Long pkEntity) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

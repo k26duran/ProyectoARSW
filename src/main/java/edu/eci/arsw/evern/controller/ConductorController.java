@@ -61,11 +61,15 @@ public class ConductorController {
 	@PostMapping("/saveConductor")
 	public ResponseEntity<?> postSaveConductor(@RequestBody Conductor conductor) {
 		try {
-			System.out.println("------ VAMOS A REGISTRAR UN CONDUCTOR ---------");
+			//System.out.println("------ VAMOS A REGISTRAR UN CONDUCTOR ---------");
 			System.out.println(conductor);
+			String registrarAutomovil = automovilesServices.createAutomovil(conductor.getAutomovil());
+			if(registrarAutomovil == null) {
+				return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<>(conductorServices.createConductor(conductor),HttpStatus.CREATED);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
 		}
 	}
 	

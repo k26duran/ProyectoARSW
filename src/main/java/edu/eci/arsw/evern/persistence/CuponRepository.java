@@ -22,9 +22,6 @@ import edu.eci.arsw.evern.persistence.repositories.ICuponRepository;
 @Qualifier("CuponRepository")
 public class CuponRepository implements ICuponRepository {
 	
-	
-
-
 	@Override
 	public List<Cupon> findAll() {
 		// TODO Auto-generated method stub
@@ -51,6 +48,12 @@ public class CuponRepository implements ICuponRepository {
 
 	@Override
 	public void delete(Cupon o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Long pkEntity) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -55,4 +55,10 @@ public class ComentarioRepository implements IComentarioRepository {
 
 	}
 
+	@Override
+	public void remove(Long pkEntity) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

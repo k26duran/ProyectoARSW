@@ -236,5 +236,11 @@ public class  ConductorRepository implements IConductorRepository {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public void remove(String pkEntity) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

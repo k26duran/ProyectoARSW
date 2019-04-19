@@ -10,5 +10,5 @@ public interface DAO<T extends Serializable, PK>{
 	public PK save(T entity);
 	public void update(T entity);
 	public void delete(T entity);
-
+	public void remove(PK pkEntity);
 }

@@ -256,5 +256,11 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public void remove(String pkEntity) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

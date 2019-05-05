@@ -52,7 +52,7 @@ public class  ConductorRepository implements IConductorRepository {
 	
 	@Override
 	public Conductor find(String correo) {
-		String query = "SELECT * FROM conductor c, automovil a where c.correo = '"+correo+"' AND c.automovil_id=a.placa;";
+		String query = "SELECT * FROM conductor c, automovil a where c.correo = '"+correo+"';";
 		try {
 			Conductor conductor = new Conductor();
 			//Automovil automovil = new Automovil();

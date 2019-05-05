@@ -37,6 +37,7 @@ public class ConductorController {
 	@GetMapping("/{correo}")
 	public ResponseEntity<?> getConductorByCorreo(@PathVariable String correo) {
 		try {		
+			System.out.println(correo);
 			return new ResponseEntity<>(conductorServices.getConductorByCorreo(correo), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.NOT_FOUND);

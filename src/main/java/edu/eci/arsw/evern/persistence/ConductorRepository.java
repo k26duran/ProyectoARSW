@@ -252,7 +252,6 @@ public class  ConductorRepository implements IConductorRepository {
 	public List<Viaje> getViajesConductorByCorreo(String correo) {
 		String query = "SELECT * FROM viaje v WHERE v.correo_conductor = '"+correo+"';";
 		try {
-			Viaje viaje = new Viaje();
 			Connection connection = RepositoryDataBases.dataSource().getConnection();
 		
 			Statement stmt = connection.createStatement();
@@ -262,6 +261,7 @@ public class  ConductorRepository implements IConductorRepository {
 			ResultSet rs = stmt.executeQuery(query);
 		
 			while (rs.next()) {
+				Viaje viaje = new Viaje();
 				viaje.setId(rs.getLong("id"));
 				viaje.setAceptado(rs.getBoolean("aceptado"));
 				//viaje.setAutomovil();

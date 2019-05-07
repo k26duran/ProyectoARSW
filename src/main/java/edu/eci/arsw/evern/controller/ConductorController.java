@@ -48,12 +48,13 @@ public class ConductorController {
 	/**
 	 * Obtiene la lista de viajes que tiene un pasajero
 	 * @param correo
-	 * @return lista de viajes
+		 * @return lista de viajes
 	 */
 	@GetMapping("/{correo}/viajes")
 	public ResponseEntity<?> getViajesConductorByCorreo(@PathVariable String correo){
 		try {
-			return new ResponseEntity<>(conductorServices.getConductorByCorreo(correo),HttpStatus.OK);
+			System.out.println(correo);
+			return new ResponseEntity<>(conductorServices.getViajesConductorByCorreo(correo),HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

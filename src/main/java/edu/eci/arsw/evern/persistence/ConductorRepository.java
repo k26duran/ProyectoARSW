@@ -247,5 +247,40 @@ public class  ConductorRepository implements IConductorRepository {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Viaje> getViajesConductorByCorreo(String correo) {
+		String query = "SELECT * FROM viaje v WHERE v.correo_conductor = '"+correo+"';";
+		try {
+			Viaje viaje = new Viaje();
+			Connection connection = RepositoryDataBases.dataSource().getConnection();
+		
+			Statement stmt = connection.createStatement();
+			List<Viaje> viajes = new ArrayList<Viaje>();
+			System.out.println("En viajes");
+		
+			ResultSet rs = stmt.executeQuery(query);
+		
+			while (rs.next()) {
+				viaje.setId(rs.getLong("id"));
+				viaje.setAceptado(rs.getBoolean("aceptado"));
+				//viaje.setAutomovil();
+				viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
+				viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
+				viaje.setCorreoConductor(rs.getString("correo_conductor"));
+				viaje.setCorreoPasajero(rs.getString("correo_pasajero"));
+				viaje.setCosto(rs.getInt("costo"));
+				viaje.setFecha(rs.getString("fecha"));
+				viaje.setLugarDestino(rs.getString("lugar_destino"));
+				viaje.setLugarOrigen(rs.getString("lugar_origen"));
+				viajes.add(viaje);
+			}
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+			return viajes;
+		} catch (Exception e) {	
+			throw new RuntimeException(e);
+		}
+	}
 	
 }

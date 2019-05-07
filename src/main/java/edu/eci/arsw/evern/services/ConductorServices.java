@@ -50,32 +50,27 @@ public class ConductorServices implements IConductorServices {
 
 	@Override
 	public List<Viaje> getViajesConductorByCorreo(String correoConductor) {
-		// TODO Auto-generated method stub
-		return null;
+		return conductorRepository.getViajesConductorByCorreo(correoConductor);
 	}
 
 	@Override
 	public void conductorCalificaAlPasajeroByViaje(Long idViaje, int calificacion) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void updateNombres(String correoUsuario, String nuevosNombres) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void updateApellidos(String correoUsuario, String nuevosApellidos) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void updateCelular(String correoUsuario, String celular) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

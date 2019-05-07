@@ -3,6 +3,7 @@ package edu.eci.arsw.evern.persistence.repositories;
 import org.springframework.stereotype.Repository;
 
 import edu.eci.arsw.evern.model.*;
+import java.util.*;
 
 
 @Repository
@@ -17,7 +18,6 @@ public interface IConductorRepository  extends DAO<Conductor, String> {
 	void updateCelular(String correoUsuario,String celular);
 	void updateClave(String correoUsuario, String nuevaClave);
 	void updateCalificacion(String correoUsuario, int nuevaCalificacion);
-	
-	
+	List<Viaje> getViajesConductorByCorreo(String correo); 
 	Conductor getConductorByCorreoYClave(String correoConductor, String clave);
 }

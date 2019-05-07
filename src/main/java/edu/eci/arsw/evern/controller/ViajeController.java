@@ -79,14 +79,5 @@ public class ViajeController {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	public ResponseEntity<?> getViajesDelUsuario(String correoUsuario) {
-		try {
-			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
 	
 }

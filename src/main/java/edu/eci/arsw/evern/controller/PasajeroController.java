@@ -13,15 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-
 import edu.eci.arsw.evern.model.Pasajero;
-import edu.eci.arsw.evern.model.Viaje;
-import edu.eci.arsw.evern.persistence.repositories.IAutomovilRepository;
-import edu.eci.arsw.evern.persistence.repositories.IComentarioRepository;
-import edu.eci.arsw.evern.persistence.repositories.IConductorRepository;
-import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
-import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
+import edu.eci.arsw.evern.model.Login;
 import edu.eci.arsw.evern.services.contracts.IPasajerosServices;
 
 @RestController
@@ -100,6 +93,19 @@ public class PasajeroController{
 				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>(pasajero,HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Login login){
+		try {
+			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(login.getCorreo(), login.getClave());
+			if(pasajero.getCorreo()==null) {
+				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}

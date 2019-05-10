@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Conductor;
-import edu.eci.arsw.evern.model.Pasajero;
+import edu.eci.arsw.evern.model.Login;
 import edu.eci.arsw.evern.services.contracts.IAutomovilServices;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
 
@@ -98,5 +98,19 @@ public class ConductorController {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Login login){
+		try {
+			Conductor conductor = conductorServices.getConductorByCorreoYClave(login.getCorreo(), login.getClave());
+			if(conductor.getCorreo()==null) {
+				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>("OK",HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
+
 
 }

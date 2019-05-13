@@ -1,7 +1,6 @@
 package edu.eci.arsw.evern.persistence;
 
 import java.util.List;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

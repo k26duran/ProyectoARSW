@@ -5,10 +5,13 @@ import java.util.List;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import edu.eci.arsw.evern.controller.EvernException;
 import edu.eci.arsw.evern.model.*;
 import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 
@@ -18,12 +21,12 @@ public class  ViajeRepository implements  IViajeRepository {
 		
 
 	@Override
-	public List<Viaje> findAll() {
+	public List<Viaje> findAll() throws EvernException {
 		String query = "SELECT * FROM viaje;";
-		System.out.println("CONSULTAR TODOS LOS VIAJES -> "+query);
 		List<Viaje> viajes = new ArrayList<>();
+		Connection connection = null;
 		try {
-			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -44,20 +47,27 @@ public class  ViajeRepository implements  IViajeRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 			return viajes;
-		} catch (Exception e) {	
-			throw new RuntimeException(e);
-		}	
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
+		}
 	}
 
 	@Override
-	public Viaje find(Long id) {
+	public Viaje find(Long id) throws EvernException {
 		//String query = "SELECT * FROM viaje WHERE id="+id.toString()+";";
 		String query = "SELECT * FROM viaje, automovil WHERE id="+id.toString()+" AND placa_automovil=placa;";
-		System.out.println("CONSULTAR VIAJE -> "+query);
 		Viaje viaje = new Viaje();
 		Automovil automovil = new Automovil();
+		
+		Connection connection = null;
 		try {
-			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -82,58 +92,75 @@ public class  ViajeRepository implements  IViajeRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 			return viaje;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}	
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
+		}
 	}
 
 	@Override
-	public Long save(Viaje entity) {
+	public Long save(Viaje entity) throws EvernException {
 		String query =String.format("insert into  viaje(aceptado,calificacion_al_conductor,calificacion_al_pasajero,"
 											+ "correo_conductor,correo_pasajero,costo,fecha,lugar_destino,lugar_origen,tiempo)"+
 				"values(false,0,0,null,'%s',%d,now(),'%s','%s',0);",entity.getCorreoPasajero(),
 						entity.getCosto(),entity.getLugarDestino(),entity.getLugarOrigen());
-		System.out.println(query);
+		
+		Connection connection = null;
 		try {
-			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
 			RepositoryDataBases.dataSource().close();
 			connection.close();
-			return (long) 200;
-		} catch (Exception e) {	
-			throw new RuntimeException(e);
+			return entity.getId();
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
 		}
 	}
 
 	@Override
 	public void update(Viaje viaje) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void delete(Viaje viaje) {
+	public void delete(Viaje viaje) throws EvernException {
 		String query = "DELETE FROM viaje WHERE id="+viaje.getId().toString()+";";
-		System.out.println("QUERY ELIMINAR VIAJE -> "+query);
+		Connection connection = null;
 		try {
-			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
 			RepositoryDataBases.dataSource().close();
 			connection.close();
-		} catch (Exception e) {	
-			throw new RuntimeException(e);
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
 		}
 	}
 
 	@Override
-	public List<Comentario> getComentariosByViaje(Long idViaje) {
+	public List<Comentario> getComentariosByViaje(Long idViaje) throws EvernException {
 		String query = "SELECT c.* FROM viaje as v, comentario as c WHERE v.id="+
 				idViaje.toString()+" AND c.viaje_id=v.id;";
+		Connection connection = null;
 		try {
-			Connection connection = RepositoryDataBases.dataSource().getConnection();
+			connection = RepositoryDataBases.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -148,15 +175,36 @@ public class  ViajeRepository implements  IViajeRepository {
 			RepositoryDataBases.dataSource().close();
 			connection.close();
 			return comentarios;
-		} catch (Exception e) {	
-			throw new RuntimeException(e);
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
 		}
 	}
 
 	@Override
-	public void remove(Long pkEntity) {
-		// TODO Auto-generated method stub
-		
+	public void remove(Long pkEntity) throws EvernException {
+		String query = "DELETE FROM viaje WHERE id="+pkEntity.toString()+";";
+		Connection connection = null;
+		try {
+			connection = RepositoryDataBases.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(query);
+			RepositoryDataBases.dataSource().close();
+			connection.close();
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
+		}
 	}
 
 }

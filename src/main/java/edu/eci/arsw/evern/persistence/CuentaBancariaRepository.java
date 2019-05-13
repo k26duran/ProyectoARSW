@@ -1,19 +1,9 @@
 package edu.eci.arsw.evern.persistence;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
 import edu.eci.arsw.evern.model.*;
 import edu.eci.arsw.evern.persistence.repositories.ICuentaBancariaRepository;
 

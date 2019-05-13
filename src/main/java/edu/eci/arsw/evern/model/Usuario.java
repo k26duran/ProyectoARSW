@@ -28,6 +28,7 @@ public class Usuario {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.celular=celular;
+		this.clave = clave;
 	}
 
 	public List<CuentaBancaria> getCuentasBancarias() {

@@ -1,18 +1,13 @@
 package edu.eci.arsw.evern.services;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import edu.eci.arsw.evern.model.Pasajero;
 import edu.eci.arsw.evern.model.Viaje;
-import edu.eci.arsw.evern.persistence.PasajeroRepository;
 import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
-import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IPasajerosServices;
 
 

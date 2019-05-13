@@ -5,26 +5,18 @@ import java.util.List;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
-import edu.eci.arsw.evern.model.*;
+import edu.eci.arsw.evern.model.Pasajero;
+import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
 
 @Component
 @Qualifier("PasajeroRepository")
 public class PasajeroRepository implements  IPasajeroRepository {
-	
 	
 	@Override
 	public List<Pasajero> findAll() {

@@ -5,5 +5,7 @@ import org.springframework.http.HttpStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends Exception{
+
+    private static final long serialVersionUID = 1L;
     
 }

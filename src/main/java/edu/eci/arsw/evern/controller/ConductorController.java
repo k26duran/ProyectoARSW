@@ -3,37 +3,60 @@ package edu.eci.arsw.evern.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.model.Login;
 import edu.eci.arsw.evern.services.contracts.IAutomovilServices;
 import edu.eci.arsw.evern.services.contracts.IConductorServices;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RestController
 @RequestMapping(value = "v1/conductores")
+@CrossOrigin(value = "*")
 public class ConductorController {
 
 	@Autowired
 	IConductorServices conductorServices;
 	@Autowired
 	IAutomovilServices automovilesServices;
+
+	//private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getConductores() {
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Login login){
 		try {
-			return new ResponseEntity<>(conductorServices.getConductores(), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+			//login.setClave(bCryptPasswordEncoder.encode(login.getClave()));
+			Conductor conductor = conductorServices.getConductorByCorreoYClave(login.getCorreo(),
+				login.getClave());
+			if(conductor.getCorreo()==null) {
+				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>("OK",HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
 
-	
+	@PostMapping("/signup")
+	public ResponseEntity<?> signup(@RequestBody Conductor conductor) {
+		try {
+			//conductor.setClave(bCryptPasswordEncoder.encode(conductor.getClave()));
+			String registrarAutomovil = automovilesServices.createAutomovil(conductor.getAutomovil());
+			if(registrarAutomovil == null) {
+				return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>(conductorServices.createConductor(conductor),HttpStatus.CREATED);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@GetMapping("/{correo}")
 	public ResponseEntity<?> getConductorByCorreo(@PathVariable String correo) {
 		try {		
@@ -41,7 +64,6 @@ public class ConductorController {
 			return new ResponseEntity<>(conductorServices.getConductorByCorreo(correo), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.NOT_FOUND);
-
 		}
 	}
 	
@@ -60,21 +82,6 @@ public class ConductorController {
 		}
 	}
 
-	@PostMapping("/saveConductor")
-	public ResponseEntity<?> postSaveConductor(@RequestBody Conductor conductor) {
-		try {
-			//System.out.println("------ VAMOS A REGISTRAR UN CONDUCTOR ---------");
-			System.out.println(conductor);
-			String registrarAutomovil = automovilesServices.createAutomovil(conductor.getAutomovil());
-			if(registrarAutomovil == null) {
-				return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
-			}
-			return new ResponseEntity<>(conductorServices.createConductor(conductor),HttpStatus.CREATED);
-		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
-		}
-	}
-	
 	@PostMapping("/aceptarViaje/{idViaje}")
 	public ResponseEntity<?> apartarViajeConductor(@RequestBody Conductor conductor ,@PathVariable Long idViaje) {
 		try {
@@ -85,32 +92,4 @@ public class ConductorController {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@GetMapping("/{correo}/{clave}")
-	public ResponseEntity<?> loginConductor(@PathVariable String correo, @PathVariable String clave){
-		try {
-			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
-			if(conductor.getCorreo()==null) {
-				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-			}
-			return new ResponseEntity<>(conductor,HttpStatus.OK);
-		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody Login login){
-		try {
-			Conductor conductor = conductorServices.getConductorByCorreoYClave(login.getCorreo(), login.getClave());
-			if(conductor.getCorreo()==null) {
-				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-			}
-			return new ResponseEntity<>("OK",HttpStatus.OK);
-		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-		}
-	}
-
-
 }

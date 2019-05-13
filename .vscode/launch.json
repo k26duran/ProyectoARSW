@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - EvernApplication",
+            "request": "launch",
+            "mainClass": "edu.eci.arsw.evern.EvernApplication",
+            "projectName": "enerv"
+        }
+    ]
+}

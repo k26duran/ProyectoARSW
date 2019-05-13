@@ -2,7 +2,6 @@ package edu.eci.arsw.evern.services.contracts;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.evern.model.Cupon;
-import edu.eci.arsw.evern.model.Viaje;
 
 @Service
 public interface ICuponServices {

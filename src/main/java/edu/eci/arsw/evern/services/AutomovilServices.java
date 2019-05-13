@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.evern.model.Automovil;
 import edu.eci.arsw.evern.persistence.repositories.IAutomovilRepository;
-import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IAutomovilServices;
 
 @Component

@@ -5,13 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import edu.eci.arsw.evern.model.Automovil;
 import edu.eci.arsw.evern.model.Comentario;
-import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.model.Viaje;
-import edu.eci.arsw.evern.persistence.ViajeRepository;
 import edu.eci.arsw.evern.persistence.repositories.*;
 import edu.eci.arsw.evern.services.contracts.IViajeServices;
 

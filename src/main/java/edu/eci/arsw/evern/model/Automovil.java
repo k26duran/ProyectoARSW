@@ -2,9 +2,6 @@ package edu.eci.arsw.evern.model;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 public class Automovil implements Serializable{
 
 	private String placa;
@@ -58,6 +55,4 @@ public class Automovil implements Serializable{
 	public String toString() {
 		return "Automovil [placa=" + placa + ", modelo=" + modelo + ", color=" + color + ", tipo=" + tipo + "]";
 	}
-
-
 }

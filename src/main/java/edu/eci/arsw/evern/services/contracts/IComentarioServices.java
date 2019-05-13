@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import edu.eci.arsw.evern.model.Comentario;
-import edu.eci.arsw.evern.model.Viaje;
 
 @Service
 public interface IComentarioServices {

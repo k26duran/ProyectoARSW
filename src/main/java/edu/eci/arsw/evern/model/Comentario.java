@@ -14,8 +14,7 @@ public class Comentario implements Serializable {
 	private String fecha = (new Date()).toString(); //dd-mm-yy
     private String correoAutor;
 	
-    public Comentario() {
-    }
+    public Comentario() {}
 
 	public Comentario(long id, String contenido, String fecha, String correoAutor) {
 		this.id = id;

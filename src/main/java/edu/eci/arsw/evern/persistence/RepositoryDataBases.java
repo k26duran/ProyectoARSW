@@ -2,19 +2,9 @@ package edu.eci.arsw.evern.persistence;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
 import org.apache.commons.dbcp.BasicDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
 @Component
 public class RepositoryDataBases {

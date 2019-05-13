@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.services.contracts.IViajeServices;
-import java.util.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 

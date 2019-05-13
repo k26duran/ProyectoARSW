@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import edu.eci.arsw.evern.model.Comentario;
 import edu.eci.arsw.evern.persistence.repositories.IComentarioRepository;
-import edu.eci.arsw.evern.persistence.repositories.IViajeRepository;
 import edu.eci.arsw.evern.services.contracts.IComentarioServices;
 
 

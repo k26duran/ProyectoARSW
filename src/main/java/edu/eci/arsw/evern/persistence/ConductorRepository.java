@@ -37,7 +37,6 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setNombres(rs.getString("nombres"));
 				conductor.setCelular(rs.getString("celular"));
 				conductor.setCorreo(rs.getString("correo"));
-				conductor.setClave(rs.getString("clave"));
 				conductors.add(conductor);
 			}
 			connection.close();
@@ -67,8 +66,11 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setApellidos(rs.getString("apellidos"));
 				conductor.setNombres(rs.getString("nombres"));
 				conductor.setCelular(rs.getString("celular"));
-				conductor.setCorreo(rs.getString("correo"));		
-				conductor.setClave(rs.getString("clave"));
+				conductor.setCorreo(rs.getString("correo"));
+				conductor.setFechaNacimiento(rs.getString("fecha_nacimiento"));
+				conductor.setCalificacion(rs.getInt("calificacion"));
+				conductor.setCasa(rs.getString("casa"));
+				
 				automovil.setModelo(rs.getString("modelo"));
 				automovil.setPlaca(rs.getString("placa"));
 				automovil.setTipo(rs.getString("tipo"));
@@ -90,9 +92,9 @@ public class  ConductorRepository implements IConductorRepository {
 	@Override
 	public String save(Conductor entity) throws EvernException {
 		 	String FK_CONDUCTOR_AUTO  = (entity.getAutomovil()!= null) ? "'"+entity.getAutomovil().getPlaca()+"'" : "null" ; 
-			String query = "INSERT INTO conductor(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento , automovil_id)"
+			String query = "INSERT INTO conductor(nombres, apellidos , calificacion , celular , clave  , correo , fecha_nacimiento , automovil_id, casa)"
 			 +"values ('"+entity.getNombres()+"','"+entity.getApellidos()+"',0,'"+entity.getCelular()+"','"+entity.getClave()+"','"
-					+entity.getCorreo()+"',null,"+FK_CONDUCTOR_AUTO+");";
+					+entity.getCorreo()+"',null,"+FK_CONDUCTOR_AUTO+", '"+entity.getCasa()+"');";
 			Connection connection = null;
 			try {
 				connection = database.dataSource().getConnection();
@@ -289,6 +291,28 @@ public class  ConductorRepository implements IConductorRepository {
 	}
 	
 	@Override
+	public void updateCasa(String correoUsuario, String nuevaCasa) throws EvernException {
+		String sql = "UPDATE conductor"+
+				" SET casa='"+nuevaCasa+"'"+
+				" WHERE correo='"+correoUsuario+"';";
+		Connection connection = null;
+		try {
+			connection = database.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			connection.close();
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
+		}
+	}
+	
+	@Override
 	public void updateCalificacion(String correoUsuario, int nuevaCalificacion) throws EvernException {
 		String sql = "UPDATE conductor"+
 				" SET calificacion='"+String.valueOf(nuevaCalificacion)+"'"+
@@ -396,5 +420,7 @@ public class  ConductorRepository implements IConductorRepository {
 			}
 		}
 	}
+
+	
 	
 }

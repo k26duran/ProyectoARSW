@@ -19,7 +19,9 @@ public class Usuario {
 	private int calificacion = 0;
 	private List<CuentaBancaria> cuentasBancarias = new ArrayList<CuentaBancaria>();
 	private List<Viaje> viajes = new ArrayList<Viaje>();
-	
+	private String fechaNacimiento;
+	private String casa;
+
 	public Usuario() {
 	}
 
@@ -99,6 +101,22 @@ public class Usuario {
 		return "usuario";
 	}
 	
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	public String getCasa() {
+		return casa;
+	}
+
+	public void setCasa(String casa) {
+		this.casa = casa;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [correo=" + correo + ", clave=" + clave + ", nombres=" + nombres + ", apellidos=" + apellidos

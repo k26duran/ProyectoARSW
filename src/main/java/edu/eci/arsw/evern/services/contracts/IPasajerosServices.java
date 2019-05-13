@@ -27,6 +27,7 @@ public interface IPasajerosServices {
 	void updateCelular(String correoUsuario,String celular) throws EvernException ;
 	void updateClave(String correoUsuario, String nuevaClave) throws EvernException ;
 	void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException ;
+	void updateCasa(String correoUsuario, String nuevaCasa) throws EvernException;
 	
 	Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave) throws EvernException ;
 	

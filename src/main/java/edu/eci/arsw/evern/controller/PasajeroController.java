@@ -204,5 +204,25 @@ public class PasajeroController{
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
+	 
+	 @RequestMapping(value = "/update/casa")
+	 public ResponseEntity<?> updateCasaPasajero(@RequestBody Object json){
+		try {
+			String jsonInString = mapper.writeValueAsString(json);
+			JSONObject jsonObj = new JSONObject(jsonInString);
+			
+			String correo = jsonObj.getString("correo");
+			String clave = jsonObj.getString("clave");
+			String nuevaCasa = jsonObj.getString("nuevaCasa");
+			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
+			if(pasajero.getCorreo() == null) {
+				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+			}
+			pasajerosServices.updateCasa(correo, nuevaCasa);
+			return new ResponseEntity<>("OK",HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

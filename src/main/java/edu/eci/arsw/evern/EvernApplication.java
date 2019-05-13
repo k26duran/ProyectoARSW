@@ -19,8 +19,6 @@ public class EvernApplication {
 	}*/
 
 	public static void main(String[] args) {
-		long expiration = 000_000_060;
-		System.out.println("FECHA DE EXPIFRACION ->"+new Date(System.currentTimeMillis()+expiration));
 		SpringApplication.run(EvernApplication.class, args);
 	}
 

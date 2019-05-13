@@ -22,8 +22,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	
 	@Autowired
 	private RepositoryDataBases database;
-	
-	
+	 
 	@Override
 	public List<Pasajero> findAll() throws EvernException {
 		String query = "SELECT * FROM pasajero;";
@@ -39,6 +38,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setNombres(rs.getString("nombres"));
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));
+				pasajero.setClave(rs.getString("fecha_nacimiento"));
 				pasajeros.add(pasajero);
 			}
 			connection.close();
@@ -57,6 +57,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public Pasajero find(String correo) throws EvernException {
 		String query = "SELECT * FROM pasajero p where p.correo = '"+correo+"';";
+		System.err.println(query);
 		Connection connection = null;
 		Pasajero pasajero = new Pasajero();
 		try {
@@ -67,7 +68,9 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setApellidos(rs.getString("apellidos"));
 				pasajero.setNombres(rs.getString("nombres"));
 				pasajero.setCelular(rs.getString("celular"));
-				pasajero.setCorreo(rs.getString("correo"));		
+				pasajero.setCorreo(rs.getString("correo"));
+				pasajero.setCalificacion(rs.getInt("calificacion"));
+				pasajero.setCasa(rs.getString("casa"));
 			}
 			connection.close();
 			return pasajero;
@@ -109,9 +112,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 
 	@Override
 	public String save(Pasajero pasajero) throws EvernException {
-		String query = "INSERT INTO pasajero(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento)"
+		String query = "INSERT INTO pasajero(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento, casa)"
 		 +"values ('"+pasajero.getNombres()+"','"+pasajero.getApellidos()+"',0,'"+pasajero.getCelular()+"','"+pasajero.getClave()+"','"
-				+pasajero.getCorreo()+"',null);";
+				+pasajero.getCorreo()+"',null,'"+pasajero.getCasa()+"');";
+		System.err.println("SAVE PASAJERO");
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
@@ -281,6 +285,28 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	public void updateFechaNacimiento(String correoUsuario, String nuevaFechaNacimiento) throws EvernException {
 		String sql = "UPDATE pasajero"+
 				" SET fecha_nacimiento='"+nuevaFechaNacimiento+"'"+
+				" WHERE correo='"+correoUsuario+"';";
+		Connection connection = null;
+		try {
+			connection = database.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			connection.close();
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
+		}
+	}
+	
+	@Override
+	public void updateCasa(String correoUsuario, String nuevaCasa) throws EvernException {
+		String sql = "UPDATE pasajero"+
+				" SET casa='"+nuevaCasa+"'"+
 				" WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {

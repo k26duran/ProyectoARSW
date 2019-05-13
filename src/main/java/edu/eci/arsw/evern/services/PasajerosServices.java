@@ -85,5 +85,10 @@ public class PasajerosServices  implements  IPasajerosServices {
 	public void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException {
 		pasajeroRepository.updateFechaNacimiento(correoUsuario, nuevaClave);
 	}
+
+	@Override
+	public void updateCasa(String correoUsuario, String nuevaCasa) throws EvernException {
+		pasajeroRepository.updateCasa(correoUsuario, nuevaCasa);
+	}
 	
 }

@@ -88,9 +88,16 @@ public class ConductorServices implements IConductorServices {
 	}
 	
 	@Override
+	public void updateCasa(String correoUsuario, String nuevaCasa) throws EvernException {
+		conductorRepository.updateCasa(correoUsuario, nuevaCasa);
+	}
+	
+	@Override
 	public void aceptarViajeConductor(Conductor conductor, Long idViaje) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

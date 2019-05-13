@@ -19,6 +19,7 @@ public interface IPasajeroRepository  extends DAO<Pasajero, String> {
 	void updateClave(String correoUsuario, String nuevaClave) throws EvernException;
 	void updateCalificacion(String correoUsuario, int nuevaCalificacion) throws EvernException;
 	void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException;
+	void updateCasa(String correoUsuario, String nuevaCasa) throws EvernException;
 	
 	Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave) throws EvernException;
 	

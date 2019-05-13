@@ -3,6 +3,8 @@ package edu.eci.arsw.evern.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import edu.eci.arsw.evern.controller.EvernException;
 import edu.eci.arsw.evern.model.CuentaBancaria;
 import edu.eci.arsw.evern.persistence.repositories.ICuentaBancariaRepository;
 import edu.eci.arsw.evern.services.contracts.ICuentaBancariaServices;
@@ -16,12 +18,12 @@ public class CuentaBancariaServices  implements ICuentaBancariaServices {
 	private ICuentaBancariaRepository cuentaBancRepository;
 
 	@Override
-	public Long createCuentaBancaria(CuentaBancaria cuentaBancaria) {
+	public Long createCuentaBancaria(CuentaBancaria cuentaBancaria) throws EvernException  {
 		return cuentaBancRepository.save(cuentaBancaria);
 	}
 
 	@Override
-	public void deleteCuentaBancaria(CuentaBancaria cuentaBancaria) {
+	public void deleteCuentaBancaria(CuentaBancaria cuentaBancaria) throws EvernException {
 		cuentaBancRepository.update(cuentaBancaria);
 	}
 

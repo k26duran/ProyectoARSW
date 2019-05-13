@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import edu.eci.arsw.evern.controller.EvernException;
 import edu.eci.arsw.evern.model.*;
 
 @Repository
 public interface IViajeRepository extends DAO<Viaje,Long>{
 
 	
-	List<Comentario> getComentariosByViaje(Long idViaje);
+	List<Comentario> getComentariosByViaje(Long idViaje) throws EvernException;
 	
 }

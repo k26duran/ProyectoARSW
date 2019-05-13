@@ -4,27 +4,28 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import edu.eci.arsw.evern.controller.EvernException;
 import edu.eci.arsw.evern.model.*;
 
 @Service
 public interface IConductorServices {
 	
 
-	String createConductor(Conductor conductor);
-	void updateConductor(Conductor conductor);
-	void deleteConductor(Conductor conductor);
+	String createConductor(Conductor conductor) throws EvernException ;
+	void updateConductor(Conductor conductor) throws EvernException ;
+	void deleteConductor(Conductor conductor) throws EvernException ;
 	
-	List<Conductor> getConductores();
-	Conductor getConductorByCorreo(String correo);
-	List<Viaje> getViajesConductorByCorreo(String correoConductor);
+	List<Conductor> getConductores() throws EvernException ;
+	Conductor getConductorByCorreo(String correo) throws EvernException ;
+	List<Viaje> getViajesConductorByCorreo(String correoConductor) throws EvernException ;
 	
-	void conductorCalificaAlPasajeroByViaje(Long idViaje, int calificacion);
-	void updateNombres(String correoUsuario, String nuevosNombres);
-	void updateApellidos(String correoUsuario, String nuevosApellidos);
-	void updateCelular(String correoUsuario,String celular);
-	void updateClave(String correoUsuario, String nuevaClave);
+	void conductorCalificaAlPasajeroByViaje(Long idViaje, int calificacion) throws EvernException ;
+	void updateNombres(String correoUsuario, String nuevosNombres) throws EvernException ;
+	void updateApellidos(String correoUsuario, String nuevosApellidos) throws EvernException ;
+	void updateCelular(String correoUsuario,String celular) throws EvernException ;
+	void updateClave(String correoUsuario, String nuevaClave) throws EvernException ;
 	
-	void aceptarViajeConductor(Conductor conductor, Long idViaje);
-	Conductor getConductorByCorreoYClave(String correoConductor, String clave);
+	void aceptarViajeConductor(Conductor conductor, Long idViaje) throws EvernException ;
+	Conductor getConductorByCorreoYClave(String correoConductor, String clave) throws EvernException;
 
 }

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.eci.arsw.evern.model.Automovil;
 import edu.eci.arsw.evern.model.Conductor;
@@ -13,12 +14,19 @@ import edu.eci.arsw.evern.model.Viaje;
 import edu.eci.arsw.evern.persistence.ConductorRepository;
 import edu.eci.arsw.evern.persistence.PasajeroRepository;
 import edu.eci.arsw.evern.persistence.ViajeRepository;
+import edu.eci.arsw.evern.services.ConductorServices;
+import edu.eci.arsw.evern.services.PasajerosServices;
 
 public class EnervTest {
 	
+	@Autowired
+	PasajerosServices pasajeroServices;
+	@Autowired
+	ConductorServices conductorServices;
+	
 	@Test
 	public void savePasajeroConViajes() {
-		/*PasajeroRepository pr= new PasajeroRepository();
+		/*
 		Pasajero p= new Pasajero("prueba5@correo", "prueba1", "prueba", "1283", "123");
 		Pasajero p1= new Pasajero("prueba4@correo", "prueba1", "prueba", "22333", "123");
 		Pasajero p2= new Pasajero("prueba3@correo", "prueba1", "prueba", "222222", "123");
@@ -30,9 +38,7 @@ public class EnervTest {
 		List<Viaje> viajes = p.getViajes();
 		viajes.add(v);
 		p.setViajes(viajes);
-		assertNotNull(pr.getViajesPasajeroByCorreo(p.getCorreo()));
-		assertNotNull(pr.findAll());*/
-		
+		assertNotNull(pr.getViajesPasajeroByCorreo(p.getCorreo()));*/
 	}
 	
 	@Test

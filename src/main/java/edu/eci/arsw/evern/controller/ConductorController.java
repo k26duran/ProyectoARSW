@@ -98,7 +98,7 @@ public class ConductorController {
 		}
 	}
 	
-	 @RequestMapping(value = "/update/clave")
+	@PostMapping(value = "/update/clave")
 	 public ResponseEntity<?> updateClavePasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -120,7 +120,7 @@ public class ConductorController {
 		}
 	}
 
-	 @RequestMapping(value = "/update/celular")
+	 @PostMapping(value = "/update/celular")
 	 public ResponseEntity<?> updateCelularPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -141,7 +141,7 @@ public class ConductorController {
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/nombres")
+	 @PostMapping(value = "/update/nombres")
 	 public ResponseEntity<?> updateNombresPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -162,7 +162,7 @@ public class ConductorController {
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/apellidos")
+	 @PostMapping(value = "/update/apellidos")
 	 public ResponseEntity<?> updateApellidosPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -183,7 +183,7 @@ public class ConductorController {
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/fechaNacimiento")
+	 @PostMapping(value = "/update/fechaNacimiento")
 	 public ResponseEntity<?> updateFechaNacimientoPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -198,6 +198,27 @@ public class ConductorController {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
 			conductorServices.updateFechaNacimiento(correo, nuevaFechaNacimiento);
+			return new ResponseEntity<>("OK",HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+		}
+	}
+	 
+	 @RequestMapping(value = "/update/casa")
+	 public ResponseEntity<?> updateCasaPasajero(@RequestBody Object json){
+		try {
+			String jsonInString = mapper.writeValueAsString(json);
+			JSONObject jsonObj = new JSONObject(jsonInString);
+			
+			String correo = jsonObj.getString("correo");
+			String clave = jsonObj.getString("clave");
+			String nuevaCasa = jsonObj.getString("nuevaCasa");
+			
+			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
+			if(conductor.getCorreo() == null) {
+				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+			}
+			conductorServices.updateCasa(correo, nuevaCasa);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);

@@ -100,7 +100,9 @@ public class PasajeroController{
 	}
 	
 	
-	 @RequestMapping(value = "/update/clave")
+	
+	
+	@PostMapping(value = "/update/clave")
 	 public ResponseEntity<?> updateClavePasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -121,7 +123,7 @@ public class PasajeroController{
 		}
 	}
 
-	 @RequestMapping(value = "/update/celular")
+	 @PostMapping(value = "/update/celular")
 	 public ResponseEntity<?> updateCelularPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -142,7 +144,7 @@ public class PasajeroController{
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/nombres")
+	 @PostMapping(value = "/update/nombres")
 	 public ResponseEntity<?> updateNombresPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -163,7 +165,7 @@ public class PasajeroController{
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/apellidos")
+	 @PostMapping(value = "/update/apellidos")
 	 public ResponseEntity<?> updateApellidosPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -184,7 +186,7 @@ public class PasajeroController{
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/fechaNacimiento")
+	 @PostMapping(value = "/update/fechaNacimiento")
 	 public ResponseEntity<?> updateFechaNacimientoPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
@@ -205,7 +207,7 @@ public class PasajeroController{
 		}
 	}
 	 
-	 @RequestMapping(value = "/update/casa")
+	 @PostMapping(value = "/update/casa")
 	 public ResponseEntity<?> updateCasaPasajero(@RequestBody Object json){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);

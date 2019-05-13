@@ -17,6 +17,8 @@ public interface IConductorRepository  extends DAO<Conductor, String> {
 	void updateCelular(String correoUsuario,String celular) throws EvernException;
 	void updateClave(String correoUsuario, String nuevaClave) throws EvernException;
 	void updateCalificacion(String correoUsuario, int nuevaCalificacion) throws EvernException;
+	void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException;	
+	
 	List<Viaje> getViajesConductorByCorreo(String correo) throws EvernException; 
 	Conductor getConductorByCorreoYClave(String correoConductor, String clave) throws EvernException;
 }

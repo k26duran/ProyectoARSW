@@ -24,6 +24,7 @@ public interface IConductorServices {
 	void updateApellidos(String correoUsuario, String nuevosApellidos) throws EvernException ;
 	void updateCelular(String correoUsuario,String celular) throws EvernException ;
 	void updateClave(String correoUsuario, String nuevaClave) throws EvernException ;
+	void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException ;
 	
 	void aceptarViajeConductor(Conductor conductor, Long idViaje) throws EvernException ;
 	Conductor getConductorByCorreoYClave(String correoConductor, String clave) throws EvernException;

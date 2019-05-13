@@ -63,32 +63,34 @@ public class ConductorServices implements IConductorServices {
 	}
 
 	@Override
-	public void updateNombres(String correoUsuario, String nuevosNombres) {
-		// TODO Auto-generated method stub
+	public void updateNombres(String correoUsuario, String nuevosNombres) throws EvernException {
+		conductorRepository.updateNombres(correoUsuario, nuevosNombres);
 	}
 
 	@Override
-	public void updateApellidos(String correoUsuario, String nuevosApellidos) {
-		// TODO Auto-generated method stub
+	public void updateApellidos(String correoUsuario, String nuevosApellidos) throws EvernException {
+		conductorRepository.updateApellidos(correoUsuario, nuevosApellidos);
 	}
 
 	@Override
-	public void updateCelular(String correoUsuario, String celular) {
-		// TODO Auto-generated method stub
+	public void updateCelular(String correoUsuario, String celular) throws EvernException {
+		conductorRepository.updateCelular(correoUsuario, celular);
 	}
 
 	@Override
-	public void updateClave(String correoUsuario, String nuevaClave) {
-		// TODO Auto-generated method stub
-		
+	public void updateClave(String correoUsuario, String nuevaClave) throws EvernException {
+		conductorRepository.updateClave(correoUsuario, nuevaClave);
 	}
 
+	@Override
+	public void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException {
+		conductorRepository.updateFechaNacimiento(correoUsuario, nuevaClave);
+	}
+	
 	@Override
 	public void aceptarViajeConductor(Conductor conductor, Long idViaje) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 
 }

@@ -49,4 +49,6 @@ public class ViajeServices implements  IViajeServices {
 		return viajeRepository.getComentariosByViaje(idViaje);
 	}
 	
+	
+	
 }

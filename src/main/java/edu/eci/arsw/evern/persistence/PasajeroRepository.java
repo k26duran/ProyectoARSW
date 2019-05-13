@@ -170,8 +170,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public void pasajeroCalificaAlConductorByViaje(Long idViaje, int calificacion) throws EvernException {
 		String sql = "UPDATE viaje"+
-				"SET calificacion_al_conductor="+String.valueOf(calificacion)+
-				"WHERE id="+idViaje.toString()+";";
+				" SET calificacion_al_conductor="+String.valueOf(calificacion)+
+				" WHERE id="+idViaje.toString()+";";
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
@@ -192,8 +192,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public void updateNombres(String correoUsuario, String nuevosNombres) throws EvernException {
 		String sql = "UPDATE pasajero"+
-				"SET nombres='"+nuevosNombres+"'"+
-				"WHERE correo='"+correoUsuario+"';";
+				" SET nombres='"+nuevosNombres+"'"+
+				" WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
@@ -214,8 +214,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public void updateApellidos(String correoUsuario, String nuevosApellidos) throws EvernException {
 		String sql = "UPDATE pasajero"+
-				"SET apellidos='"+nuevosApellidos+"'"+
-				"WHERE correo='"+correoUsuario+"';";
+				" SET apellidos='"+nuevosApellidos+"'"+
+				" WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
@@ -236,8 +236,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public void updateCelular(String correoUsuario, String nuevoCelular) throws EvernException {
 		String sql = "UPDATE pasajero"+
-				"SET celular='"+nuevoCelular+"'"+
-				"WHERE correo='"+correoUsuario+"';";
+				" SET celular='"+nuevoCelular+"'"+
+				" WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
@@ -258,8 +258,30 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public void updateClave(String correoUsuario, String nuevaClave) throws EvernException {
 		String sql = "UPDATE pasajero"+
-				"SET clave='"+nuevaClave+"'"+
-				"WHERE correo='"+correoUsuario+"';";
+				" SET clave='"+nuevaClave+"'"+
+				" WHERE correo='"+correoUsuario+"';";
+		Connection connection = null;
+		try {
+			connection = database.dataSource().getConnection();
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			connection.close();
+		} catch(Exception e) {
+			throw new EvernException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new EvernException("Failed to close connection");
+			}
+		}
+	}
+	
+	@Override
+	public void updateFechaNacimiento(String correoUsuario, String nuevaFechaNacimiento) throws EvernException {
+		String sql = "UPDATE pasajero"+
+				" SET fecha_nacimiento='"+nuevaFechaNacimiento+"'"+
+				" WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
@@ -280,8 +302,8 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public void updateCalificacion(String correoUsuario, int nuevaCalificacion) throws EvernException {
 		String sql = "UPDATE pasajero"+
-				"SET calificacion='"+String.valueOf(nuevaCalificacion)+"'"+
-				"WHERE correo='"+correoUsuario+"';";
+				" SET calificacion='"+String.valueOf(nuevaCalificacion)+"'"+
+				" WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();

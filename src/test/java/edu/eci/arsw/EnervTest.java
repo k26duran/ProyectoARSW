@@ -27,7 +27,7 @@ public class EnervTest {
 	public void buscarPasajeroxCorreo() {
 		String correo = "prueba0513@evern.com";
 		try {
-			pasajeroServices.getPasajeros();
+			pasajeroServices.getPasajeroByCorreo(correo);
 		} catch (EvernException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

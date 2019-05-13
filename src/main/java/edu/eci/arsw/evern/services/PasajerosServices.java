@@ -80,5 +80,10 @@ public class PasajerosServices  implements  IPasajerosServices {
 	public Pasajero getPasajeroByCorreoYClave(String correoPasajero, String clave) throws EvernException {
 		return pasajeroRepository.getPasajeroByCorreoYClave(correoPasajero, clave);
 	}
+
+	@Override
+	public void updateFechaNacimiento(String correoUsuario, String nuevaClave) throws EvernException {
+		pasajeroRepository.updateFechaNacimiento(correoUsuario, nuevaClave);
+	}
 	
 }

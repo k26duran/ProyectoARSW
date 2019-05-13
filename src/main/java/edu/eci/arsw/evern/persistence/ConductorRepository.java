@@ -1,6 +1,8 @@
 package edu.eci.arsw.evern.persistence;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +19,16 @@ import java.util.ArrayList;
 @Qualifier("ConductorRepository")
 public class  ConductorRepository implements IConductorRepository {
 	
+	@Autowired
+	private RepositoryDataBases database;
+	
 	@Override
 	public List<Conductor> findAll() throws EvernException {
 		String query = "SELECT * FROM conductor;";
 		List<Conductor> conductors = new ArrayList<>();
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -35,7 +40,7 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setClave(rs.getString("clave"));
 				conductors.add(conductor);
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return conductors;
 		} catch(Exception e) {
@@ -56,7 +61,7 @@ public class  ConductorRepository implements IConductorRepository {
 		Automovil automovil = new Automovil();
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -70,7 +75,7 @@ public class  ConductorRepository implements IConductorRepository {
 				automovil.setTipo(rs.getString("tipo"));
 				conductor.setAutomovil(automovil);
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return conductor;
 		} catch(Exception e) {
@@ -92,10 +97,10 @@ public class  ConductorRepository implements IConductorRepository {
 					+entity.getCorreo()+"',null,"+FK_CONDUCTOR_AUTO+");";
 			Connection connection = null;
 			try {
-				connection = RepositoryDataBases.dataSource().getConnection();
+				connection = database.dataSource().getConnection();
 				Statement stmt = connection.createStatement();
 				stmt.execute(query);
-				RepositoryDataBases.dataSource().close();
+				database.dataSource().close();
 				connection.close();
 				return entity.getCorreo();
 			} catch(Exception e) {
@@ -115,10 +120,10 @@ public class  ConductorRepository implements IConductorRepository {
 			String query = String.format("UPDATE viaje SET correo_conductor = '%s' , aceptado = true WHERE id = %d;",conductor.getCorreo() , idViaje); 
 			Connection connection = null;
 			try {
-				connection = RepositoryDataBases.dataSource().getConnection();
+				connection = database.dataSource().getConnection();
 				Statement stmt = connection.createStatement();
 				stmt.execute(query);
-				RepositoryDataBases.dataSource().close();
+				database.dataSource().close();
 				connection.close();
 			} catch(Exception e) {
 				throw new EvernException(e.getMessage());
@@ -141,10 +146,10 @@ public class  ConductorRepository implements IConductorRepository {
 		String query = "DELETE FROM conductor WHERE correo = '"+o.getCorreo()+"'; ";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -164,10 +169,10 @@ public class  ConductorRepository implements IConductorRepository {
 				"WHERE id="+idViaje.toString()+";";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -186,10 +191,10 @@ public class  ConductorRepository implements IConductorRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -209,10 +214,10 @@ public class  ConductorRepository implements IConductorRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -232,10 +237,10 @@ public class  ConductorRepository implements IConductorRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -255,10 +260,10 @@ public class  ConductorRepository implements IConductorRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -278,10 +283,10 @@ public class  ConductorRepository implements IConductorRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -300,7 +305,7 @@ public class  ConductorRepository implements IConductorRepository {
 		Connection connection = null;
 		Conductor conductor = new Conductor();
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -310,7 +315,7 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setCorreo(rs.getString("correo"));		
 				conductor.setClave(rs.getString("clave"));
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return conductor;
 		} catch(Exception e) {
@@ -329,10 +334,10 @@ public class  ConductorRepository implements IConductorRepository {
 		String query = "DELETE FROM conductor WHERE correo = '"+pkEntity+"'; ";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -350,7 +355,7 @@ public class  ConductorRepository implements IConductorRepository {
 		String query = "SELECT * FROM viaje v WHERE v.correo_conductor = '"+correo+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			List<Viaje> viajes = new ArrayList<Viaje>();
 			System.out.println("En viajes");
@@ -370,7 +375,7 @@ public class  ConductorRepository implements IConductorRepository {
 				viaje.setLugarOrigen(rs.getString("lugar_origen"));
 				viajes.add(viaje);
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return viajes;
 		} catch(Exception e) {

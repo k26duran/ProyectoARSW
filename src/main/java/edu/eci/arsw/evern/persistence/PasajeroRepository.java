@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +20,16 @@ import edu.eci.arsw.evern.persistence.repositories.IPasajeroRepository;
 @Qualifier("PasajeroRepository")
 public class PasajeroRepository implements  IPasajeroRepository {
 	
+	@Autowired
+	private RepositoryDataBases database;
+	
 	@Override
 	public List<Pasajero> findAll() throws EvernException {
 		String query = "SELECT * FROM pasajero;";
 		List<Pasajero> pasajeros = new ArrayList<>();
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -35,7 +40,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCorreo(rs.getString("correo"));
 				pasajeros.add(pasajero);
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return pasajeros;
 		} catch(Exception e) {
@@ -55,7 +60,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		Connection connection = null;
 		Pasajero pasajero = new Pasajero();
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -64,7 +69,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));		
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return pasajero;
 		}catch(Exception e) {
@@ -88,10 +93,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		String query = "DELETE FROM pasajero WHERE correo = '"+o.getCorreo()+"'; ";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -111,10 +116,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				+pasajero.getCorreo()+"',null);";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return pasajero.getCorreo();
 		} catch(Exception e) {
@@ -133,7 +138,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		List<Viaje> viajesPasajero = new ArrayList<>();
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -152,7 +157,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				
 				viajesPasajero.add(viaje);
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return viajesPasajero;
 		} catch(Exception e) {
@@ -173,10 +178,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				"WHERE id="+idViaje.toString()+";";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -196,10 +201,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -219,10 +224,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -242,10 +247,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -265,10 +270,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -288,10 +293,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				"WHERE correo='"+correoUsuario+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -310,7 +315,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		Connection connection = null;
 		Pasajero pasajero = new Pasajero();
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -319,7 +324,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return pasajero;
 		} catch(Exception e) {
@@ -338,10 +343,10 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		String query = "DELETE FROM pasajero WHERE correo = '"+pkEntity+"'; ";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());

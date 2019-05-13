@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +19,17 @@ import edu.eci.arsw.evern.persistence.repositories.IAutomovilRepository;
 @Qualifier("AutomovilRepository")
 public class AutomovilRepository implements IAutomovilRepository {
 
+	
+	@Autowired
+	private RepositoryDataBases database;
+	
 	@Override
 	public List<Automovil> findAll() throws EvernException {
 		String query = "SELECT * FROM automovil;";
 		List<Automovil> automoviles = new ArrayList<>();
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -34,7 +40,7 @@ public class AutomovilRepository implements IAutomovilRepository {
 				automovil.setTipo(rs.getString("tipo"));
 				automoviles.add(automovil);
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return automoviles;
 		} catch(Exception e) {
@@ -54,7 +60,7 @@ public class AutomovilRepository implements IAutomovilRepository {
 		Automovil automovil = new Automovil();
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -63,7 +69,7 @@ public class AutomovilRepository implements IAutomovilRepository {
 				automovil.setPlaca(rs.getString("placa"));
 				automovil.setTipo(rs.getString("tipo"));
 			}
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return automovil;
 		} catch(Exception e) {
@@ -85,10 +91,10 @@ public class AutomovilRepository implements IAutomovilRepository {
 		
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 			return automovil.getPlaca();
 		}  catch(Exception e) {
@@ -111,10 +117,10 @@ public class AutomovilRepository implements IAutomovilRepository {
 		String query = "DELETE FROM automovil WHERE placa='"+o.getPlaca()+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -132,10 +138,10 @@ public class AutomovilRepository implements IAutomovilRepository {
 		String query = "DELETE FROM automovil WHERE placa='"+pkEntity+"';";
 		Connection connection = null;
 		try {
-			connection = RepositoryDataBases.dataSource().getConnection();
+			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			RepositoryDataBases.dataSource().close();
+			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());

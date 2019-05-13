@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import edu.eci.arsw.evern.controller.EvernException;
 import edu.eci.arsw.evern.model.Automovil;
 import edu.eci.arsw.evern.model.Conductor;
 import edu.eci.arsw.evern.model.Pasajero;
@@ -52,6 +53,14 @@ public class EnervTest {
 		assertNotNull(cr.findAll());
 		ViajeRepository vr= new ViajeRepository();
 		assertNotNull(vr.findAll());*/
+	}
+	
+	@Test
+	public void buscarPasajeroxCorreo() {
+		String correo = "prueba0513@evern.com";
+		
+			//Pasajero Pasajero = pasajeroServices.getPasajeroByCorreo(correo);
+		assert(true);
 	}
 	
 }

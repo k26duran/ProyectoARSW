@@ -23,6 +23,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Autowired
 	private RepositoryDataBases database;
 	
+	
 	@Override
 	public List<Pasajero> findAll() throws EvernException {
 		String query = "SELECT * FROM pasajero;";
@@ -40,7 +41,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCorreo(rs.getString("correo"));
 				pasajeros.add(pasajero);
 			}
-			database.dataSource().close();
 			connection.close();
 			return pasajeros;
 		} catch(Exception e) {
@@ -69,7 +69,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));		
 			}
-			database.dataSource().close();
 			connection.close();
 			return pasajero;
 		}catch(Exception e) {
@@ -96,7 +95,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -119,7 +117,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 			return pasajero.getCorreo();
 		} catch(Exception e) {
@@ -157,7 +154,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				
 				viajesPasajero.add(viaje);
 			}
-			database.dataSource().close();
 			connection.close();
 			return viajesPasajero;
 		} catch(Exception e) {
@@ -181,7 +177,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -204,7 +199,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -227,7 +221,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -250,7 +243,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -273,7 +265,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -296,7 +287,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -324,7 +314,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));
 			}
-			database.dataSource().close();
 			connection.close();
 			return pasajero;
 		} catch(Exception e) {
@@ -346,7 +335,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());

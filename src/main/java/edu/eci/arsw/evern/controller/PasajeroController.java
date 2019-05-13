@@ -32,11 +32,13 @@ public class PasajeroController{
 			System.out.println(login);
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(login.getCorreo(),
 				login.getClave());
+			System.out.println(pasajero);
 			if(pasajero.getCorreo()==null) {
 				return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
@@ -83,5 +85,7 @@ public class PasajeroController{
 			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
 
 }

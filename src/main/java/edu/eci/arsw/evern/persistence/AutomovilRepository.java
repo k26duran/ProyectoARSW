@@ -40,7 +40,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 				automovil.setTipo(rs.getString("tipo"));
 				automoviles.add(automovil);
 			}
-			database.dataSource().close();
 			connection.close();
 			return automoviles;
 		} catch(Exception e) {
@@ -69,7 +68,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 				automovil.setPlaca(rs.getString("placa"));
 				automovil.setTipo(rs.getString("tipo"));
 			}
-			database.dataSource().close();
 			connection.close();
 			return automovil;
 		} catch(Exception e) {
@@ -94,7 +92,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 			return automovil.getPlaca();
 		}  catch(Exception e) {
@@ -120,7 +117,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -141,7 +137,6 @@ public class AutomovilRepository implements IAutomovilRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());

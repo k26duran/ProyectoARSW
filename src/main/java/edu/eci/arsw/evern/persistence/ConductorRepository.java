@@ -40,7 +40,6 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setClave(rs.getString("clave"));
 				conductors.add(conductor);
 			}
-			database.dataSource().close();
 			connection.close();
 			return conductors;
 		} catch(Exception e) {
@@ -75,7 +74,6 @@ public class  ConductorRepository implements IConductorRepository {
 				automovil.setTipo(rs.getString("tipo"));
 				conductor.setAutomovil(automovil);
 			}
-			database.dataSource().close();
 			connection.close();
 			return conductor;
 		} catch(Exception e) {
@@ -100,7 +98,6 @@ public class  ConductorRepository implements IConductorRepository {
 				connection = database.dataSource().getConnection();
 				Statement stmt = connection.createStatement();
 				stmt.execute(query);
-				database.dataSource().close();
 				connection.close();
 				return entity.getCorreo();
 			} catch(Exception e) {
@@ -123,7 +120,6 @@ public class  ConductorRepository implements IConductorRepository {
 				connection = database.dataSource().getConnection();
 				Statement stmt = connection.createStatement();
 				stmt.execute(query);
-				database.dataSource().close();
 				connection.close();
 			} catch(Exception e) {
 				throw new EvernException(e.getMessage());
@@ -149,7 +145,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -172,7 +167,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -194,7 +188,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -217,7 +210,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -240,7 +232,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -263,7 +254,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -286,7 +276,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(sql);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -315,7 +304,6 @@ public class  ConductorRepository implements IConductorRepository {
 				conductor.setCorreo(rs.getString("correo"));		
 				conductor.setClave(rs.getString("clave"));
 			}
-			database.dataSource().close();
 			connection.close();
 			return conductor;
 		} catch(Exception e) {
@@ -337,7 +325,6 @@ public class  ConductorRepository implements IConductorRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -375,7 +362,6 @@ public class  ConductorRepository implements IConductorRepository {
 				viaje.setLugarOrigen(rs.getString("lugar_origen"));
 				viajes.add(viaje);
 			}
-			database.dataSource().close();
 			connection.close();
 			return viajes;
 		} catch(Exception e) {

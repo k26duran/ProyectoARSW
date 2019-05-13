@@ -48,7 +48,6 @@ public class  ViajeRepository implements  IViajeRepository {
 				viaje.setLugarOrigen(rs.getString("lugar_origen"));
 				viajes.add(viaje);
 			}
-			database.dataSource().close();
 			connection.close();
 			return viajes;
 		} catch(Exception e) {
@@ -93,7 +92,6 @@ public class  ViajeRepository implements  IViajeRepository {
 				viaje.setAutomovil(automovil);
 				return viaje;
 			}
-			database.dataSource().close();
 			connection.close();
 			return viaje;
 		} catch(Exception e) {
@@ -119,7 +117,6 @@ public class  ViajeRepository implements  IViajeRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 			return entity.getId();
 		} catch(Exception e) {
@@ -145,7 +142,6 @@ public class  ViajeRepository implements  IViajeRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
@@ -176,7 +172,6 @@ public class  ViajeRepository implements  IViajeRepository {
 				comentario.setContenido(rs.getString("contenido"));
 				comentarios.add(comentario);
 			}
-			database.dataSource().close();
 			connection.close();
 			return comentarios;
 		} catch(Exception e) {
@@ -198,7 +193,6 @@ public class  ViajeRepository implements  IViajeRepository {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
-			database.dataSource().close();
 			connection.close();
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());

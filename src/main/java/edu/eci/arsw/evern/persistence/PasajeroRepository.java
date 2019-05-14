@@ -38,7 +38,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setNombres(rs.getString("nombres"));
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));
-				pasajero.setClave(rs.getString("fecha_nacimiento"));
+				pasajero.setFechaNacimiento(rs.getString("fecha_nacimiento"));
 				pasajeros.add(pasajero);
 			}
 			connection.close();
@@ -69,6 +69,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setNombres(rs.getString("nombres"));
 				pasajero.setCelular(rs.getString("celular"));
 				pasajero.setCorreo(rs.getString("correo"));
+				pasajero.setFechaNacimiento(rs.getString("fecha_nacimiento"));
 				pasajero.setCalificacion(rs.getInt("calificacion"));
 				pasajero.setCasa(rs.getString("casa"));
 			}

@@ -35,7 +35,6 @@ public class PasajeroController{
 	
 	ObjectMapper mapper = new ObjectMapper();
 
-
 	@Autowired
 	IPasajerosServices pasajerosServices;
 	

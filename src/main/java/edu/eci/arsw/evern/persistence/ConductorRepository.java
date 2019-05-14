@@ -74,6 +74,7 @@ public class  ConductorRepository implements IConductorRepository {
 				automovil.setModelo(rs.getString("modelo"));
 				automovil.setPlaca(rs.getString("placa"));
 				automovil.setTipo(rs.getString("tipo"));
+				automovil.setColor(rs.getString("color"));
 				conductor.setAutomovil(automovil);
 			}
 			connection.close();
@@ -385,19 +386,19 @@ public class  ConductorRepository implements IConductorRepository {
 
 	@Override
 	public List<Viaje> getViajesConductorByCorreo(String correo) throws EvernException {
-		String query = "SELECT * FROM viaje v WHERE v.correo_conductor = '"+correo+"';";
+		String query = "SELECT * FROM viaje v, automovil a"+
+		" WHERE a.placa=v.placa_automovil AND v.correo_conductor = '"+ correo+"';";
+		
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();
 			Statement stmt = connection.createStatement();
 			List<Viaje> viajes = new ArrayList<Viaje>();
-			System.out.println("En viajes");
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				Viaje viaje = new Viaje();
 				viaje.setId(rs.getLong("id"));
 				viaje.setAceptado(rs.getBoolean("aceptado"));
-				//viaje.setAutomovil();
 				viaje.setCalificacionAlConductor(rs.getInt("calificacion_al_conductor"));
 				viaje.setCalificacionAlPasajero(rs.getInt("calificacion_al_pasajero"));
 				viaje.setCorreoConductor(rs.getString("correo_conductor"));
@@ -406,6 +407,14 @@ public class  ConductorRepository implements IConductorRepository {
 				viaje.setFecha(rs.getString("fecha"));
 				viaje.setLugarDestino(rs.getString("lugar_destino"));
 				viaje.setLugarOrigen(rs.getString("lugar_origen"));
+				
+				Automovil automovil = new Automovil();
+				automovil.setPlaca(rs.getString("placa"));
+				automovil.setModelo(rs.getString("modelo"));
+				automovil.setTipo(rs.getString("tipo"));
+				automovil.setTipo(rs.getString("color"));
+				viaje.setAutomovil(automovil);
+				
 				viajes.add(viaje);
 			}
 			connection.close();

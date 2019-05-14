@@ -57,7 +57,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 	@Override
 	public Pasajero find(String correo) throws EvernException {
 		String query = "SELECT * FROM pasajero p where p.correo = '"+correo+"';";
-		System.err.println(query);
 		Connection connection = null;
 		Pasajero pasajero = new Pasajero();
 		try {
@@ -73,6 +72,7 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCalificacion(rs.getInt("calificacion"));
 				pasajero.setCasa(rs.getString("casa"));
 			}
+			System.out.println(pasajero);
 			connection.close();
 			return pasajero;
 		}catch(Exception e) {

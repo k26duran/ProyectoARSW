@@ -30,8 +30,8 @@ public class ViajeServices implements  IViajeServices {
 	}
 
 	@Override
-	public void deleteViaje(Viaje viaje) throws EvernException {
-		viajeRepository.delete(viaje);
+	public void deleteViaje(Long idviaje) throws EvernException {
+		viajeRepository.remove(idviaje);
 	}
 
 	@Override
@@ -48,7 +48,5 @@ public class ViajeServices implements  IViajeServices {
 	public List<Comentario> getComentariosByViaje(Long idViaje) throws EvernException {
 		return viajeRepository.getComentariosByViaje(idViaje);
 	}
-	
-	
 	
 }

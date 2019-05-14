@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 public class Conductor extends Usuario implements Serializable {
 
-
     private Automovil automovil;
 
     public Conductor() {}
@@ -28,7 +27,6 @@ public class Conductor extends Usuario implements Serializable {
     public void setAutomovil(Automovil automovil) {
         this.automovil = automovil;
     }
-
     
     @Override
     public String getTipoUsuario() {

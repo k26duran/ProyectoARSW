@@ -108,9 +108,12 @@ public class  ViajeRepository implements  IViajeRepository {
 	@Override
 	public Long save(Viaje entity) throws EvernException {
 		String query =String.format("insert into  viaje(aceptado,calificacion_al_conductor,calificacion_al_pasajero,"
-											+ "correo_conductor,correo_pasajero,costo,fecha,lugar_destino,lugar_origen,tiempo)"+
-				"values(false,0,0,null,'%s',%d,now(),'%s','%s',0);",entity.getCorreoPasajero(),
-						entity.getCosto(),entity.getLugarDestino(),entity.getLugarOrigen());
+								  + "correo_conductor,correo_pasajero,costo,fecha,lugar_destino,lugar_origen,tiempo, placa_automovil)"+
+				"values(%b,0,0,'%s','%s',%d,now(),'%s','%s',%d, '%s');",
+						entity.isAceptado(), entity.getCorreoConductor(), entity.getCorreoPasajero(),
+						entity.getCosto(),entity.getLugarDestino(),entity.getLugarOrigen(),
+						entity.getTiempo(), entity.getAutomovil().getPlaca());
+		System.out.println(query);
 		
 		Connection connection = null;
 		try {
@@ -118,7 +121,7 @@ public class  ViajeRepository implements  IViajeRepository {
 			Statement stmt = connection.createStatement();
 			stmt.execute(query);
 			connection.close();
-			return entity.getId();
+			return new Long(200);
 		} catch(Exception e) {
 			throw new EvernException(e.getMessage());
 		} finally {
@@ -133,7 +136,7 @@ public class  ViajeRepository implements  IViajeRepository {
 	@Override
 	public void update(Viaje viaje) {
 	}
-
+ 
 	@Override
 	public void delete(Viaje viaje) throws EvernException {
 		String query = "DELETE FROM viaje WHERE id="+viaje.getId().toString()+";";

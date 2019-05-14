@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +41,11 @@ public class PasajeroController{
 	
 	//private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	/**
+	 * Verifica que las credenciales del pasajero sea correcta
+	 * @param login
+	 * @return OK, si las credenciales son correctas.
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Login login){
 		try {
@@ -52,14 +58,14 @@ public class PasajeroController{
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	/**
 	 * Guarda un pasajero a la base de datos
 	 * @param pasajero
-	 * @return
+	 * @return correo del pasajero, si se puede registrar satisfactoriamente
 	 */
 	@PostMapping("/signup")
 	public ResponseEntity<?> postSavePasajero(@RequestBody Pasajero pasajero) {
@@ -67,14 +73,14 @@ public class PasajeroController{
 			//pasajero.setClave(bCryptPasswordEncoder.encode(pasajero.getClave()));
 			return new ResponseEntity<>(pasajerosServices.createPasajero(pasajero),HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	/**
 	 * Obtiene la informacion de un pasajero dado su correo
 	 * @param correo
-	 * @return Un Pasajero
+	 * @return un objeto de tipo Pasajero
 	 */
 	@GetMapping("/{correo}")
 	public ResponseEntity<?> getPasajeroByCorreo(@PathVariable String correo) {
@@ -95,15 +101,22 @@ public class PasajeroController{
 		try {
 			return new ResponseEntity<>(pasajerosServices.getViajesPasajeroByCorreo(correo),HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	
-	
-	
-	@PostMapping(value = "/update/clave")
-	 public ResponseEntity<?> updateClavePasajero(@RequestBody Object json){
+	/**
+	 * Actualiza la clave de un pasajero.
+	 * 
+	 * @param json
+	 * @param correopasajero
+	 * @return Una cadena, OK si puede actualizar correctamente la clave, No autorizado si un
+	 * 		   conductor quiere actualizar la información de otro, Error si no puede
+	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 */
+	@PutMapping(value = "/{correopasajero}/update/clave")
+	 public ResponseEntity<?> updateClavePasajero(@RequestBody Object json, @PathVariable String correopasajero){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
 			JSONObject jsonObj = new JSONObject(jsonInString);
@@ -112,19 +125,32 @@ public class PasajeroController{
 			String clave = jsonObj.getString("clave");
 			String nuevaClave = jsonObj.getString("nuevaClave");
 			
+			if(!correopasajero.equals(correo)) {
+				return new ResponseEntity<>("No autorizado",HttpStatus.UNAUTHORIZED);
+			}
+			
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
 			if(pasajero.getCorreo() == null) {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.updateClave(correo, nuevaClave);
+			pasajerosServices.updateClave(correopasajero, nuevaClave);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	 @PostMapping(value = "/update/celular")
-	 public ResponseEntity<?> updateCelularPasajero(@RequestBody Object json){
+	
+	
+	/**
+	 * Actualiza el numero de celular del pasajero. 
+	 * @param json
+	 * @param correopasajero
+	 * @return Una cadena, OK si puede actualizar correctamente el celular, No autorizado si un
+	 * 		   conductor quiere actualizar la información de otro, Error si no puede
+	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 */
+	@PutMapping(value = "/{correopasajero}/update/celular")
+	 public ResponseEntity<?> updateCelularPasajero(@RequestBody Object json, @PathVariable String correopasajero){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
 			JSONObject jsonObj = new JSONObject(jsonInString);
@@ -133,19 +159,32 @@ public class PasajeroController{
 			String clave = jsonObj.getString("clave");
 			String nuevoCelular = jsonObj.getString("nuevoCelular");
 			
+			if(!correopasajero.equals(correo)) {
+				return new ResponseEntity<>("No autorizado",HttpStatus.UNAUTHORIZED);
+			}
+			
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
 			if(pasajero.getCorreo() == null) {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.updateCelular(correo, nuevoCelular);
+			pasajerosServices.updateCelular(correopasajero, nuevoCelular);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
-	 @PostMapping(value = "/update/nombres")
-	 public ResponseEntity<?> updateNombresPasajero(@RequestBody Object json){
+	/**
+	 * Actualiza los nombres del pasajero.
+	 * 
+	 * @param json
+	 * @param correopasajero
+	 * @return Una cadena, OK si puede actualizar correctamente los nombres, No autorizado si un
+	 * 		   conductor quiere actualizar la información de otro, Error si no puede
+	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 */
+	 @PutMapping(value = "/{correopasajero}/update/nombres")
+	 public ResponseEntity<?> updateNombresPasajero(@RequestBody Object json, @PathVariable String correopasajero){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
 			JSONObject jsonObj = new JSONObject(jsonInString);
@@ -154,19 +193,32 @@ public class PasajeroController{
 			String clave = jsonObj.getString("clave");
 			String nuevosNombres = jsonObj.getString("nuevosNombres");
 			
+			if(!correopasajero.equals(correo)) {
+				return new ResponseEntity<>("No autorizado",HttpStatus.UNAUTHORIZED);
+			}
+			
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
 			if(pasajero.getCorreo() == null) {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.updateNombres(correo, nuevosNombres);
+			pasajerosServices.updateNombres(correopasajero, nuevosNombres);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
-	 @PostMapping(value = "/update/apellidos")
-	 public ResponseEntity<?> updateApellidosPasajero(@RequestBody Object json){
+	 /**
+	  * Actualiza los apellidos del pasajero.
+	  * 
+	  * @param json
+	  * @param correopasajero
+	  * @return Una cadena, OK si puede actualizar correctamente los apellidos, No autorizado si un
+	 * 		   conductor quiere actualizar la información de otro, Error si no puede
+	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	  */
+	 @PutMapping(value = "/{correopasajero}/update/apellidos")
+	 public ResponseEntity<?> updateApellidosPasajero(@RequestBody Object json, @PathVariable String correopasajero){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
 			JSONObject jsonObj = new JSONObject(jsonInString);
@@ -175,19 +227,32 @@ public class PasajeroController{
 			String clave = jsonObj.getString("clave");
 			String nuevosApellidos = jsonObj.getString("nuevosApellidos");
 			
+			if(!correopasajero.equals(correo)) {
+				return new ResponseEntity<>("No autorizado",HttpStatus.UNAUTHORIZED);
+			}
+			
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
 			if(pasajero.getCorreo() == null) {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.updateApellidos(correo, nuevosApellidos);
+			pasajerosServices.updateApellidos(correopasajero, nuevosApellidos);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
-	 @PostMapping(value = "/update/fechaNacimiento")
-	 public ResponseEntity<?> updateFechaNacimientoPasajero(@RequestBody Object json){
+	 /**
+	  * Actualiza la fecha de nacimiento del pasajero.
+	  * 
+	  * @param json
+	  * @param correopasajero
+	  * @return Una cadena, OK si puede actualizar correctamente la fecha de nacimiento, No autorizado si un
+	 * 		   conductor quiere actualizar la información de otro, Error si no puede
+	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	  */
+	 @PutMapping(value = "/{correopasajero}/update/fechaNacimiento")
+	 public ResponseEntity<?> updateFechaNacimientoPasajero(@RequestBody Object json, @PathVariable String correopasajero){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
 			JSONObject jsonObj = new JSONObject(jsonInString);
@@ -196,19 +261,32 @@ public class PasajeroController{
 			String clave = jsonObj.getString("clave");
 			String nuevaFechaNacimiento = jsonObj.getString("nuevaFechaNacimiento");
 			
+			if(!correopasajero.equals(correo)) {
+				return new ResponseEntity<>("No autorizado",HttpStatus.UNAUTHORIZED);
+			}
+			
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
 			if(pasajero.getCorreo() == null) {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.updateFechaNacimiento(correo, nuevaFechaNacimiento);
+			pasajerosServices.updateFechaNacimiento(correopasajero, nuevaFechaNacimiento);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
-	 @PostMapping(value = "/update/casa")
-	 public ResponseEntity<?> updateCasaPasajero(@RequestBody Object json){
+	/**
+	 * Actualiza la casa del pasajero
+	 * 
+	 * @param json
+	 * @param correopasajero
+	 * @return Una cadena, OK si puede actualizar correctamente la casa, No autorizado si un
+	 * 		   conductor quiere actualizar la información de otro, Error si no puede
+	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 */
+	 @PutMapping(value = "/{correopasajero}/update/casa")
+	 public ResponseEntity<?> updateCasaPasajero(@RequestBody Object json, @PathVariable String correopasajero){
 		try {
 			String jsonInString = mapper.writeValueAsString(json);
 			JSONObject jsonObj = new JSONObject(jsonInString);
@@ -216,14 +294,20 @@ public class PasajeroController{
 			String correo = jsonObj.getString("correo");
 			String clave = jsonObj.getString("clave");
 			String nuevaCasa = jsonObj.getString("nuevaCasa");
+			
+			if(!correopasajero.equals(correo)) {
+				return new ResponseEntity<>("No autorizado",HttpStatus.UNAUTHORIZED);
+			}
+			
 			Pasajero pasajero = pasajerosServices.getPasajeroByCorreoYClave(correo, clave);
 			if(pasajero.getCorreo() == null) {
 				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.updateCasa(correo, nuevaCasa);
+			
+			pasajerosServices.updateCasa(correopasajero, nuevaCasa);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

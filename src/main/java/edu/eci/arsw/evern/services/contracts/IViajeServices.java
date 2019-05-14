@@ -13,7 +13,7 @@ public interface IViajeServices {
 
 	Long createViaje(Viaje viaje) throws EvernException ;
 	void updateViaje(Viaje viaje) throws EvernException ;
-	void deleteViaje(Viaje viaje) throws EvernException ;
+	void deleteViaje(Long idviaje) throws EvernException ;
 	
 	List<Viaje> getViajes() throws EvernException ;
 	Viaje getViajeById(Long idViaje) throws EvernException ;

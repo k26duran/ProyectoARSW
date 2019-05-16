@@ -14,7 +14,8 @@ public interface IConductorServices {
 	String createConductor(Conductor conductor) throws EvernException ;
 	void updateConductor(Conductor conductor) throws EvernException ;
 	void deleteConductor(Conductor conductor) throws EvernException ;
-	
+	void removeConductor(String correoconductor) throws EvernException;
+
 	List<Conductor> getConductores() throws EvernException ;
 	Conductor getConductorByCorreo(String correo) throws EvernException ;
 	List<Viaje> getViajesConductorByCorreo(String correoConductor) throws EvernException ;

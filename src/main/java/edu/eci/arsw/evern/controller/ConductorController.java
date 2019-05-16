@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,11 +47,11 @@ public class ConductorController {
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(login.getCorreo(),
 				login.getClave());
 			if(conductor.getCorreo()==null) {
-				return new ResponseEntity<>("Credenciales erroneas", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS", HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("ERROR", HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -65,11 +66,15 @@ public class ConductorController {
 			//conductor.setClave(bCryptPasswordEncoder.encode(conductor.getClave()));
 			String registrarAutomovil = automovilesServices.createAutomovil(conductor.getAutomovil());
 			if(registrarAutomovil == null) {
-				return new ResponseEntity<>("El automovil no se pudo registrar", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("EL AUTOMOVIL NO SE PUDO REGISTRAR", HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<>(conductorServices.createConductor(conductor),HttpStatus.CREATED);
+			String correoconductor = conductorServices.createConductor(conductor);
+			if(correoconductor == null){
+				return new ResponseEntity<>("NO SE CREO EL CONDUCTOR",HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>("OK",HttpStatus.CREATED);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -81,7 +86,11 @@ public class ConductorController {
 	@GetMapping("/{correo}")
 	public ResponseEntity<?> getConductorByCorreo(@PathVariable String correo) {
 		try {		
-			return new ResponseEntity<>(conductorServices.getConductorByCorreo(correo), HttpStatus.OK);
+			Conductor conductor = conductorServices.getConductorByCorreo(correo);
+			if(conductor.getCorreo()==null) {
+				return new ResponseEntity<>("NO EXISTE", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(conductor,HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.NOT_FOUND);
 		}
@@ -97,7 +106,7 @@ public class ConductorController {
 		try {
 			return new ResponseEntity<>(conductorServices.getViajesConductorByCorreo(correo),HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("ERROR", HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -107,7 +116,7 @@ public class ConductorController {
 			conductorServices.aceptarViajeConductor(conductor,idViaje);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("ERROR", HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -120,8 +129,8 @@ public class ConductorController {
 	 * @param json
 	 * @param correoconductor
 	 * @return Una cadena, OK si puede actualizar correctamente la clave, No autorizado si un
-	 * 		   conductor quiere actualizar la información de otro, Error si no puede
-	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 * 		   conductor quiere actualizar la información de otro, ERROR si no puede
+	 * 		   actualizar la informacion en la base de datos, y CREDENCIALES ERRONEAS.
 	 */
 	@PutMapping(value = "/{correoconductor}/update/clave")
 	 public ResponseEntity<?> updateClaveconductor(@RequestBody Object json, @PathVariable String correoconductor){
@@ -139,12 +148,12 @@ public class ConductorController {
 			
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
 			if(conductor.getCorreo() == null) {
-				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
 			conductorServices.updateClave(correoconductor, nuevaClave);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -155,8 +164,8 @@ public class ConductorController {
 	 * @param json
 	 * @param correoconductor
 	 * @return Una cadena, OK si puede actualizar correctamente el celular, No autorizado si un
-	 * 		   conductor quiere actualizar la información de otro, Error si no puede
-	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 * 		   conductor quiere actualizar la información de otro, ERROR si no puede
+	 * 		   actualizar la informacion en la base de datos, y CREDENCIALES ERRONEAS.
 	 */
 	@PutMapping(value = "/{correoconductor}/update/celular")
 	 public ResponseEntity<?> updateCelularconductor(@RequestBody Object json, @PathVariable String correoconductor){
@@ -174,12 +183,12 @@ public class ConductorController {
 			
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
 			if(conductor.getCorreo() == null) {
-				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
 			conductorServices.updateCelular(correoconductor, nuevoCelular);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
@@ -190,8 +199,8 @@ public class ConductorController {
 	 * @param json
 	 * @param correoconductor
 	 * @return Una cadena, OK si puede actualizar correctamente los nombres, No autorizado si un
-	 * 		   conductor quiere actualizar la información de otro, Error si no puede
-	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 * 		   conductor quiere actualizar la información de otro, ERROR si no puede
+	 * 		   actualizar la informacion en la base de datos, y CREDENCIALES ERRONEAS.
 	 */
 	 @PutMapping(value = "/{correoconductor}/update/nombres")
 	 public ResponseEntity<?> updateNombresconductor(@RequestBody Object json, @PathVariable String correoconductor){
@@ -209,12 +218,12 @@ public class ConductorController {
 			
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
 			if(conductor.getCorreo() == null) {
-				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
 			conductorServices.updateNombres(correoconductor, nuevosNombres);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
@@ -225,8 +234,8 @@ public class ConductorController {
 	  * @param json
 	  * @param correoconductor
 	  * @return Una cadena, OK si puede actualizar correctamente los apellidos, No autorizado si un
-	 * 		   conductor quiere actualizar la información de otro, Error si no puede
-	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 * 		   conductor quiere actualizar la información de otro, ERROR si no puede
+	 * 		   actualizar la informacion en la base de datos, y CREDENCIALES ERRONEAS.
 	  */
 	 @PutMapping(value = "/{correoconductor}/update/apellidos")
 	 public ResponseEntity<?> updateApellidosconductor(@RequestBody Object json, @PathVariable String correoconductor){
@@ -244,12 +253,12 @@ public class ConductorController {
 			
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
 			if(conductor.getCorreo() == null) {
-				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
 			conductorServices.updateApellidos(correoconductor, nuevosApellidos);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
@@ -259,8 +268,8 @@ public class ConductorController {
 	  * @param json
 	  * @param correoconductor
 	  * @return Una cadena, OK si puede actualizar correctamente la fecha de nacimiento, No autorizado si un
-	 * 		   conductor quiere actualizar la información de otro, Error si no puede
-	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 * 		   conductor quiere actualizar la información de otro, ERROR si no puede
+	 * 		   actualizar la informacion en la base de datos, y CREDENCIALES ERRONEAS.
 	  */
 	 @PutMapping(value = "/{correoconductor}/update/fechaNacimiento")
 	 public ResponseEntity<?> updateFechaNacimientoconductor(@RequestBody Object json, @PathVariable String correoconductor){
@@ -278,12 +287,12 @@ public class ConductorController {
 			
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
 			if(conductor.getCorreo() == null) {
-				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
 			conductorServices.updateFechaNacimiento(correoconductor, nuevaFechaNacimiento);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	 
@@ -295,8 +304,8 @@ public class ConductorController {
 	  * @param json
 	  * @param correoconductor
 	  * @return Una cadena, OK si puede actualizar correctamente la casa, No autorizado si un
-	 * 		   conductor quiere actualizar la información de otro, Error si no puede
-	 * 		   actualizar la informacion en la base de datos, y Credenciales erroneas.
+	 * 		   conductor quiere actualizar la información de otro, ERROR si no puede
+	 * 		   actualizar la informacion en la base de datos, y CREDENCIALES ERRONEAS.
 	  */
 	 @PutMapping(value = "/{correoconductor}/update/casa")
 	 public ResponseEntity<?> updateCasaconductor(@RequestBody Object json, @PathVariable String correoconductor){
@@ -314,13 +323,30 @@ public class ConductorController {
 			
 			Conductor conductor = conductorServices.getConductorByCorreoYClave(correo, clave);
 			if(conductor.getCorreo() == null) {
-				return new ResponseEntity<>("Credenciales erroneas",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
 			
 			conductorServices.updateCasa(correoconductor, nuevaCasa);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@DeleteMapping("/{correoconductor}/delete")
+	public ResponseEntity<?> delete(@RequestBody Login login, @PathVariable String correoconductor){
+		try{
+			if(!login.getCorreo().equals(correoconductor)){
+				return new ResponseEntity<>("NO AUTORIZADO",HttpStatus.UNAUTHORIZED);
+			}
+			Conductor conductor = conductorServices.getConductorByCorreoYClave(login.getCorreo(), login.getClave());
+			if(conductor.getCorreo()==null){
+				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
+			}
+			conductorServices.removeConductor(correoconductor);
+			return new ResponseEntity<>("OK",HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

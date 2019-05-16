@@ -41,7 +41,12 @@ public class PasajerosServices  implements  IPasajerosServices {
 	}
 
 	@Override
-	public void deletePasajero(String correopasajero) throws EvernException {
+	public void deletePasajero(Pasajero pasajero) throws EvernException {
+		pasajeroRepository.delete(pasajero);
+	}
+
+	@Override
+	public void removePasajero(String correopasajero) throws EvernException {
 		pasajeroRepository.remove(correopasajero);
 	}
 

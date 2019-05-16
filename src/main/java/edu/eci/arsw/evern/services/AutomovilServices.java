@@ -44,4 +44,9 @@ public class AutomovilServices  implements IAutomovilServices  {
 		return automovilRepository.find(placa);
 	}
 
+	@Override
+	public void removeAutomovil(String placa) throws EvernException {
+		automovilRepository.remove(placa);
+	}
+
 }

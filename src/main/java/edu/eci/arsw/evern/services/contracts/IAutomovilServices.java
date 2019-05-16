@@ -13,7 +13,8 @@ public interface IAutomovilServices {
 	public String createAutomovil(Automovil automovil) throws EvernException ;
 	public void updateAutomovil(Automovil automovil) throws EvernException ;
 	public void deleteAutomovil(Automovil automovil) throws EvernException ;
-	
+	public void removeAutomovil(String placa) throws EvernException;
+
 	public List<Automovil> getAutomoviles() throws EvernException;
 	public Automovil getAutomovilByPlaca(String placa) throws EvernException ;
 	

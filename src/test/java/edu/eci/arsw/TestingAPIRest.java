@@ -1,30 +1,29 @@
 package edu.eci.arsw;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.mockserver.integration.ClientAndServer;
 
-import org.junit.Test;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import java.io.IOException;
 
-import edu.eci.arsw.evern.model.Pasajero;
+import javax.xml.bind.JAXBException;
 
-public class TestingAPIRest extends AbstractTest {
-    @Test
-    public void getPasajeros() throws Exception {
-        
-        String uri = "https://backarsw.herokuapp.com/v1/pasajeros/prueba0513@evern.com";
-        System.out.println(uri);
+import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
-            .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        System.out.println("DESPUES DE MVC RESULT");
-        int status = mvcResult.getResponse().getStatus();
-        System.out.println("STATUS ------------------>>>> "+status);
-        assertEquals(200, status);
-        String content = mvcResult.getResponse().getContentAsString();
-        Pasajero pasajero = super.mapFromJson(content, Pasajero.class);
-        assertNotNull(pasajero.getCorreo());
+public class TestingAPIRest {
+    
+    private static ClientAndServer mockServer;
+
+    
+    @BeforeClass
+    public static void setupMockServer() throws IOException, JAXBException {
+        mockServer = startClientAndServer(8000);
+        Expectations.createDefaultExpectations(mockServer);
     }
+
+    @AfterClass
+    public static void after() {
+        mockServer.stop();
+    }
+
 }

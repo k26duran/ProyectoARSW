@@ -1,30 +1,15 @@
 package edu.eci.arsw;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import edu.eci.arsw.evern.controller.EvernException;
-import edu.eci.arsw.evern.model.Automovil;
-import edu.eci.arsw.evern.model.Conductor;
-import edu.eci.arsw.evern.model.Pasajero;
-import edu.eci.arsw.evern.model.Viaje;
-
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class EnervTest {
 
@@ -44,29 +29,6 @@ public class EnervTest {
 			JSONObject jsonObj = new JSONObject(response);
 			String correo = jsonObj.getString("correo");
 			assertEquals(correopasajero, correo);
-		} catch (EvernException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void savePasajero(){
-		String url = "https://backarsw.herokuapp.com/v1/pasajeros/signup";
-		String data = "{"+
-						"'nombres': 'prueba001', "+
-						"'apellidos': 'prueba001', "+
-						"'correo': 'prueba001@pasajero.evern.com', "+
-						"'clave': 'prueba001', "+
-						"'fechaNacimiento': '05/05/1992', "+
-						"'celular': '3001005000'"+
-						"}";
-		JSONObject jsonObj = new JSONObject(data);
-		data = jsonObj.toString();
-		System.out.println(data);
-		try {
-			String response = httpPOST(url, data);
-			System.out.println(response);
-			assertEquals(response, "200");
 		} catch (EvernException e) {
 			e.printStackTrace();
 		}
@@ -99,44 +61,4 @@ public class EnervTest {
 		}
 	}
 
-
-	public String httpPOST(String GET_URL, String urlParameters) throws EvernException {
-		System.out.println(urlParameters);
-		byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
-		try{
-			URL urlObject = new URL(GET_URL);
-			
-			con = (HttpURLConnection) urlObject.openConnection();
-
-            con.setDoOutput(true);
-            con.setRequestMethod("POST");
-            con.setRequestProperty("User-Agent", "Java client");
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
-                wr.write(postData);
-            }
-			System.out.println(postData.toString());
-
-            StringBuilder content;
-
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
-                }
-            }
-			return content.toString();
-		}catch (Exception e) {
-			throw new EvernException("No pudo hacer la conexion");
-		}finally{
-			con.disconnect();
-		}
-	}
-	
 }

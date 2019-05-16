@@ -321,7 +321,7 @@ public class PasajeroController{
 			if(pasajero.getCorreo()==null){
 				return new ResponseEntity<>("CREDENCIALES ERRONEAS",HttpStatus.NOT_FOUND);
 			}
-			pasajerosServices.deletePasajero(correopasajero);
+			pasajerosServices.removePasajero(correopasajero);
 			return new ResponseEntity<>("OK",HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);

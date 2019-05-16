@@ -37,6 +37,11 @@ public class ConductorServices implements IConductorServices {
 	}
 
 	@Override
+	public void removeConductor(String correoconductor) throws EvernException {
+		conductorRepository.remove(correoconductor);
+	}
+
+	@Override
 	public List<Conductor> getConductores() throws EvernException {
 		return conductorRepository.findAll();
 	}
@@ -98,6 +103,7 @@ public class ConductorServices implements IConductorServices {
 		
 	}
 
+	
 	
 
 }

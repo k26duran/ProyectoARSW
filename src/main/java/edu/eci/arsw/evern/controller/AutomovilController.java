@@ -28,25 +28,20 @@ public class AutomovilController {
 		try {
 			return new ResponseEntity<>(automovilesServices.getAutomoviles(),HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("ERROR", HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/{automovilPlaca}")
 	public ResponseEntity<?> getAutomovilByPlaca(@PathVariable String automovilPlaca){
 		try {
-			return new ResponseEntity<>(automovilesServices.getAutomovilByPlaca(automovilPlaca),HttpStatus.OK);
+			Automovil automovil = automovilesServices.getAutomovilByPlaca(automovilPlaca);
+			if(automovil.getPlaca()==null){
+				return new ResponseEntity<>("NO EXISTE",HttpStatus.OK);
+			}
+			return new ResponseEntity<>(automovil,HttpStatus.OK);
 		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	@PostMapping("/saveAutomovil")
-	public ResponseEntity<?> saveAutomovil(@RequestBody Automovil auto){
-		try {
-			return new ResponseEntity<>(automovilesServices.createAutomovil(auto),HttpStatus.OK);
-		} catch (Exception ex) {
-			return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

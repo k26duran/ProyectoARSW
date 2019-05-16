@@ -55,7 +55,7 @@ public class AutomovilRepository implements IAutomovilRepository {
 
 	@Override
 	public Automovil find(String placa) throws EvernException {
-		String query = "SELECT * FROM automovil;";
+		String query = "SELECT * FROM automovil WHERE placa='"+placa+"';";
 		Automovil automovil = new Automovil();
 		Connection connection = null;
 		try {

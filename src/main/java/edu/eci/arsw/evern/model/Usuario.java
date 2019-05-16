@@ -1,13 +1,7 @@
 package edu.eci.arsw.evern.model;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.*;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 public class Usuario {
 

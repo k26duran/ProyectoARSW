@@ -12,42 +12,33 @@ import edu.eci.arsw.evern.persistence.repositories.ICuentaBancariaRepository;
 @Qualifier("CuentaBancariaRepository")
 public class CuentaBancariaRepository implements ICuentaBancariaRepository   {
 
-	private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
+	//private String dbUrl = System.getenv().get("JDBC_DATABASE_URL");
 	
 	@Override
 	public List<CuentaBancaria> findAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public CuentaBancaria find(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Long save(CuentaBancaria entity) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void update(CuentaBancaria entity) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void delete(CuentaBancaria o) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void remove(Long pkEntity) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

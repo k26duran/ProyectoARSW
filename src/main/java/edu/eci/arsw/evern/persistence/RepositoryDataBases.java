@@ -1,9 +1,6 @@
 package edu.eci.arsw.evern.persistence;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -16,7 +16,6 @@ import edu.eci.arsw.evern.services.contracts.IPasajerosServices;
 @Component
 public class PasajerosServices  implements  IPasajerosServices {
 	
-	
 	@Autowired
 	@Qualifier("PasajeroRepository")
 	private IPasajeroRepository pasajeroRepository;
@@ -42,8 +41,8 @@ public class PasajerosServices  implements  IPasajerosServices {
 	}
 
 	@Override
-	public void deletePasajero(Pasajero pasajero) throws EvernException {
-		pasajeroRepository.delete(pasajero);
+	public void deletePasajero(String correopasajero) throws EvernException {
+		pasajeroRepository.remove(correopasajero);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public interface IPasajerosServices {
 	
 	String createPasajero(Pasajero pasajero) throws EvernException ;
 	void updatePasajero(Pasajero pasajero) throws EvernException ;
-	void deletePasajero(Pasajero pasajero) throws EvernException ;
+	void deletePasajero(String correopasajero) throws EvernException ;
 	
 	List<Pasajero> getPasajeros() throws EvernException ;
 	Pasajero getPasajeroByCorreo(String correo) throws EvernException ;

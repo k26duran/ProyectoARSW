@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Automovil implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String placa;
 	private String modelo;
 	private String color;

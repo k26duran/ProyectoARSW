@@ -113,7 +113,6 @@ public class  ViajeRepository implements  IViajeRepository {
 						entity.isAceptado(), entity.getCorreoConductor(), entity.getCorreoPasajero(),
 						entity.getCosto(),entity.getLugarDestino(),entity.getLugarOrigen(),
 						entity.getTiempo(), entity.getAutomovil().getPlaca());
-		System.out.println(query);
 		
 		Connection connection = null;
 		try {

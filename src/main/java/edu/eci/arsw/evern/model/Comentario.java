@@ -2,13 +2,10 @@
 
 import java.io.Serializable;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import javax.validation.constraints.NotBlank;
-import java.util.Date;
-
 
 public class Comentario implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String contenido;
 	private String fecha = (new Date()).toString(); //dd-mm-yy

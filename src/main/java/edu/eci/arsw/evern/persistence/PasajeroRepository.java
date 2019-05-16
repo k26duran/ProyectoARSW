@@ -72,7 +72,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 				pasajero.setCalificacion(rs.getInt("calificacion"));
 				pasajero.setCasa(rs.getString("casa"));
 			}
-			System.out.println(pasajero);
 			connection.close();
 			return pasajero;
 		}catch(Exception e) {
@@ -116,7 +115,6 @@ public class PasajeroRepository implements  IPasajeroRepository {
 		String query = "INSERT INTO pasajero(nombres,apellidos,calificacion,celular,clave,correo,fecha_nacimiento, casa)"
 		 +"values ('"+pasajero.getNombres()+"','"+pasajero.getApellidos()+"',0,'"+pasajero.getCelular()+"','"+pasajero.getClave()+"','"
 				+pasajero.getCorreo()+"',null,'"+pasajero.getCasa()+"');";
-		System.err.println("SAVE PASAJERO");
 		Connection connection = null;
 		try {
 			connection = database.dataSource().getConnection();

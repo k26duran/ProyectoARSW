@@ -34,12 +34,15 @@ public class Viaje implements Serializable {
 
 	public Viaje(){}
 	
-	public Viaje(String lugarOrigen, String lugarDestino, int costo, String correoConductor, String correoPasajero) {
+	public Viaje(String lugarOrigen, String lugarDestino, int costo, int tiempo,
+		String correoConductor, String correoPasajero, Automovil automovil) {
 		this.lugarOrigen = lugarOrigen;
 		this.lugarDestino = lugarDestino;
 		this.costo = costo;
+		this.tiempo = tiempo;
 		this.correoConductor = correoConductor;
 		this.correoPasajero = correoPasajero;
+		this.automovil = automovil;
 	}
 	
 	public Long getId() {

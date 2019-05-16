@@ -32,7 +32,7 @@ public class ViajeController {
 		try {
 			return new ResponseEntity<>(viajeServices.getViajes(),HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -44,9 +44,13 @@ public class ViajeController {
 	@GetMapping("/{idviaje}")
 	public ResponseEntity<?> getViajeById(@PathVariable Long idviaje) {
 		try {
-			return new ResponseEntity<>(viajeServices.getViajeById(idviaje), HttpStatus.CREATED);
+			Viaje viaje = viajeServices.getViajeById(idviaje);
+			if(viaje.getId()==null){
+				return new ResponseEntity<>("NO EXISTE", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(viaje, HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}	
 	
@@ -58,8 +62,11 @@ public class ViajeController {
 	@PostMapping("/save")
 	public ResponseEntity<?> create(@RequestBody Viaje viaje) {
 		try {
-			System.out.println(viaje);
-			return new ResponseEntity<>(viajeServices.createViaje(viaje), HttpStatus.CREATED);
+			Long response = viajeServices.createViaje(viaje);
+			if(response ==null){
+				return new ResponseEntity<>("NO SE PUDO CREAR", HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>("OK", HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>("ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
